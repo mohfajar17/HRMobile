@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_dark">#014565</color>
+    <color name="primary">#0278ae</color>
+    <color name="primary_light">#51adcf</color>
+    <color name="cyan">#a5ecd7</color>
+    <color name="cream">#e8ffc1</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="light">#f2f2f2</color>
+
+    <color name="colorLightGray">#DCDCDC</color>
+    <color name="colorGray">#8c8c8c</color>
+    <color name="colorDarkGray">#444444</color>
+
+    //asuka color
+    <color name="colorAsukaBlue">#3051a0</color>
+    <color name="colorAsukaRed">#ee4043</color>
+    <color name="colorAsukaGreen">#319f31</color>
+
+    //icon color
+    <color name="colorIcon1">#fab745</color>
+    <color name="colorIcon2">#3366ff</color>
+    <color name="colorIcon3">#97d653</color>
+    <color name="colorIcon4">#fe1e1b</color>
+    <color name="colorIcon5">#33ccff</color>
+</resources>

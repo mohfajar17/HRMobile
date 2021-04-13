@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.hrmobile">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo2"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/logo2"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.HRMobile.NoActionBar">
+        <activity android:name=".SigninActivity"></activity>
+        <activity android:name=".Menu.SlipGaji.SlipGajiActivity" />
+        <activity android:name=".Profile.FileActivity" />
+        <activity android:name=".Profile.PelatihanActivity" />
+        <activity android:name=".Profile.PengalamanKerjaActivity" />
+        <activity android:name=".Profile.DataKeluargaActivity" />
+        <activity android:name=".Profile.RiwayatPendidikanActivity" />
+        <activity android:name=".Menu.Cuti.CutiCreateActivity" />
+        <activity android:name=".Menu.Absensi.CheckClockActivity" />
+        <activity android:name=".Menu.Spkl.SpklCreateActivity" />
+        <activity android:name=".Menu.Spkl.SpklDetailActivity" />
+        <activity android:name=".Menu.Spkl.SpklActivity" />
+        <activity android:name=".Profile.EditProfileActivity" />
+        <activity android:name=".Home.NewsDetailActivity" />
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Profile.AboutAppsActivity" />
+        <activity android:name=".Hybrid.CutiActivity" />
+        <activity android:name=".Profile.TunjanganPotonganActivity" />
+        <activity android:name=".Profile.RiwayatJabatanActivity" />
+        <activity android:name=".Profile.DataLengkapActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".MainActivity" />
+    </application>
+
+</manifest>

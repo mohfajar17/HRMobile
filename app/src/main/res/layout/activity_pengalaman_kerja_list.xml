@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/primary_dark"
+        android:textColor="@color/cyan"
+        android:textStyle="bold"
+        android:text="0"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:id="@+id/textTglAwal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bubble"
+            android:paddingTop="10dp"
+            android:paddingLeft="140dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:text="-"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bubble_sub"
+            android:padding="10dp"
+            android:text="Tanggal Awal"
+            android:textColor="@color/white"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:id="@+id/textTglAkhir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bubble"
+            android:paddingTop="10dp"
+            android:paddingLeft="140dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:text="-"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bubble_sub"
+            android:padding="10dp"
+            android:text="Tanggal Akhir"
+            android:textColor="@color/white"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:id="@+id/textKeterangan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bubble"
+            android:paddingTop="10dp"
+            android:paddingLeft="140dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:text="-"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bubble_sub"
+            android:padding="10dp"
+            android:text="Perusahaan"
+            android:textColor="@color/white"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:id="@+id/textPosition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bubble"
+            android:paddingTop="10dp"
+            android:paddingLeft="140dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:text="-"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bubble_sub"
+            android:padding="10dp"
+            android:text="Position"
+            android:textColor="@color/white"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/bubble_cyan"/>
+</LinearLayout>

@@ -1,0 +1,1041 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Menu.SlipGaji.SlipGajiActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/buttonBack"
+            android:layout_width="50dp"
+            android:padding="7dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_back"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:padding="10dp"
+            android:gravity="left|center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="Slip Gaji"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/cyan"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/primary_dark"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinnerTgl"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:spinnerMode="dialog"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="/"
+            android:gravity="center"
+            android:textColor="@color/white" />
+
+        <Spinner
+            android:id="@+id/spinnerBulan"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:spinnerMode="dialog"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="/"
+            android:gravity="center"
+            android:textColor="@color/white" />
+
+        <Spinner
+            android:id="@+id/spinnerTahun"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:spinnerMode="dialog"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:focusable="true"
+        android:paddingBottom="10dp"
+        android:focusableInTouchMode="true"
+        android:background="@color/primary_dark"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/btnSearch"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:src="@drawable/ic_search"
+            android:background="@drawable/bubble"
+            app:tint="@color/primary_dark" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layoutAll"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:background="@color/primary_light"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:text="Pendapatan"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textGajiPokok"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Gaji Pokok (NT)"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutMeal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textMeal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Meal"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutTransport"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textTransport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Transport"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutWelfare"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textWelfare"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Welfare"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutProfesional"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textProfesional"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Profesional"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutBPJSKesehatan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textBPJSKesehatan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="BPJS Kesehatan"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutBPJSKetenagakerjaan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textBPJSKetenagakerjaan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="BPJS Ketenagakerjaan"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutLembur"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textLembur"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Lembur"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutMakanLembur"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textMakanLembur"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Makan Lembur"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutEmergencyCall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textEmergencyCall"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Emergency Call"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutLessPayment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textLessPayment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Less Payment"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutAbsent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textAbsent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="Absent"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/textJumlahPendapatan"
+                        android:layout_width="match_parent"
+                        android:layout_height="90sp"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="45dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. 0"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="Jumlah Pendapatan"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:background="@color/primary_light"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:text="Potongan"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textKesehatan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="BPJS Kesehatan"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textKetenagakerjaan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:text="BPJS Ketenagakerjaan"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textJht"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:text="JHT"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textJP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:text="JP"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textBPJSKaryawan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:text="BPJS (Karyawan)"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textJumlahPotongan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:text="Jumlah Potongan"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/textGajiBersih"
+                        android:layout_width="match_parent"
+                        android:layout_height="90sp"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="45dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. 0"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="Gaji Bersih"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:background="@color/primary_light"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:text="TOTAL"/>
+
+                <RelativeLayout
+                    android:id="@+id/layoutIncomeTax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textIncomeTax"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:text="Income Tax"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutInvestasiJaminanKerja"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textInvestasiJaminanKerja"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:text="Investasi Jaminan Kerja"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutPinjamanKoperasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textPinjamanKoperasi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:text="Pinjaman Koperasi"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutPotonganK3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textPotonganK3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:text="Potongan K3"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutPotonganTerlambat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textPotonganTerlambat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:text="Potongan Terlambat"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutPotonganLainnya"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/textPotonganLainnya"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="190dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. -"
+                        android:gravity="right"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:text="Potongan Lain-lain"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/textTakeHomePay"
+                        android:layout_width="match_parent"
+                        android:layout_height="90sp"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="45dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. 0"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="Take Home Pay"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutTunjanganLokasiPerjalanan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/textTunjanganLokasiPerjalanan"
+                        android:layout_width="match_parent"
+                        android:layout_height="90sp"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="45dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. 0"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="Tunjangan Lokasi &amp; Tunjangan Perjalanan Dinas"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/textTotal"
+                        android:layout_width="match_parent"
+                        android:layout_height="90sp"
+                        android:background="@drawable/bubble"
+                        android:paddingTop="45dp"
+                        android:paddingBottom="10dp"
+                        android:text="Rp. 0"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bubble_sub"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="Total"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

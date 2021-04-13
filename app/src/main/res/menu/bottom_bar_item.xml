@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_home"
+        android:icon="@drawable/ic_home"
+        android:title="HOME" />
+    <item
+        android:id="@+id/tab_menu"
+        android:icon="@drawable/ic_menu"
+        android:title="MENU" />
+    <item
+        android:id="@+id/tab_agenda"
+        android:icon="@drawable/ic_calendar"
+        android:title="AGENDA" />
+    <item
+        android:id="@+id/tab_profile"
+        android:icon="@drawable/ic_person"
+        android:title="PROFILE" />
+</menu>
