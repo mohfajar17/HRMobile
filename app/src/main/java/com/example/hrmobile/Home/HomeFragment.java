@@ -3,6 +3,7 @@ package com.example.hrmobile.Home;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
@@ -24,6 +25,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hrmobile.Adapter.RecyclerViewNews;
 import com.example.hrmobile.Config;
+import com.example.hrmobile.CustomProgressDialog;
 import com.example.hrmobile.Data.News;
 import com.example.hrmobile.LoginActivity;
 import com.example.hrmobile.R;
@@ -50,7 +52,7 @@ public class HomeFragment extends Fragment {
     private RecyclerViewNews adapter;
     private RecyclerView.LayoutManager recylerViewLayoutManager;
     private List<News> news;
-    private ProgressDialog progressDialog;
+    private CustomProgressDialog progressDialog;
 
     private NumberFormat formatter;
     private SharedPrefManager sharedPrefManager;
@@ -85,10 +87,7 @@ public class HomeFragment extends Fragment {
         sharedPrefManager = SharedPrefManager.getInstance(getActivity());
         formatter = new DecimalFormat("#,###");
 
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setTitle("Loading Data");
-        progressDialog.setMessage("Please wait...");
-        progressDialog.setCancelable(false);
+        progressDialog = new CustomProgressDialog(getContext());
 
         context = getActivity().getApplicationContext();
         news = new ArrayList<>();
@@ -169,10 +168,10 @@ public class HomeFragment extends Fragment {
                     } else {
                         Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
                     }
-                    progressDialog.dismiss();
+//                    progressDialog.dismiss();
                 } catch (JSONException e) {
                     Toast.makeText(getActivity(), "Error load data", Toast.LENGTH_LONG).show();
-                    progressDialog.dismiss();
+//                    progressDialog.dismiss();
                     e.printStackTrace();
                 }
             }
@@ -180,7 +179,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
                 Toast.makeText(getActivity(), "Network is broken", Toast.LENGTH_LONG).show();
             }
         }){

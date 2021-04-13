@@ -19,7 +19,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="120dp"
             app:srcCompat="@drawable/logo2" />
 
@@ -27,11 +27,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="serif"
             android:gravity="center"
-            android:text="Asuka Mobile"
+            android:text="HR Asuka Mobile"
             android:textColor="@color/black"
-            android:textSize="30sp"
+            android:textSize="26sp"
             android:textStyle="italic" />
     </LinearLayout>
 
