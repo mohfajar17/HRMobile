@@ -22,6 +22,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.hrmobile.Adapter.RecyclerViewPotongan;
 import com.example.hrmobile.Adapter.RecyclerViewTunjangan;
 import com.example.hrmobile.Config;
+import com.example.hrmobile.CustomProgressDialog;
 import com.example.hrmobile.Data.Potongan;
 import com.example.hrmobile.Data.Tunjangan;
 import com.example.hrmobile.LoginActivity;
@@ -51,7 +52,7 @@ public class TunjanganPotonganActivity extends AppCompatActivity {
     private List<Potongan> potongans;
 
     private Context context;
-    private ProgressDialog progressDialog;
+    private CustomProgressDialog progressDialog;
     private NumberFormat formatter;
     private SharedPrefManager sharedPrefManager;
 
@@ -70,10 +71,7 @@ public class TunjanganPotonganActivity extends AppCompatActivity {
         sharedPrefManager = SharedPrefManager.getInstance(this);
         formatter = new DecimalFormat("#,###");
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading Data");
-        progressDialog.setMessage("Please wait...");
-        progressDialog.setCancelable(false);
+        progressDialog = new CustomProgressDialog(this);
 
         context = getApplicationContext();
         tunjangans = new ArrayList<>();

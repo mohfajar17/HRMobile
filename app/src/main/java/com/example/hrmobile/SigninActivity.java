@@ -43,7 +43,7 @@ public class SigninActivity extends AppCompatActivity {
     private String[] emplooyeeId;
     private String[] emplooyeeName;
 
-    private ProgressDialog progressDialog;
+    private CustomProgressDialog progressDialog;
     private boolean doubleBackToExitPressedOnce = false;
 
     @Override
@@ -51,10 +51,7 @@ public class SigninActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading Data");
-        progressDialog.setMessage("Please wait...");
-        progressDialog.setCancelable(false);
+        progressDialog = new CustomProgressDialog(this);
 
         textViewLogin = (TextView) findViewById(R.id.textViewLogin);
         spinnerKaryawan = (Spinner) findViewById(R.id.spinnerKaryawan);

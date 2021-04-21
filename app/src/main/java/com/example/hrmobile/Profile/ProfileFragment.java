@@ -1,14 +1,21 @@
 package com.example.hrmobile.Profile;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -50,6 +57,7 @@ public class ProfileFragment extends Fragment {
     private TextView textJobGrade;
     private TextView textEmployeeNumber;
     private CircleImageView imageAkun;
+    private Dialog myDialog;
 
     private SharedPrefManager sharedPrefManager;
 
@@ -76,6 +84,7 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         sharedPrefManager = SharedPrefManager.getInstance(getActivity());
+        myDialog = new Dialog(getContext());
 
         menuDataLengkap = (LinearLayout) view.findViewById(R.id.menuDataLengkap);
         menuDataKeluarga = (LinearLayout) view.findViewById(R.id.menuDataKeluarga);
@@ -186,10 +195,7 @@ public class ProfileFragment extends Fragment {
         menuLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent logout = new Intent(getActivity(), LoginActivity.class);
-                startActivity(logout);
-                sharedPrefManager.setIsLogout();
-                getActivity().finish();
+                ShowPopup();
             }
         });
         loadUserEnable();
@@ -229,5 +235,45 @@ public class ProfileFragment extends Fragment {
             }
         };
         Volley.newRequestQueue(getActivity()).add(request);
+    }
+
+
+
+    public void ShowPopup() {
+        ImageView image;
+        TextView textDialog;
+        TextView btnYes;
+        TextView btnNo;
+
+        myDialog.setContentView(R.layout.custom_confirm_dialog);
+        image = (ImageView) myDialog.findViewById(R.id.imageDialog);
+        textDialog = (TextView) myDialog.findViewById(R.id.textDialog);
+        btnYes = (TextView) myDialog.findViewById(R.id.btnYes);
+        btnNo = (TextView) myDialog.findViewById(R.id.btnNo);
+
+        image.setImageResource(R.drawable.ic_exit);
+        textDialog.setText("Do you want to logout?");
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent logout = new Intent(getActivity(), LoginActivity.class);
+                startActivity(logout);
+                sharedPrefManager.setIsLogout();
+                getActivity().finish();
+            }
+        });
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+
+        WindowManager.LayoutParams params = myDialog.getWindow().getAttributes();
+        params.gravity = Gravity.CENTER;
+        myDialog.getWindow().setAttributes(params);
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.setCancelable(false);
+        myDialog.show();
     }
 }

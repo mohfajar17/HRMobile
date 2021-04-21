@@ -28,6 +28,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hrmobile.Adapter.RecyclerViewCheckClock;
 import com.example.hrmobile.Config;
+import com.example.hrmobile.CustomProgressDialog;
 import com.example.hrmobile.Data.CheckClock;
 import com.example.hrmobile.LoginActivity;
 import com.example.hrmobile.R;
@@ -48,7 +49,7 @@ public class CheckClockActivity extends AppCompatActivity {
     private RecyclerViewCheckClock adapter;
     private RecyclerView.LayoutManager recylerViewLayoutManager;
     private List<CheckClock> employeeDet;
-    private ProgressDialog progressDialog;
+    private CustomProgressDialog progressDialog;
     public boolean loadAll = false;
     public int counter = 0;
     public ViewGroup.LayoutParams params;
@@ -77,11 +78,7 @@ public class CheckClockActivity extends AppCompatActivity {
         setContentView(R.layout.activity_check_clock);
 
         sharedPrefManager = SharedPrefManager.getInstance(this);
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading Data");
-        progressDialog.setMessage("Please wait...");
-        progressDialog.setCancelable(false);
+        progressDialog = new CustomProgressDialog(this);
 
         context = getApplicationContext();
         employeeDet = new ArrayList<>();

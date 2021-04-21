@@ -168,10 +168,10 @@ public class HomeFragment extends Fragment {
                     } else {
                         Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
                     }
-//                    progressDialog.dismiss();
+                    progressDialog.dismiss();
                 } catch (JSONException e) {
                     Toast.makeText(getActivity(), "Error load data", Toast.LENGTH_LONG).show();
-//                    progressDialog.dismiss();
+                    progressDialog.dismiss();
                     e.printStackTrace();
                 }
             }
@@ -179,7 +179,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-//                progressDialog.dismiss();
+                progressDialog.dismiss();
                 Toast.makeText(getActivity(), "Network is broken", Toast.LENGTH_LONG).show();
             }
         }){

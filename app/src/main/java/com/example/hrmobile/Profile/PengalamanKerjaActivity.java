@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hrmobile.Adapter.RecyclerViewPengalamanKerja;
 import com.example.hrmobile.Config;
+import com.example.hrmobile.CustomProgressDialog;
 import com.example.hrmobile.Data.PengalamanKerja;
 import com.example.hrmobile.LoginActivity;
 import com.example.hrmobile.R;
@@ -36,7 +37,7 @@ import java.util.Map;
 
 public class PengalamanKerjaActivity extends AppCompatActivity {
 
-    private ProgressDialog progressDialog;
+    private CustomProgressDialog progressDialog;
     private SharedPrefManager sharedPrefManager;
 
     private Context context;
@@ -54,10 +55,7 @@ public class PengalamanKerjaActivity extends AppCompatActivity {
 
         sharedPrefManager = SharedPrefManager.getInstance(this);
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading Data");
-        progressDialog.setMessage("Please wait...");
-        progressDialog.setCancelable(false);
+        progressDialog = new CustomProgressDialog(this);
 
         context = getApplicationContext();
         pengalamanKerjas = new ArrayList<>();

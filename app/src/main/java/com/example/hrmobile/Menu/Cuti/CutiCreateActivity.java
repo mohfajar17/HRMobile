@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hrmobile.Config;
+import com.example.hrmobile.CustomProgressDialog;
 import com.example.hrmobile.LoginActivity;
 import com.example.hrmobile.R;
 import com.example.hrmobile.SharedPrefManager;
@@ -45,6 +46,7 @@ public class CutiCreateActivity extends AppCompatActivity {
     private EditText editNotes;
     private Button buttonBuat;
 
+    private CustomProgressDialog progressDialog;
     private SharedPrefManager sharedPrefManager;
 
     @Override
@@ -53,6 +55,7 @@ public class CutiCreateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cuti_create);
 
         sharedPrefManager = SharedPrefManager.getInstance(this);
+        progressDialog = new CustomProgressDialog(this);
 
         editCutiRequested = (Spinner) findViewById(R.id.editCutiRequested);
         editCutiKategori = (Spinner) findViewById(R.id.editCutiKategori);
@@ -150,6 +153,7 @@ public class CutiCreateActivity extends AppCompatActivity {
                 editCutiStartDate.getText().toString().matches("") || editCutiEndDate.getText().toString().matches("")) {
             Toast.makeText(CutiCreateActivity.this, "Failed, please check your data", Toast.LENGTH_LONG).show();
         } else {
+            progressDialog.show();
             final String employeeId = cutiRequestedId[editCutiRequested.getSelectedItemPosition()];
             final String categoryId = cutiKategoriId[editCutiKategori.getSelectedItemPosition()];
 
@@ -165,8 +169,10 @@ public class CutiCreateActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(CutiCreateActivity.this, "Filed applied for leave", Toast.LENGTH_LONG).show();
                         }
+                        progressDialog.dismiss();
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        progressDialog.dismiss();
                         Toast.makeText(CutiCreateActivity.this, "Error add data", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -174,6 +180,7 @@ public class CutiCreateActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     error.printStackTrace();
+                    progressDialog.dismiss();
                     Toast.makeText(CutiCreateActivity.this, "network is broken, please check your network", Toast.LENGTH_LONG).show();
                 }
             }){
@@ -228,10 +235,11 @@ public class CutiCreateActivity extends AppCompatActivity {
                                 adapter = new ArrayAdapter<String>(CutiCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, cutiKategori);
                                 editCutiKategori.setAdapter(adapter);
                             } else {
-                                Toast.makeText(CutiCreateActivity.this, "No data", Toast.LENGTH_LONG).show();
+                                Toast.makeText(CutiCreateActivity.this, "Failed load data", Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Toast.makeText(CutiCreateActivity.this, "Error load data", Toast.LENGTH_LONG).show();
                         }
                     }
                 },
@@ -239,6 +247,7 @@ public class CutiCreateActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
+                        Toast.makeText(CutiCreateActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
                     }
                 }){
         };

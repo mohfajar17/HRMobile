@@ -150,6 +150,8 @@ public class EditProfileActivity extends AppCompatActivity {
                         if(status==1){
                             onBackPressed();
                             Toast.makeText(EditProfileActivity.this, "Success", Toast.LENGTH_LONG).show();
+                        } else if (status==2){
+                            Toast.makeText(EditProfileActivity.this, "You don't have an access, please contact admin", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(EditProfileActivity.this, "Incorrect data input", Toast.LENGTH_LONG).show();
                         }

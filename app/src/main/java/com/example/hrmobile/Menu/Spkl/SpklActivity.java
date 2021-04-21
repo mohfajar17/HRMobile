@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hrmobile.Adapter.RecyclerViewSpkl;
 import com.example.hrmobile.Config;
+import com.example.hrmobile.CustomProgressDialog;
 import com.example.hrmobile.Data.Spkl;
 import com.example.hrmobile.LoginActivity;
 import com.example.hrmobile.R;
@@ -43,7 +44,7 @@ public class SpklActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager recylerViewLayoutManager;
     private List<Spkl> spkls;
 
-    private ProgressDialog progressDialog;
+    private CustomProgressDialog progressDialog;
     private SharedPrefManager sharedPrefManager;
 
     private FloatingActionButton pskFabAdd;
@@ -55,11 +56,7 @@ public class SpklActivity extends AppCompatActivity {
         setContentView(R.layout.activity_spkl);
 
         sharedPrefManager = SharedPrefManager.getInstance(this);
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading Data");
-        progressDialog.setMessage("Please wait...");
-        progressDialog.setCancelable(false);
+        progressDialog = new CustomProgressDialog(this);
 
         context = getApplicationContext();
         spkls = new ArrayList<>();

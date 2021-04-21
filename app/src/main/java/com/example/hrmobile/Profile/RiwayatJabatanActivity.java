@@ -25,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.hrmobile.Adapter.RecyclerViewRiwayatHistory;
 import com.example.hrmobile.Adapter.RecyclerViewRiwayatJabatan;
 import com.example.hrmobile.Config;
+import com.example.hrmobile.CustomProgressDialog;
 import com.example.hrmobile.Data.RiwayatHistory;
 import com.example.hrmobile.Data.RiwayatJabatan;
 import com.example.hrmobile.LoginActivity;
@@ -52,7 +53,7 @@ public class RiwayatJabatanActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager recylerViewLayoutManagerHis;
     private List<RiwayatHistory> riwayatHistories;
 
-    private ProgressDialog progressDialog;
+    private CustomProgressDialog progressDialog;
     private SharedPrefManager sharedPrefManager;
 
     private TextView textTanggalAwalKerja;
@@ -71,10 +72,7 @@ public class RiwayatJabatanActivity extends AppCompatActivity {
 
         sharedPrefManager = SharedPrefManager.getInstance(this);
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading Data");
-        progressDialog.setMessage("Please wait...");
-        progressDialog.setCancelable(false);
+        progressDialog = new CustomProgressDialog(this);
 
         context = getApplicationContext();
         riwayatJabatans = new ArrayList<>();

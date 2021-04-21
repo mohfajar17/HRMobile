@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private SharedPrefManager sharedPrefManager;
 
-    private ProgressDialog progressDialog;
+    private CustomProgressDialog progressDialog;
     private boolean doubleBackToExitPressedOnce = false;
 
     @Override
@@ -56,10 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading Data");
-        progressDialog.setMessage("Please wait...");
-        progressDialog.setCancelable(false);
+        progressDialog = new CustomProgressDialog(this);
 
         layoutUsername = (LinearLayout) findViewById(R.id.layoutUsername);
         layoutPassword = (LinearLayout) findViewById(R.id.layoutPassword);

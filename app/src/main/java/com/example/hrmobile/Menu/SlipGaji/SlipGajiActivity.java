@@ -26,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hrmobile.Config;
+import com.example.hrmobile.CustomProgressDialog;
 import com.example.hrmobile.LoginActivity;
 import com.example.hrmobile.R;
 import com.example.hrmobile.SharedPrefManager;
@@ -98,7 +99,7 @@ public class SlipGajiActivity extends AppCompatActivity {
     private RelativeLayout layoutPotonganLainnya;
     private RelativeLayout layoutTunjanganLokasiPerjalanan;
 
-    private ProgressDialog progressDialog;
+    private CustomProgressDialog progressDialog;
     private SharedPrefManager sharedPrefManager;
 
     @Override
@@ -106,11 +107,7 @@ public class SlipGajiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slip_gaji);
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading Data");
-        progressDialog.setMessage("Please wait...");
-        progressDialog.setCancelable(false);
-
+        progressDialog = new CustomProgressDialog(this);
         sharedPrefManager = SharedPrefManager.getInstance(this);
 
         layoutMeal = (RelativeLayout) findViewById(R.id.layoutMeal);

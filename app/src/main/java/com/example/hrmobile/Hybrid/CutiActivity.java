@@ -21,6 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hrmobile.Adapter.RecyclerViewCuti;
 import com.example.hrmobile.Config;
+import com.example.hrmobile.CustomProgressDialog;
 import com.example.hrmobile.Data.Cuti;
 import com.example.hrmobile.LoginActivity;
 import com.example.hrmobile.Menu.Cuti.CutiCreateActivity;
@@ -47,7 +48,7 @@ public class CutiActivity extends AppCompatActivity {
 
     private ImageView buttonBack;
     private FloatingActionButton fabAdd;
-    private ProgressDialog progressDialog;
+    private CustomProgressDialog progressDialog;
     private SharedPrefManager sharedPrefManager;
     private Bundle bundle;
 
@@ -59,6 +60,8 @@ public class CutiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_data_cuti);
 
         sharedPrefManager = SharedPrefManager.getInstance(this);
+        progressDialog = new CustomProgressDialog(this);
+
         bundle = getIntent().getExtras();
         code = bundle.getInt("code");
 
@@ -76,11 +79,6 @@ public class CutiActivity extends AppCompatActivity {
                 }
             });
         }
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading Data");
-        progressDialog.setMessage("Please wait...");
-        progressDialog.setCancelable(false);
 
         context = getApplicationContext();
         cutis = new ArrayList<>();

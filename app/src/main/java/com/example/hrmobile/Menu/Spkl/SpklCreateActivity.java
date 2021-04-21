@@ -26,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hrmobile.Config;
+import com.example.hrmobile.CustomProgressDialog;
 import com.example.hrmobile.LoginActivity;
 import com.example.hrmobile.R;
 import com.example.hrmobile.SharedPrefManager;
@@ -82,6 +83,7 @@ public class SpklCreateActivity extends AppCompatActivity {
     private EditText spklFinishTime1, spklFinishTime2, spklFinishTime3, spklFinishTime4, spklFinishTime5;
     private EditText spklKeterangan1, spklKeterangan2, spklKeterangan3, spklKeterangan4, spklKeterangan5;
 
+    private CustomProgressDialog progressDialog;
     private SharedPrefManager sharedPrefManager;
 
     @Override
@@ -90,6 +92,7 @@ public class SpklCreateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_spkl_create);
 
         sharedPrefManager = SharedPrefManager.getInstance(this);
+        progressDialog = new CustomProgressDialog(this);
 
         editSpklNumber = (EditText) findViewById(R.id.editSpklNumber);
         editSpklDesc = (EditText) findViewById(R.id.editSpklDesc);
@@ -550,9 +553,10 @@ public class SpklCreateActivity extends AppCompatActivity {
                                 spklNamaKaryawan3.setAdapter(adapter);
                                 spklNamaKaryawan4.setAdapter(adapter);
                                 spklNamaKaryawan5.setAdapter(adapter);
-                            }
+                            } else Toast.makeText(SpklCreateActivity.this, "Failed load data", Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Toast.makeText(SpklCreateActivity.this, "Error load data", Toast.LENGTH_LONG).show();
                         }
                     }
                 },
@@ -560,6 +564,7 @@ public class SpklCreateActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
+                        Toast.makeText(SpklCreateActivity.this, "Network is broken", Toast.LENGTH_LONG).show();
                     }
                 }){
         };
@@ -574,6 +579,7 @@ public class SpklCreateActivity extends AppCompatActivity {
                 spklStartTime1.getText().toString().matches("") || spklFinishTime1.getText().toString().matches("")) {
             Toast.makeText(SpklCreateActivity.this, "Failed, please check your data", Toast.LENGTH_LONG).show();
         } else {
+            progressDialog.show();
             final String spklJobCode = spklJobCodeId[editSpklRequested.getSelectedItemPosition()];
             final String spklWorkLocation = spklLokasiId[editSpklLokasi.getSelectedItemPosition()];
             final String spklDepartment = spklDepartmenId[editSpklDepartment.getSelectedItemPosition()];
@@ -601,8 +607,10 @@ public class SpklCreateActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(SpklCreateActivity.this, "Failed add data", Toast.LENGTH_LONG).show();
                         }
+                        progressDialog.dismiss();
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        progressDialog.dismiss();
                         Toast.makeText(SpklCreateActivity.this, "Error add data", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -610,6 +618,7 @@ public class SpklCreateActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     error.printStackTrace();
+                    progressDialog.dismiss();
                     Toast.makeText(SpklCreateActivity.this, "network is broken, please check your network", Toast.LENGTH_LONG).show();
                 }
             }){
