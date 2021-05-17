@@ -33,6 +33,7 @@
         android:id="@+id/textDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="Do you want to logout?"
         android:textSize="20dp"
         android:textColor="@color/black"/>

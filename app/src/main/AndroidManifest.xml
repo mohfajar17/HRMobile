@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.hrmobile">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HRMobile.NoActionBar"
         tools:replace="android:icon,android:theme">
-        <activity android:name=".SigninActivity"></activity>
+        <activity android:name=".Menu.SlipGaji.DownloadSlipActivity"></activity>
+        <activity android:name=".SigninActivity" />
         <activity android:name=".Menu.SlipGaji.SlipGajiActivity" />
         <activity android:name=".Profile.FileActivity" />
         <activity android:name=".Profile.PelatihanActivity" />

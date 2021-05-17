@@ -2,16 +2,11 @@ package com.example.hrmobile.Menu.SlipGaji;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -79,6 +74,7 @@ public class SlipGajiActivity extends AppCompatActivity {
     private TextView textTakeHomePay;
     private TextView textTunjanganLokasiPerjalanan;
     private TextView textTotal;
+    private ImageView downloadFile;
 
     private RelativeLayout layoutMeal;
     private RelativeLayout layoutTransport;
@@ -161,6 +157,15 @@ public class SlipGajiActivity extends AppCompatActivity {
         textTotal = (TextView) findViewById(R.id.textTotal);
 
         layoutAll = (LinearLayout) findViewById(R.id.layoutAll);
+
+        downloadFile = (ImageView) findViewById(R.id.detailFile);
+        downloadFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent bukaMainActivity = new Intent(SlipGajiActivity.this, DownloadSlipActivity.class);
+                startActivity(bukaMainActivity);
+            }
+        });
 
         spinnerTgl = (Spinner) findViewById(R.id.spinnerTgl);
         spinnerBulan = (Spinner) findViewById(R.id.spinnerBulan);
