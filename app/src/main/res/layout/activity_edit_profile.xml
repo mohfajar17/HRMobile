@@ -52,6 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:maxLength="20"
                     android:hint="last password"
                     android:inputType="textPassword" />
 
@@ -73,6 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:maxLength="20"
                     android:hint="new password"
                     android:inputType="textPassword" />
 
@@ -275,6 +277,7 @@
                     android:layout_marginLeft="10dp"
                     android:hint="state"
                     android:enabled="false"
+                    android:maxLength="20"
                     android:inputType="textPersonName" />
 
                 <ImageView
@@ -296,7 +299,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:hint="mobile phone"
-                    android:inputType="textPersonName" />
+                    android:maxLength="15"
+                    android:inputType="number" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -317,7 +321,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:hint="email"
-                    android:inputType="textPersonName" />
+                    android:inputType="textEmailAddress" />
 
                 <Button
                     android:id="@+id/buttonSimpanPersonal"

@@ -91,8 +91,6 @@ public class SigninActivity extends AppCompatActivity {
     private void loadData() {
         if (spinnerKaryawan.getSelectedItemPosition() == 0 || editTextUsername.getText().toString().matches("") || editTextPassword.getText().toString().matches("")) {
             Toast.makeText(SigninActivity.this, "Failed, please check your data", Toast.LENGTH_LONG).show();
-        } else if (editTextUsername.getText().length()>20 || editTextPassword.getText().length()>20) {
-            Toast.makeText(SigninActivity.this, "Failed, username or password length exceeds the limit", Toast.LENGTH_LONG).show();
         } else {
             final String empId = emplooyeeId[spinnerKaryawan.getSelectedItemPosition()];
             final String empName = emplooyeeName[spinnerKaryawan.getSelectedItemPosition()];
