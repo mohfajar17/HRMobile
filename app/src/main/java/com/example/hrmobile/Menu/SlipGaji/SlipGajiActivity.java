@@ -163,6 +163,9 @@ public class SlipGajiActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent bukaMainActivity = new Intent(SlipGajiActivity.this, DownloadSlipActivity.class);
+                bukaMainActivity.putExtra("employee_id", sharedPrefManager.getKeyEmployeeId());
+                bukaMainActivity.putExtra("tanggal", spinnerTgl.getSelectedItem().toString());
+                bukaMainActivity.putExtra("bulan_tahun", spinnerBulan.getSelectedItem().toString()+"+"+spinnerTahun.getSelectedItem().toString());
                 startActivity(bukaMainActivity);
             }
         });

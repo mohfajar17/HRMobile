@@ -2,17 +2,24 @@ package com.example.hrmobile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,20 +35,24 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SigninActivity extends AppCompatActivity {
     private TextView textViewLogin;
-    private Spinner spinnerKaryawan;
+    private TextView textViewKaryawan;
     private EditText editTextUsername;
     private EditText editTextPassword;
     private Button buttonSignup;
     private CheckBox checkBox;
 
-    private ArrayAdapter<String> adapter;
     private String[] emplooyeeId;
     private String[] emplooyeeName;
+    private ArrayList<String> arrayListKaryawan;
+    private int idKaryawan = -1;
+
+    private Dialog dialog;
 
     private CustomProgressDialog progressDialog;
     private boolean doubleBackToExitPressedOnce = false;
@@ -52,9 +63,9 @@ public class SigninActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signin);
 
         progressDialog = new CustomProgressDialog(this);
+        arrayListKaryawan = new ArrayList<>();
 
         textViewLogin = (TextView) findViewById(R.id.textViewLogin);
-        spinnerKaryawan = (Spinner) findViewById(R.id.spinnerKaryawan);
         editTextUsername = (EditText) findViewById(R.id.editTextUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         buttonSignup = (Button) findViewById(R.id.buttonSignup);
@@ -76,6 +87,48 @@ public class SigninActivity extends AppCompatActivity {
             }
         });
 
+        textViewKaryawan = (TextView) findViewById(R.id.textViewKaryawan);
+        textViewKaryawan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog = new Dialog(SigninActivity.this);
+                dialog.setContentView(R.layout.dialog_searchable_spinner);
+                dialog.getWindow().setLayout(900, 1500);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
+                //initialize dialog variable
+                EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
+                ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(SigninActivity.this, android.R.layout.simple_list_item_1, arrayListKaryawan);
+                listViewSearch.setAdapter(adapter);
+                editTextSearch.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        adapter.getFilter().filter(charSequence);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+                listViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        textViewKaryawan.setText(adapter.getItem(i));
+                        idKaryawan = i;
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+
         textViewLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,16 +137,16 @@ public class SigninActivity extends AppCompatActivity {
                 finish();
             }
         });
-
         getDataEmp();
     }
 
     private void loadData() {
-        if (spinnerKaryawan.getSelectedItemPosition() == 0 || editTextUsername.getText().toString().matches("") || editTextPassword.getText().toString().matches("")) {
+        if (idKaryawan < 0 || editTextUsername.getText().toString().matches("") || editTextPassword.getText().toString().matches("")) {
             Toast.makeText(SigninActivity.this, "Failed, please check your data", Toast.LENGTH_LONG).show();
         } else {
-            final String empId = emplooyeeId[spinnerKaryawan.getSelectedItemPosition()];
-            final String empName = emplooyeeName[spinnerKaryawan.getSelectedItemPosition()];
+            progressDialog.show();
+            final String empId = emplooyeeId[idKaryawan];
+            final String empName = emplooyeeName[idKaryawan];
             StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SIGNUP, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -101,15 +154,19 @@ public class SigninActivity extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(response);
                         int status = jsonObject.getInt("status");
                         if(status==1){
-                            spinnerKaryawan.setSelection(0);
                             editTextUsername.setText("");
                             editTextPassword.setText("");
+                            textViewKaryawan.setText("Pilih karyawan");
+                            idKaryawan = -1;
+                            getDataEmp();
                             Toast.makeText(SigninActivity.this, "Registration success, wait until the admin verify your account", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(SigninActivity.this, "Registration failed, account with this employee_id already exists", Toast.LENGTH_LONG).show();
                         }
+                        progressDialog.dismiss();
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        progressDialog.dismiss();
                         Toast.makeText(SigninActivity.this, "Failed add data", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -117,6 +174,7 @@ public class SigninActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     error.printStackTrace();
+                    progressDialog.dismiss();
                     Toast.makeText(SigninActivity.this, "network is broken, please check your network", Toast.LENGTH_LONG).show();
                 }
             }){
@@ -132,10 +190,10 @@ public class SigninActivity extends AppCompatActivity {
             };
             Volley.newRequestQueue(this).add(request);
         }
-
     }
 
     private void getDataEmp() {
+        arrayListKaryawan.clear();
         StringRequest request = new StringRequest(Request.Method.GET, Config.DATA_URL_SIGNUP_EMP_LIST,
                 new Response.Listener<String>() {
                     @Override
@@ -148,17 +206,15 @@ public class SigninActivity extends AppCompatActivity {
 
                                 //data employee
                                 jsonArray = jsonObject.getJSONArray("data employee");
-                                String[] empName = new String[jsonArray.length()+1];
-                                emplooyeeId = new String[jsonArray.length()+1];
-                                emplooyeeName = new String[jsonArray.length()+1];
-                                empName[0] = "-- Pilih Karyawan --";
+                                String[] empName = new String[jsonArray.length()];
+                                emplooyeeId = new String[jsonArray.length()];
+                                emplooyeeName = new String[jsonArray.length()];
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    empName[i + 1] = jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name");
-                                    emplooyeeId[i + 1] = jsonArray.getJSONObject(i).getString("employee_id");
-                                    emplooyeeName[i + 1] = jsonArray.getJSONObject(i).getString("fullname");
+                                    empName[i] = jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name");
+                                    emplooyeeId[i] = jsonArray.getJSONObject(i).getString("employee_id");
+                                    emplooyeeName[i] = jsonArray.getJSONObject(i).getString("fullname");
+                                    arrayListKaryawan.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
                                 }
-                                adapter = new ArrayAdapter<String>(SigninActivity.this, android.R.layout.simple_spinner_dropdown_item, empName);
-                                spinnerKaryawan.setAdapter(adapter);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

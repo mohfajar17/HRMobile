@@ -15,14 +15,13 @@ import com.example.hrmobile.SharedPrefManager;
 public class DownloadSlipActivity extends AppCompatActivity {
 
     private WebView webView;
-    private SharedPrefManager sharedPrefManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_download_slip);
 
-        sharedPrefManager = SharedPrefManager.getInstance(this);
+        Bundle bundle = getIntent().getExtras();
 
         webView = (WebView) findViewById(R.id.webSlipGaji);
         webView.getSettings().setLoadsImagesAutomatically(true);
@@ -37,6 +36,6 @@ public class DownloadSlipActivity extends AppCompatActivity {
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webView.setWebViewClient(new WebViewClient());
         // set url webview
-        webView.loadUrl(Uri.parse(Config.DATA_URL_SLIP_GAJI_WEB_COBA+sharedPrefManager.getKeyEmployeeId()).toString());
+        webView.loadUrl(Uri.parse(Config.DATA_URL_SLIP_GAJI_WEB+bundle.getString("employee_id")+"&tanggal="+bundle.getString("tanggal")+"&bulantahun="+bundle.getString("bulan_tanggal")).toString());
     }
 }
