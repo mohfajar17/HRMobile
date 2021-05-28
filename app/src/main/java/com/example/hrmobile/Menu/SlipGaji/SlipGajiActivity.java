@@ -162,10 +162,18 @@ public class SlipGajiActivity extends AppCompatActivity {
         downloadFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int type;
+                if (spinnerTgl.getSelectedItemPosition()==1)
+                    type = 0;
+                else if (spinnerTgl.getSelectedItemPosition()==2)
+                    type = 1;
+                else type = 2;
                 Intent bukaMainActivity = new Intent(SlipGajiActivity.this, DownloadSlipActivity.class);
                 bukaMainActivity.putExtra("employee_id", sharedPrefManager.getKeyEmployeeId());
+                bukaMainActivity.putExtra("tipe", type);
                 bukaMainActivity.putExtra("tanggal", spinnerTgl.getSelectedItem().toString());
-                bukaMainActivity.putExtra("bulan_tahun", spinnerBulan.getSelectedItem().toString()+"+"+spinnerTahun.getSelectedItem().toString());
+                bukaMainActivity.putExtra("bulan", spinnerBulan.getSelectedItem().toString());
+                bukaMainActivity.putExtra("tahun", spinnerTahun.getSelectedItem().toString());
                 startActivity(bukaMainActivity);
             }
         });
@@ -259,7 +267,6 @@ public class SlipGajiActivity extends AppCompatActivity {
                             ViewGroup.LayoutParams params = layoutAll.getLayoutParams();
                             params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                             layoutAll.setLayoutParams(params);
-
 
                             if (jsonObject.getJSONArray("data pokok").getJSONObject(0).getLong("meal_allowance") == 0)
                                 changeLayout(layoutMeal);

@@ -114,7 +114,7 @@ public class SpklDetailActivity extends AppCompatActivity {
         detailSpklLocation.setText(spkls.getWork_location());
         detailSpklJobCode.setText(spkls.getJob_order_id());
         detailSpklProposedDate.setText(spkls.getProposed_date());
-        detailSpklReq.setText(spkls.getCreated_by());
+        detailSpklReq.setText(spkls.getRequested_id());
         detailSpklReqDate.setText("");//spkls.getRequest_date());
         detailSpklApproval1.setText(spkls.getApproval1_by() + "\n" + spkls.getApproval1_date());
         detailSpklApproval2.setText(spkls.getApproval2_by() + "\n" + spkls.getApproval2_date());

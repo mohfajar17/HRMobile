@@ -79,6 +79,7 @@ public class SpklActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(context, SpklCreateActivity.class);
                 startActivityForResult(intent,1);
+                finish();
             }
         });
 
@@ -158,6 +159,7 @@ public class SpklActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param=new HashMap<>();
                 param.put("empId", sharedPrefManager.getKeyEmployeeId());
+                param.put("userId", sharedPrefManager.getKeyUserId());
                 return param;
             }
         };

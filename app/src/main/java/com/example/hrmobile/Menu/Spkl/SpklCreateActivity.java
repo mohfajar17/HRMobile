@@ -3,17 +3,24 @@ package com.example.hrmobile.Menu.Spkl;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -36,6 +43,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -45,6 +53,9 @@ import java.util.Map;
 public class SpklCreateActivity extends AppCompatActivity {
 
     private String spklNumber;
+    private Dialog dialog;
+    private ArrayList<String> arrayListJo;
+    private int idJobOrder = -1;
     private ArrayAdapter<String> adapter;
     private String[] spklJobCodeId;
     private String[] spklLokasiId;
@@ -60,7 +71,7 @@ public class SpklCreateActivity extends AppCompatActivity {
     private EditText editSpklNumber;
     private EditText editSpklDesc;
     private EditText editSpklDate;
-    private Spinner editSpklJo;
+    private TextView textViewJo;
     private Spinner editSpklLokasi;
     private Spinner editSpklDepartment;
     private Spinner editSpklRequested;
@@ -93,11 +104,12 @@ public class SpklCreateActivity extends AppCompatActivity {
 
         sharedPrefManager = SharedPrefManager.getInstance(this);
         progressDialog = new CustomProgressDialog(this);
+        arrayListJo = new ArrayList<>();
 
         editSpklNumber = (EditText) findViewById(R.id.editSpklNumber);
         editSpklDesc = (EditText) findViewById(R.id.editSpklDesc);
         editSpklDate = (EditText) findViewById(R.id.editSpklDate);
-        editSpklJo = (Spinner) findViewById(R.id.editSpklJo);
+        textViewJo = (TextView) findViewById(R.id.textViewJo);
         editSpklLokasi = (Spinner) findViewById(R.id.editSpklLokasi);
         editSpklDepartment = (Spinner) findViewById(R.id.editSpklDepartment);
         editSpklRequested = (Spinner) findViewById(R.id.editSpklRequested);
@@ -216,6 +228,48 @@ public class SpklCreateActivity extends AppCompatActivity {
                 }, Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 
                 datePickerDialog.show();
+            }
+        });
+
+        textViewJo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog = new Dialog(SpklCreateActivity.this);
+                dialog.setContentView(R.layout.dialog_searchable_spinner);
+                dialog.setCancelable(false);
+                dialog.getWindow().setLayout(900, 1500);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
+                //initialize dialog variable
+                EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
+                ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
+                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListJo);
+                listViewSearch.setAdapter(newAdapter);
+                editTextSearch.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        newAdapter.getFilter().filter(charSequence);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+                listViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        textViewJo.setText(newAdapter.getItem(i));
+                        idJobOrder = i;
+                        dialog.dismiss();
+                    }
+                });
             }
         });
 
@@ -474,6 +528,7 @@ public class SpklCreateActivity extends AppCompatActivity {
     }
 
     private void getSpklData() {
+        arrayListJo.clear();
         StringRequest request = new StringRequest(Request.Method.GET, Config.DATA_URL_SPKL_CREATE_DATA_LIST,
                 new Response.Listener<String>() {
                     @Override
@@ -490,15 +545,11 @@ public class SpklCreateActivity extends AppCompatActivity {
 
                                 //data spkl jo
                                 jsonArray = jsonObject.getJSONArray("data spkl jo");
-                                String[] spklJobCode = new String[jsonArray.length()+1];
-                                spklJobCodeId = new String[jsonArray.length()+1];
-                                spklJobCode[0] = "-- Pilih Job Code --";
+                                spklJobCodeId = new String[jsonArray.length()];
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    spklJobCode[i + 1] = jsonArray.getJSONObject(i).getString("job_order_number") + " | " + jsonArray.getJSONObject(i).getString("job_order_description");
-                                    spklJobCodeId[i + 1] = jsonArray.getJSONObject(i).getString("job_order_id");
+                                    spklJobCodeId[i] = jsonArray.getJSONObject(i).getString("job_order_id");
+                                    arrayListJo.add(jsonArray.getJSONObject(i).getString("job_order_number") + " | " + jsonArray.getJSONObject(i).getString("job_order_description"));
                                 }
-                                adapter = new ArrayAdapter<String>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, spklJobCode);
-                                editSpklJo.setAdapter(adapter);
 
                                 //data workbase
                                 jsonArray = jsonObject.getJSONArray("data spkl workbase");
@@ -536,6 +587,7 @@ public class SpklCreateActivity extends AppCompatActivity {
                                 spklKaryawan4 = new String[jsonArray.length()+1];
                                 spklKaryawan5 = new String[jsonArray.length()+1];
                                 SpklRequested[0] = "-- Pilih Karyawan --";
+                                spklRequestedId[0] = "0";
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     SpklRequested[i + 1] = jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name");
                                     spklRequestedId[i + 1] = jsonArray.getJSONObject(i).getString("employee_id");
@@ -572,15 +624,15 @@ public class SpklCreateActivity extends AppCompatActivity {
     }
 
     private void createSpkl() {
-        if (editSpklJo.getSelectedItemPosition() == 0 || editSpklLokasi.getSelectedItemPosition() == 0 ||
+        if (idJobOrder < 0 || editSpklLokasi.getSelectedItemPosition() == 0 ||
                 editSpklDepartment.getSelectedItemPosition() == 0 || editSpklDesc.getText().toString().matches("") ||
-                editSpklDate.getText().toString().matches("") || editSpklRequested.getSelectedItemPosition() == 0 ||
-                spklNamaKaryawan1.getSelectedItemPosition() == 0 || spklOvertimeDate1.getText().toString().matches("") ||
-                spklStartTime1.getText().toString().matches("") || spklFinishTime1.getText().toString().matches("")) {
+                editSpklDate.getText().toString().matches("") || spklNamaKaryawan1.getSelectedItemPosition() == 0 ||
+                spklOvertimeDate1.getText().toString().matches("") || spklStartTime1.getText().toString().matches("") ||
+                spklFinishTime1.getText().toString().matches("")) {
             Toast.makeText(SpklCreateActivity.this, "Failed, please check your data", Toast.LENGTH_LONG).show();
         } else {
             progressDialog.show();
-            final String spklJobCode = spklJobCodeId[editSpklRequested.getSelectedItemPosition()];
+            final String spklJobCode = spklJobCodeId[idJobOrder];
             final String spklWorkLocation = spklLokasiId[editSpklLokasi.getSelectedItemPosition()];
             final String spklDepartment = spklDepartmenId[editSpklDepartment.getSelectedItemPosition()];
             final String spklWorkDescription = String.valueOf(editSpklDesc.getText());
@@ -663,5 +715,11 @@ public class SpklCreateActivity extends AppCompatActivity {
             };
             Volley.newRequestQueue(this).add(request);
         }
+    }
+
+    public void onBackPressed(){
+        Intent intent = new Intent(this, SpklActivity.class);
+        startActivityForResult(intent,1);
+        finish();
     }
 }

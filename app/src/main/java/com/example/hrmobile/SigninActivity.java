@@ -100,8 +100,8 @@ public class SigninActivity extends AppCompatActivity {
                 //initialize dialog variable
                 EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
                 ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(SigninActivity.this, android.R.layout.simple_list_item_1, arrayListKaryawan);
-                listViewSearch.setAdapter(adapter);
+                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SigninActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListKaryawan);
+                listViewSearch.setAdapter(newAdapter);
                 editTextSearch.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -110,7 +110,7 @@ public class SigninActivity extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        adapter.getFilter().filter(charSequence);
+                        newAdapter.getFilter().filter(charSequence);
                     }
 
                     @Override
@@ -121,7 +121,7 @@ public class SigninActivity extends AppCompatActivity {
                 listViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        textViewKaryawan.setText(adapter.getItem(i));
+                        textViewKaryawan.setText(newAdapter.getItem(i));
                         idKaryawan = i;
                         dialog.dismiss();
                     }
@@ -206,11 +206,9 @@ public class SigninActivity extends AppCompatActivity {
 
                                 //data employee
                                 jsonArray = jsonObject.getJSONArray("data employee");
-                                String[] empName = new String[jsonArray.length()];
                                 emplooyeeId = new String[jsonArray.length()];
                                 emplooyeeName = new String[jsonArray.length()];
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    empName[i] = jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name");
                                     emplooyeeId[i] = jsonArray.getJSONObject(i).getString("employee_id");
                                     emplooyeeName[i] = jsonArray.getJSONObject(i).getString("fullname");
                                     arrayListKaryawan.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));

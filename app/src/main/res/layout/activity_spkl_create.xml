@@ -113,13 +113,27 @@
                         android:textColor="@android:color/holo_red_dark" />
                 </LinearLayout>
 
-                <Spinner
-                    android:id="@+id/editSpklJo"
+<!--                <Spinner-->
+<!--                    android:id="@+id/editSpklJo"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:spinnerMode="dialog"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:layout_marginLeft="10dp" />-->
+
+                <TextView
+                    android:id="@+id/textViewJo"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:spinnerMode="dialog"
                     android:layout_marginTop="5dp"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="18dp"
+                    android:gravity="center_vertical"
+                    android:text="-- Pilih Job Code --"
+                    android:textSize="16dp"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:drawableRight="@drawable/ic_drop_down"
+                    android:background="@android:color/transparent" />
 
                 <ImageView
                     android:layout_width="match_parent"

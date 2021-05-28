@@ -218,6 +218,6 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="17dp"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/cyan" />
+        app:backgroundTint="@color/primary_light" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

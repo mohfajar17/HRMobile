@@ -21,6 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hrmobile.Config;
 import com.example.hrmobile.CustomProgressDialog;
+import com.example.hrmobile.Hybrid.CutiActivity;
 import com.example.hrmobile.LoginActivity;
 import com.example.hrmobile.R;
 import com.example.hrmobile.SharedPrefManager;
@@ -252,5 +253,12 @@ public class CutiCreateActivity extends AppCompatActivity {
                 }){
         };
         Volley.newRequestQueue(CutiCreateActivity.this).add(request);
+    }
+
+    public void onBackPressed(){
+        Intent intent = new Intent(this, CutiActivity.class);
+        intent.putExtra("code", 0);
+        startActivityForResult(intent,1);
+        finish();
     }
 }

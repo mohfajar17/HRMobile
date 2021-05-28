@@ -76,6 +76,7 @@ public class CutiActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     Intent bukaActivity = new Intent(CutiActivity.this, CutiCreateActivity.class);
                     startActivityForResult(bukaActivity,1);
+                    finish();
                 }
             });
         }

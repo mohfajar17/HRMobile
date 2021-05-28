@@ -36,6 +36,6 @@ public class DownloadSlipActivity extends AppCompatActivity {
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webView.setWebViewClient(new WebViewClient());
         // set url webview
-        webView.loadUrl(Uri.parse(Config.DATA_URL_SLIP_GAJI_WEB+bundle.getString("employee_id")+"&tanggal="+bundle.getString("tanggal")+"&bulantahun="+bundle.getString("bulan_tanggal")).toString());
+        webView.loadUrl(Uri.parse(Config.DATA_URL_SLIP_GAJI_WEB+bundle.getString("employee_id")+"&tipe="+bundle.getString("tipe")+"&tanggal="+bundle.getString("tanggal")+"&bulan="+bundle.getString("bulan")+"&tahun="+bundle.getString("tahun")).toString());
     }
 }

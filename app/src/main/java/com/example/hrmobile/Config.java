@@ -32,7 +32,7 @@ public class Config {
     public static final String DATA_URL_CUTI_CREATE_DATA_LIST = DATA_URL_AIS +"getDataCreateCuti";
     public static final String DATA_URL_CUTI_CREATE = DATA_URL_AIS +"createCuti";
     public static final String DATA_URL_SLIP_GAJI = DATA_URL_AIS +"getSlipGaji";
-    public static final String DATA_URL_SLIP_GAJI_WEB = DATA_URL + "slipGaji.php?employee_id=";
+    public static final String DATA_URL_SLIP_GAJI_WEB = DATA_URL + "gaji.php?employee_id=";
     public static final String DATA_URL_SLIP_GAJI_WEB_COBA = "https://ais.asukaindonesia.co.id/index.php?r=hr/employee/print2&id=";
 
     //menu profile
