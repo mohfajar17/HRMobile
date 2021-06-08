@@ -34,6 +34,7 @@ public class RecyclerViewCuti extends RecyclerView.Adapter<RecyclerViewCuti.View
     public void onBindViewHolder(final RecyclerViewCuti.ViewHolder holder, final int position) {
         int nomor = position + 1;
         holder.textNo.setText("" + nomor);
+        holder.textLeaveNo.setText(mValues.get(position).getEmployee_leave_number());
         holder.textTglCuti.setText(mValues.get(position).getDate_leave());
         holder.textTglPengajuan.setText(mValues.get(position).getProposed_date());
         holder.textTglKadarluarsa.setText(mValues.get(position).getDate_extended());
@@ -57,6 +58,7 @@ public class RecyclerViewCuti extends RecyclerView.Adapter<RecyclerViewCuti.View
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView textNo;
+        public final TextView textLeaveNo;
         public final TextView textTglCuti;
         public final TextView textTglPengajuan;
         public final TextView textTglKadarluarsa;
@@ -71,6 +73,7 @@ public class RecyclerViewCuti extends RecyclerView.Adapter<RecyclerViewCuti.View
 
             mView = itemView;
             textNo = (TextView) itemView.findViewById(R.id.textNo);
+            textLeaveNo = (TextView) itemView.findViewById(R.id.textLeaveNo);
             textTglCuti = (TextView) itemView.findViewById(R.id.textTglCuti);
             textTglPengajuan = (TextView) itemView.findViewById(R.id.textTglPengajuan);
             textTglKadarluarsa = (TextView) itemView.findViewById(R.id.textTglKadarluarsa);

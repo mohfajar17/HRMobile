@@ -25,10 +25,23 @@
             android:src="@color/black"/>
 
         <TextView
+            android:id="@+id/textLeaveNo"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:gravity="center|top"
+            android:padding="10dp"
+            android:textColor="@android:color/black"/>
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:src="@color/black"/>
+
+        <TextView
             android:id="@+id/textTglCuti"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:gravity="left|top"
+            android:gravity="center|top"
             android:padding="10dp"
             android:textColor="@android:color/black"/>
 
@@ -41,7 +54,7 @@
             android:id="@+id/textTglPengajuan"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:gravity="left|top"
+            android:gravity="center|top"
             android:padding="10dp"
             android:textColor="@android:color/black"/>
 
@@ -54,7 +67,7 @@
             android:id="@+id/textTglKadarluarsa"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:gravity="left|top"
+            android:gravity="center|top"
             android:padding="10dp"
             android:textColor="@android:color/black"/>
 
@@ -67,7 +80,7 @@
             android:id="@+id/textStatus"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:gravity="left|top"
+            android:gravity="center|top"
             android:padding="10dp"
             android:textColor="@android:color/black"/>
 

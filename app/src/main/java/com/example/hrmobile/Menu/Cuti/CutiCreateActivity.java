@@ -3,14 +3,22 @@ package com.example.hrmobile.Menu.Cuti;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -30,22 +38,28 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CutiCreateActivity extends AppCompatActivity {
 
+    private ArrayList<String> arrayListKaryawan;
+    private int idKaryawan = -1;
     private ArrayAdapter<String> adapter;
-    private String[] cutiRequestedId;
+    private String[] cutiKaryawanId;
     private String[] cutiKategoriId;
 
-    private Spinner editCutiRequested;
+    private EditText editCutiNo;
+    private TextView editCutiKaryawan;
     private Spinner editCutiKategori;
     private EditText editCutiStartDate;
     private EditText editCutiEndDate;
     private EditText editNotes;
     private Button buttonBuat;
+
+    private Dialog dialog;
 
     private CustomProgressDialog progressDialog;
     private SharedPrefManager sharedPrefManager;
@@ -57,13 +71,56 @@ public class CutiCreateActivity extends AppCompatActivity {
 
         sharedPrefManager = SharedPrefManager.getInstance(this);
         progressDialog = new CustomProgressDialog(this);
+        arrayListKaryawan = new ArrayList<>();
 
-        editCutiRequested = (Spinner) findViewById(R.id.editCutiRequested);
+        editCutiNo = (EditText) findViewById(R.id.editCutiNo);
+        editCutiKaryawan = (TextView) findViewById(R.id.editCutiKaryawan);
         editCutiKategori = (Spinner) findViewById(R.id.editCutiKategori);
         editCutiStartDate = (EditText) findViewById(R.id.editCutiStartDate);
         editCutiEndDate = (EditText) findViewById(R.id.editCutiEndDate);
         editNotes = (EditText) findViewById(R.id.editNotes);
         buttonBuat = (Button) findViewById(R.id.buttonBuat);
+
+        editCutiKaryawan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog = new Dialog(CutiCreateActivity.this);
+                dialog.setContentView(R.layout.dialog_searchable_spinner);
+                dialog.getWindow().setLayout(900, 1500);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
+                //initialize dialog variable
+                EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
+                ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
+                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(CutiCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListKaryawan);
+                listViewSearch.setAdapter(newAdapter);
+                editTextSearch.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        newAdapter.getFilter().filter(charSequence);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+                listViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        editCutiKaryawan.setText(newAdapter.getItem(i));
+                        idKaryawan = i;
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
 
         editCutiStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,12 +207,13 @@ public class CutiCreateActivity extends AppCompatActivity {
     }
 
     private void createLeave() {
-        if (editCutiRequested.getSelectedItemPosition() == 0 || editCutiKategori.getSelectedItemPosition() == 0 ||
-                editCutiStartDate.getText().toString().matches("") || editCutiEndDate.getText().toString().matches("")) {
+        if (editCutiKategori.getSelectedItemPosition() == 0 || editCutiStartDate.getText().toString().matches("") || 
+                editCutiEndDate.getText().toString().matches("") || editCutiNo.getText().toString().equals("ASK-EL-XX.XXXX") || 
+                idKaryawan < 0) {
             Toast.makeText(CutiCreateActivity.this, "Failed, please check your data", Toast.LENGTH_LONG).show();
         } else {
             progressDialog.show();
-            final String employeeId = cutiRequestedId[editCutiRequested.getSelectedItemPosition()];
+            final String employeeId = cutiKaryawanId[idKaryawan];
             final String categoryId = cutiKategoriId[editCutiKategori.getSelectedItemPosition()];
 
             StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_CUTI_CREATE, new Response.Listener<String>() {
@@ -167,6 +225,8 @@ public class CutiCreateActivity extends AppCompatActivity {
                         if(status==1){
                             Toast.makeText(CutiCreateActivity.this, "Success applied for leave", Toast.LENGTH_LONG).show();
                             onBackPressed();
+                        } else if (status == 2){
+                            Toast.makeText(CutiCreateActivity.this, "Your annual leave has expired", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(CutiCreateActivity.this, "Filed applied for leave", Toast.LENGTH_LONG).show();
                         }
@@ -188,6 +248,7 @@ public class CutiCreateActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> param=new HashMap<>();
+                    param.put("leaveNumber", editCutiNo.getText().toString());
                     param.put("employeeId", employeeId);
                     param.put("leaveCategory", categoryId);
                     param.put("startLeave", editCutiStartDate.getText().toString());
@@ -212,17 +273,16 @@ public class CutiCreateActivity extends AppCompatActivity {
                             if (status == 1) {
                                 JSONArray jsonArray;
 
+                                //data number
+                                editCutiNo.setText(jsonObject.getString("data leave number"));
+
                                 //data employee
                                 jsonArray = jsonObject.getJSONArray("data leave employee");
-                                String[] cutiRequested = new String[jsonArray.length()+1];
-                                cutiRequestedId = new String[jsonArray.length()+1];
-                                cutiRequested[0] = "-- Pilih Karyawan --";
+                                cutiKaryawanId = new String[jsonArray.length()];
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    cutiRequested[i + 1] = jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name");
-                                    cutiRequestedId[i + 1] = jsonArray.getJSONObject(i).getString("employee_id");
+                                    cutiKaryawanId[i] = jsonArray.getJSONObject(i).getString("employee_id");
+                                    arrayListKaryawan.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
                                 }
-                                adapter = new ArrayAdapter<String>(CutiCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, cutiRequested);
-                                editCutiRequested.setAdapter(adapter);
 
                                 //data category
                                 jsonArray = jsonObject.getJSONArray("data leave category");

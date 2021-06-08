@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 public class Cuti implements Parcelable {
 
+    private String employee_leave_number;
     private String date_leave;
     private String proposed_date;
     private String date_extended;
@@ -16,6 +17,7 @@ public class Cuti implements Parcelable {
     private String is_approved;
 
     protected Cuti(Parcel in) {
+        employee_leave_number = in.readString();
         date_leave = in.readString();
         proposed_date = in.readString();
         date_extended = in.readString();
@@ -26,6 +28,7 @@ public class Cuti implements Parcelable {
 
     public Cuti(JSONObject jsonObject){
         try {
+            this.employee_leave_number = jsonObject.getString("employee_leave_number");
             this.date_leave = jsonObject.getString("date_leave");
             this.proposed_date = jsonObject.getString("proposed_date");
             this.date_extended = jsonObject.getString("date_extended");
@@ -56,12 +59,17 @@ public class Cuti implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(employee_leave_number);
         dest.writeString(date_leave);
         dest.writeString(proposed_date);
         dest.writeString(date_extended);
         dest.writeString(status);
         dest.writeString(leave_category_name);
         dest.writeString(is_approved);
+    }
+
+    public String getEmployee_leave_number() {
+        return employee_leave_number;
     }
 
     public String getDate_leave() {

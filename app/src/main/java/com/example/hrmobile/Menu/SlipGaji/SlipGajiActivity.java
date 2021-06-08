@@ -41,7 +41,7 @@ public class SlipGajiActivity extends AppCompatActivity {
     private Spinner spinnerTgl;
     private Spinner spinnerBulan;
     private Spinner spinnerTahun;
-    private ImageView btnSearch;
+    private LinearLayout btnSearch;
     private LinearLayout layoutAll;
 
     private TextView textGajiPokok;
@@ -195,7 +195,7 @@ public class SlipGajiActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(SlipGajiActivity.this, android.R.layout.simple_spinner_dropdown_item, tahun);
         spinnerTahun.setAdapter(adapter);
 
-        btnSearch = (ImageView) findViewById(R.id.btnSearch);
+        btnSearch = (LinearLayout) findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

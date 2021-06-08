@@ -54,19 +54,15 @@ public class SpklCreateActivity extends AppCompatActivity {
 
     private String spklNumber;
     private Dialog dialog;
-    private ArrayList<String> arrayListJo;
-    private int idJobOrder = -1;
+    private ArrayList<String> arrayListJo, arrayListRequested, arrayListKaryawan1, arrayListKaryawan2, arrayListKaryawan3, arrayListKaryawan4, arrayListKaryawan5;
+    private int idJobOrder = -1, idRequested = -1, idKaryawan1 = -1, idKaryawan2 = -1, idKaryawan3 = -1, idKaryawan4 = -1, idKaryawan5 = -1;
     private ArrayAdapter<String> adapter;
-    private String[] spklJobCodeId;
+    private String[] spklJobCodeId, spklJobCodeText;
     private String[] spklLokasiId;
     private String[] spklDepartmenId;
     private String[] spklDepartmenCode;
+    private String[] spklEmpName;
     private String[] spklRequestedId;
-    private String[] spklKaryawan1;
-    private String[] spklKaryawan2;
-    private String[] spklKaryawan3;
-    private String[] spklKaryawan4;
-    private String[] spklKaryawan5;
 
     private EditText editSpklNumber;
     private EditText editSpklDesc;
@@ -74,7 +70,7 @@ public class SpklCreateActivity extends AppCompatActivity {
     private TextView textViewJo;
     private Spinner editSpklLokasi;
     private Spinner editSpklDepartment;
-    private Spinner editSpklRequested;
+    private TextView textViewRequested;
     private Button buttonBuat;
     private ImageView buttonBack;
 
@@ -88,7 +84,7 @@ public class SpklCreateActivity extends AppCompatActivity {
     private LinearLayout layoutspkl3;
     private LinearLayout layoutspkl4;
     private LinearLayout layoutspkl5;
-    private Spinner spklNamaKaryawan1, spklNamaKaryawan2, spklNamaKaryawan3, spklNamaKaryawan4, spklNamaKaryawan5;
+    private TextView spklNamaKaryawan1, spklNamaKaryawan2, spklNamaKaryawan3, spklNamaKaryawan4, spklNamaKaryawan5;
     private EditText spklOvertimeDate1, spklOvertimeDate2, spklOvertimeDate3, spklOvertimeDate4, spklOvertimeDate5;
     private EditText spklStartTime1, spklStartTime2, spklStartTime3, spklStartTime4, spklStartTime5;
     private EditText spklFinishTime1, spklFinishTime2, spklFinishTime3, spklFinishTime4, spklFinishTime5;
@@ -105,6 +101,12 @@ public class SpklCreateActivity extends AppCompatActivity {
         sharedPrefManager = SharedPrefManager.getInstance(this);
         progressDialog = new CustomProgressDialog(this);
         arrayListJo = new ArrayList<>();
+        arrayListRequested = new ArrayList<>();
+        arrayListKaryawan1 = new ArrayList<>();
+        arrayListKaryawan2 = new ArrayList<>();
+        arrayListKaryawan3 = new ArrayList<>();
+        arrayListKaryawan4 = new ArrayList<>();
+        arrayListKaryawan5 = new ArrayList<>();
 
         editSpklNumber = (EditText) findViewById(R.id.editSpklNumber);
         editSpklDesc = (EditText) findViewById(R.id.editSpklDesc);
@@ -112,7 +114,7 @@ public class SpklCreateActivity extends AppCompatActivity {
         textViewJo = (TextView) findViewById(R.id.textViewJo);
         editSpklLokasi = (Spinner) findViewById(R.id.editSpklLokasi);
         editSpklDepartment = (Spinner) findViewById(R.id.editSpklDepartment);
-        editSpklRequested = (Spinner) findViewById(R.id.editSpklRequested);
+        textViewRequested = (TextView) findViewById(R.id.textViewRequested);
         buttonBuat = (Button) findViewById(R.id.buttonBuat);
         buttonBack = (ImageView) findViewById(R.id.buttonBack);
 
@@ -127,11 +129,11 @@ public class SpklCreateActivity extends AppCompatActivity {
         layoutspkl4 = (LinearLayout) findViewById(R.id.layoutspkl4);
         layoutspkl5 = (LinearLayout) findViewById(R.id.layoutspkl5);
 
-        spklNamaKaryawan1 = (Spinner) findViewById(R.id.spklNamaKaryawan1);
-        spklNamaKaryawan2 = (Spinner) findViewById(R.id.spklNamaKaryawan2);
-        spklNamaKaryawan3 = (Spinner) findViewById(R.id.spklNamaKaryawan3);
-        spklNamaKaryawan4 = (Spinner) findViewById(R.id.spklNamaKaryawan4);
-        spklNamaKaryawan5 = (Spinner) findViewById(R.id.spklNamaKaryawan5);
+        spklNamaKaryawan1 = (TextView) findViewById(R.id.spklKaryawan1);
+        spklNamaKaryawan2 = (TextView) findViewById(R.id.spklKaryawan2);
+        spklNamaKaryawan3 = (TextView) findViewById(R.id.spklKaryawan3);
+        spklNamaKaryawan4 = (TextView) findViewById(R.id.spklKaryawan4);
+        spklNamaKaryawan5 = (TextView) findViewById(R.id.spklKaryawan5);
         spklOvertimeDate1 = (EditText) findViewById(R.id.spklOvertimeDate1);
         spklOvertimeDate2 = (EditText) findViewById(R.id.spklOvertimeDate2);
         spklOvertimeDate3 = (EditText) findViewById(R.id.spklOvertimeDate3);
@@ -152,6 +154,12 @@ public class SpklCreateActivity extends AppCompatActivity {
         spklKeterangan3 = (EditText) findViewById(R.id.spklKeterangan3);
         spklKeterangan4 = (EditText) findViewById(R.id.spklKeterangan4);
         spklKeterangan5 = (EditText) findViewById(R.id.spklKeterangan5);
+
+        dialog = new Dialog(SpklCreateActivity.this);
+        dialog.setContentView(R.layout.dialog_searchable_spinner);
+//        dialog.setCancelable(false);
+        dialog.getWindow().setLayout(900, 1500);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         buttonBuat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -234,11 +242,6 @@ public class SpklCreateActivity extends AppCompatActivity {
         textViewJo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog = new Dialog(SpklCreateActivity.this);
-                dialog.setContentView(R.layout.dialog_searchable_spinner);
-                dialog.setCancelable(false);
-                dialog.getWindow().setLayout(900, 1500);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
 
                 //initialize dialog variable
@@ -265,8 +268,268 @@ public class SpklCreateActivity extends AppCompatActivity {
                 listViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        int count = 0;
+                        while (count<spklJobCodeText.length){
+                            if (newAdapter.getItem(i).equals(spklJobCodeText[count])){
+                                idJobOrder = count;
+                                break;
+                            } else count++;
+                        }
                         textViewJo.setText(newAdapter.getItem(i));
-                        idJobOrder = i;
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+
+        textViewRequested.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.show();
+
+                //initialize dialog variable
+                EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
+                ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
+                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListRequested);
+                listViewSearch.setAdapter(newAdapter);
+                editTextSearch.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        newAdapter.getFilter().filter(charSequence);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+                listViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        int count = 0;
+                        while (count< spklEmpName.length){
+                            if (newAdapter.getItem(i).equals(spklEmpName[count])){
+                                idRequested = count;
+                                break;
+                            } else count++;
+                        }
+                        textViewRequested.setText(newAdapter.getItem(i));
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+
+        spklNamaKaryawan1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.show();
+
+                //initialize dialog variable
+                EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
+                ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
+                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListKaryawan1);
+                listViewSearch.setAdapter(newAdapter);
+                editTextSearch.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        newAdapter.getFilter().filter(charSequence);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+                listViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        int count = 0;
+                        while (count< spklEmpName.length){
+                            if (newAdapter.getItem(i).equals(spklEmpName[count])){
+                                idKaryawan1 = count;
+                                break;
+                            } else count++;
+                        }
+                        spklNamaKaryawan1.setText(newAdapter.getItem(i));
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+        spklNamaKaryawan2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.show();
+
+                //initialize dialog variable
+                EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
+                ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
+                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListKaryawan2);
+                listViewSearch.setAdapter(newAdapter);
+                editTextSearch.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        newAdapter.getFilter().filter(charSequence);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+                listViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        int count = 0;
+                        while (count< spklEmpName.length){
+                            if (newAdapter.getItem(i).equals(spklEmpName[count])){
+                                idKaryawan2 = count;
+                                break;
+                            } else count++;
+                        }
+                        spklNamaKaryawan2.setText(newAdapter.getItem(i));
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+        spklNamaKaryawan3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.show();
+
+                //initialize dialog variable
+                EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
+                ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
+                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListKaryawan3);
+                listViewSearch.setAdapter(newAdapter);
+                editTextSearch.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        newAdapter.getFilter().filter(charSequence);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+                listViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        int count = 0;
+                        while (count< spklEmpName.length){
+                            if (newAdapter.getItem(i).equals(spklEmpName[count])){
+                                idKaryawan3 = count;
+                                break;
+                            } else count++;
+                        }
+                        spklNamaKaryawan3.setText(newAdapter.getItem(i));
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+        spklNamaKaryawan4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.show();
+
+                //initialize dialog variable
+                EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
+                ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
+                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListKaryawan4);
+                listViewSearch.setAdapter(newAdapter);
+                editTextSearch.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        newAdapter.getFilter().filter(charSequence);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+                listViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        int count = 0;
+                        while (count< spklEmpName.length){
+                            if (newAdapter.getItem(i).equals(spklEmpName[count])){
+                                idKaryawan4 = count;
+                                break;
+                            } else count++;
+                        }
+                        spklNamaKaryawan4.setText(newAdapter.getItem(i));
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+        spklNamaKaryawan5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.show();
+
+                //initialize dialog variable
+                EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
+                ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
+                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListKaryawan5);
+                listViewSearch.setAdapter(newAdapter);
+                editTextSearch.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        newAdapter.getFilter().filter(charSequence);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+                listViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        int count = 0;
+                        while (count< spklEmpName.length){
+                            if (newAdapter.getItem(i).equals(spklEmpName[count])){
+                                idKaryawan5 = count;
+                                break;
+                            } else count++;
+                        }
+                        spklNamaKaryawan5.setText(newAdapter.getItem(i));
                         dialog.dismiss();
                     }
                 });
@@ -355,7 +618,15 @@ public class SpklCreateActivity extends AppCompatActivity {
                 timePicker = new TimePickerDialog(SpklCreateActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        spklStartTime1.setText( selectedHour + ":" + selectedMinute);
+                        if (selectedMinute<10) {
+                            if (selectedHour<10)
+                                spklStartTime1.setText("0" + selectedHour + ":" + "0" + selectedMinute);
+                            else spklStartTime1.setText(selectedHour + ":" + "0" + selectedMinute);
+                        } else {
+                            if (selectedHour<10)
+                                spklStartTime1.setText("0" + selectedHour + ":" + selectedMinute);
+                            else spklStartTime1.setText(selectedHour + ":" + selectedMinute);
+                        }
                     }
                 }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), true);//Yes 24 hour time
                 timePicker.setTitle("Select Start Time");
@@ -369,7 +640,15 @@ public class SpklCreateActivity extends AppCompatActivity {
                 timePicker = new TimePickerDialog(SpklCreateActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        spklStartTime2.setText( selectedHour + ":" + selectedMinute);
+                        if (selectedMinute<10) {
+                            if (selectedHour<10)
+                                spklStartTime2.setText("0" + selectedHour + ":" + "0" + selectedMinute);
+                            else spklStartTime2.setText(selectedHour + ":" + "0" + selectedMinute);
+                        } else {
+                            if (selectedHour<10)
+                                spklStartTime2.setText("0" + selectedHour + ":" + selectedMinute);
+                            else spklStartTime2.setText(selectedHour + ":" + selectedMinute);
+                        }
                     }
                 }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), true);//Yes 24 hour time
                 timePicker.setTitle("Select Start Time");
@@ -384,6 +663,15 @@ public class SpklCreateActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         spklStartTime3.setText( selectedHour + ":" + selectedMinute);
+                        if (selectedMinute<10) {
+                            if (selectedHour<10)
+                                spklStartTime3.setText("0" + selectedHour + ":" + "0" + selectedMinute);
+                            else spklStartTime3.setText(selectedHour + ":" + "0" + selectedMinute);
+                        } else {
+                            if (selectedHour<10)
+                                spklStartTime3.setText("0" + selectedHour + ":" + selectedMinute);
+                            else spklStartTime3.setText(selectedHour + ":" + selectedMinute);
+                        }
                     }
                 }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), true);//Yes 24 hour time
                 timePicker.setTitle("Select Start Time");
@@ -398,6 +686,15 @@ public class SpklCreateActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         spklStartTime4.setText( selectedHour + ":" + selectedMinute);
+                        if (selectedMinute<10) {
+                            if (selectedHour<10)
+                                spklStartTime4.setText("0" + selectedHour + ":" + "0" + selectedMinute);
+                            else spklStartTime4.setText(selectedHour + ":" + "0" + selectedMinute);
+                        } else {
+                            if (selectedHour<10)
+                                spklStartTime4.setText("0" + selectedHour + ":" + selectedMinute);
+                            else spklStartTime4.setText(selectedHour + ":" + selectedMinute);
+                        }
                     }
                 }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), true);//Yes 24 hour time
                 timePicker.setTitle("Select Start Time");
@@ -411,7 +708,15 @@ public class SpklCreateActivity extends AppCompatActivity {
                 timePicker = new TimePickerDialog(SpklCreateActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        spklStartTime5.setText( selectedHour + ":" + selectedMinute);
+                        if (selectedMinute<10) {
+                            if (selectedHour<10)
+                                spklStartTime5.setText("0" + selectedHour + ":" + "0" + selectedMinute);
+                            else spklStartTime5.setText(selectedHour + ":" + "0" + selectedMinute);
+                        } else {
+                            if (selectedHour<10)
+                                spklStartTime5.setText("0" + selectedHour + ":" + selectedMinute);
+                            else spklStartTime5.setText(selectedHour + ":" + selectedMinute);
+                        }
                     }
                 }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), true);//Yes 24 hour time
                 timePicker.setTitle("Select Start Time");
@@ -425,7 +730,15 @@ public class SpklCreateActivity extends AppCompatActivity {
                 timePicker = new TimePickerDialog(SpklCreateActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        spklFinishTime1.setText( selectedHour + ":" + selectedMinute);
+                        if (selectedMinute<10) {
+                            if (selectedHour<10)
+                                spklFinishTime1.setText("0" + selectedHour + ":" + "0" + selectedMinute);
+                            else spklFinishTime1.setText(selectedHour + ":" + "0" + selectedMinute);
+                        } else {
+                            if (selectedHour<10)
+                                spklFinishTime1.setText("0" + selectedHour + ":" + selectedMinute);
+                            else spklFinishTime1.setText(selectedHour + ":" + selectedMinute);
+                        }
                     }
                 }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), true);//Yes 24 hour time
                 timePicker.setTitle("Select Start Time");
@@ -439,7 +752,15 @@ public class SpklCreateActivity extends AppCompatActivity {
                 timePicker = new TimePickerDialog(SpklCreateActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        spklFinishTime2.setText( selectedHour + ":" + selectedMinute);
+                        if (selectedMinute<10) {
+                            if (selectedHour<10)
+                                spklFinishTime2.setText("0" + selectedHour + ":" + "0" + selectedMinute);
+                            else spklFinishTime2.setText(selectedHour + ":" + "0" + selectedMinute);
+                        } else {
+                            if (selectedHour<10)
+                                spklFinishTime2.setText("0" + selectedHour + ":" + selectedMinute);
+                            else spklFinishTime2.setText(selectedHour + ":" + selectedMinute);
+                        }
                     }
                 }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), true);//Yes 24 hour time
                 timePicker.setTitle("Select Start Time");
@@ -453,7 +774,15 @@ public class SpklCreateActivity extends AppCompatActivity {
                 timePicker = new TimePickerDialog(SpklCreateActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        spklFinishTime3.setText( selectedHour + ":" + selectedMinute);
+                        if (selectedMinute<10) {
+                            if (selectedHour<10)
+                                spklFinishTime3.setText("0" + selectedHour + ":" + "0" + selectedMinute);
+                            else spklFinishTime3.setText(selectedHour + ":" + "0" + selectedMinute);
+                        } else {
+                            if (selectedHour<10)
+                                spklFinishTime3.setText("0" + selectedHour + ":" + selectedMinute);
+                            else spklFinishTime3.setText(selectedHour + ":" + selectedMinute);
+                        }
                     }
                 }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), true);//Yes 24 hour time
                 timePicker.setTitle("Select Start Time");
@@ -467,7 +796,15 @@ public class SpklCreateActivity extends AppCompatActivity {
                 timePicker = new TimePickerDialog(SpklCreateActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        spklFinishTime4.setText( selectedHour + ":" + selectedMinute);
+                        if (selectedMinute<10) {
+                            if (selectedHour<10)
+                                spklFinishTime4.setText("0" + selectedHour + ":" + "0" + selectedMinute);
+                            else spklFinishTime4.setText(selectedHour + ":" + "0" + selectedMinute);
+                        } else {
+                            if (selectedHour<10)
+                                spklFinishTime4.setText("0" + selectedHour + ":" + selectedMinute);
+                            else spklFinishTime4.setText(selectedHour + ":" + selectedMinute);
+                        }
                     }
                 }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), true);//Yes 24 hour time
                 timePicker.setTitle("Select Start Time");
@@ -481,7 +818,15 @@ public class SpklCreateActivity extends AppCompatActivity {
                 timePicker = new TimePickerDialog(SpklCreateActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        spklFinishTime5.setText( selectedHour + ":" + selectedMinute);
+                        if (selectedMinute<10) {
+                            if (selectedHour<10)
+                                spklFinishTime5.setText("0" + selectedHour + ":" + "0" + selectedMinute);
+                            else spklFinishTime5.setText(selectedHour + ":" + "0" + selectedMinute);
+                        } else {
+                            if (selectedHour<10)
+                                spklFinishTime5.setText("0" + selectedHour + ":" + selectedMinute);
+                            else spklFinishTime5.setText(selectedHour + ":" + selectedMinute);
+                        }
                     }
                 }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), true);//Yes 24 hour time
                 timePicker.setTitle("Select Start Time");
@@ -546,8 +891,10 @@ public class SpklCreateActivity extends AppCompatActivity {
                                 //data spkl jo
                                 jsonArray = jsonObject.getJSONArray("data spkl jo");
                                 spklJobCodeId = new String[jsonArray.length()];
+                                spklJobCodeText = new String[jsonArray.length()];
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     spklJobCodeId[i] = jsonArray.getJSONObject(i).getString("job_order_id");
+                                    spklJobCodeText[i] = jsonArray.getJSONObject(i).getString("job_order_number") + " | " + jsonArray.getJSONObject(i).getString("job_order_description");
                                     arrayListJo.add(jsonArray.getJSONObject(i).getString("job_order_number") + " | " + jsonArray.getJSONObject(i).getString("job_order_description"));
                                 }
 
@@ -579,32 +926,18 @@ public class SpklCreateActivity extends AppCompatActivity {
 
                                 //data employee
                                 jsonArray = jsonObject.getJSONArray("data spkl employee");
-                                String[] SpklRequested = new String[jsonArray.length()+1];
-                                spklRequestedId = new String[jsonArray.length()+1];
-                                spklKaryawan1 = new String[jsonArray.length()+1];
-                                spklKaryawan2 = new String[jsonArray.length()+1];
-                                spklKaryawan3 = new String[jsonArray.length()+1];
-                                spklKaryawan4 = new String[jsonArray.length()+1];
-                                spklKaryawan5 = new String[jsonArray.length()+1];
-                                SpklRequested[0] = "-- Pilih Karyawan --";
-                                spklRequestedId[0] = "0";
+                                spklRequestedId = new String[jsonArray.length()];
+                                spklEmpName = new String[jsonArray.length()];
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    SpklRequested[i + 1] = jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name");
-                                    spklRequestedId[i + 1] = jsonArray.getJSONObject(i).getString("employee_id");
-                                    spklKaryawan1[i + 1] = jsonArray.getJSONObject(i).getString("employee_id");
-                                    spklKaryawan2[i + 1] = jsonArray.getJSONObject(i).getString("employee_id");
-                                    spklKaryawan3[i + 1] = jsonArray.getJSONObject(i).getString("employee_id");
-                                    spklKaryawan4[i + 1] = jsonArray.getJSONObject(i).getString("employee_id");
-                                    spklKaryawan5[i + 1] = jsonArray.getJSONObject(i).getString("employee_id");
+                                    spklRequestedId[i] = jsonArray.getJSONObject(i).getString("employee_id");
+                                    spklEmpName[i] = jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name");
+                                    arrayListRequested.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
+                                    arrayListKaryawan1.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
+                                    arrayListKaryawan2.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
+                                    arrayListKaryawan3.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
+                                    arrayListKaryawan4.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
+                                    arrayListKaryawan5.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
                                 }
-                                adapter = new ArrayAdapter<String>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, SpklRequested);
-                                editSpklRequested.setAdapter(adapter);
-
-                                spklNamaKaryawan1.setAdapter(adapter);
-                                spklNamaKaryawan2.setAdapter(adapter);
-                                spklNamaKaryawan3.setAdapter(adapter);
-                                spklNamaKaryawan4.setAdapter(adapter);
-                                spklNamaKaryawan5.setAdapter(adapter);
                             } else Toast.makeText(SpklCreateActivity.this, "Failed load data", Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -626,9 +959,9 @@ public class SpklCreateActivity extends AppCompatActivity {
     private void createSpkl() {
         if (idJobOrder < 0 || editSpklLokasi.getSelectedItemPosition() == 0 ||
                 editSpklDepartment.getSelectedItemPosition() == 0 || editSpklDesc.getText().toString().matches("") ||
-                editSpklDate.getText().toString().matches("") || spklNamaKaryawan1.getSelectedItemPosition() == 0 ||
+                editSpklDate.getText().toString().matches("") || /*spklNamaKaryawan1.getSelectedItemPosition() == 0 ||*/
                 spklOvertimeDate1.getText().toString().matches("") || spklStartTime1.getText().toString().matches("") ||
-                spklFinishTime1.getText().toString().matches("")) {
+                spklFinishTime1.getText().toString().matches("") || idKaryawan1 < 0) {
             Toast.makeText(SpklCreateActivity.this, "Failed, please check your data", Toast.LENGTH_LONG).show();
         } else {
             progressDialog.show();
@@ -637,13 +970,13 @@ public class SpklCreateActivity extends AppCompatActivity {
             final String spklDepartment = spklDepartmenId[editSpklDepartment.getSelectedItemPosition()];
             final String spklWorkDescription = String.valueOf(editSpklDesc.getText());
             final String spklProposedDate = String.valueOf(editSpklDate.getText());
-            final String spklRequested = spklRequestedId[editSpklRequested.getSelectedItemPosition()];
+            final String spklRequested = spklRequestedId[idRequested];
 
-            final String employeeId1 = spklKaryawan1[spklNamaKaryawan1.getSelectedItemPosition()];
-            final String employeeId2 = spklKaryawan2[spklNamaKaryawan2.getSelectedItemPosition()];
-            final String employeeId3 = spklKaryawan3[spklNamaKaryawan3.getSelectedItemPosition()];
-            final String employeeId4 = spklKaryawan4[spklNamaKaryawan4.getSelectedItemPosition()];
-            final String employeeId5 = spklKaryawan5[spklNamaKaryawan5.getSelectedItemPosition()];
+            final String employeeId1 = spklRequestedId[idKaryawan1];
+            final String employeeId2 = spklRequestedId[idKaryawan2];
+            final String employeeId3 = spklRequestedId[idKaryawan3];
+            final String employeeId4 = spklRequestedId[idKaryawan4];
+            final String employeeId5 = spklRequestedId[idKaryawan5];
 
             final String spklNumberFinal = "SPKL-" + spklDepartmenCode[editSpklDepartment.getSelectedItemPosition()] + "-" + spklNumber;
 

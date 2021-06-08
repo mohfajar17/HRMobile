@@ -64,6 +64,33 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="Leave Number"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@android:color/holo_red_dark" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/editCutiNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:hint="ASK-EL-XX.XXXX"
+                    android:enabled="false"
+                    android:inputType="text"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Requested"
                         android:textColor="@android:color/black" />
 
@@ -74,13 +101,20 @@
                         android:textColor="@android:color/holo_red_dark" />
                 </LinearLayout>
 
-                <Spinner
-                    android:id="@+id/editCutiRequested"
+                <TextView
+                    android:id="@+id/editCutiKaryawan"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:spinnerMode="dialog"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="13dp"
+                    android:maxLines="1"
+                    android:gravity="center_vertical"
+                    android:text="-- Pilih karyawan --"
+                    android:textSize="18dp"
+                    android:textColor="@color/black"
+                    android:drawableRight="@drawable/ic_drop_down"
+                    android:background="@android:color/transparent" />
 
                 <ImageView
                     android:layout_width="match_parent"

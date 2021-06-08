@@ -242,13 +242,19 @@
                     android:text="Requested"
                     android:textColor="@android:color/black" />
 
-                <Spinner
-                    android:id="@+id/editSpklRequested"
+                <TextView
+                    android:id="@+id/textViewRequested"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:spinnerMode="dialog"
                     android:layout_marginTop="5dp"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="18dp"
+                    android:gravity="center_vertical"
+                    android:text="-- Pilih Karyawan --"
+                    android:textSize="16dp"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:drawableRight="@drawable/ic_drop_down"
+                    android:background="@android:color/transparent" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -284,6 +290,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:paddingTop="50dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="5dp"
                         android:paddingBottom="10dp"
                         android:orientation="vertical"
                         android:background="@drawable/border_oval">
@@ -294,13 +302,19 @@
                             android:text="Nama Karyawan"
                             android:textColor="@android:color/black" />
 
-                        <Spinner
-                            android:id="@+id/spklNamaKaryawan1"
+                        <TextView
+                            android:id="@+id/spklKaryawan1"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:spinnerMode="dialog"
                             android:layout_marginTop="5dp"
-                            android:layout_marginLeft="10dp" />
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:text="-- Pilih Karyawan --"
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black"
+                            android:drawableRight="@drawable/ic_drop_down"
+                            android:background="@android:color/transparent" />
 
                         <ImageView
                             android:layout_width="match_parent"
@@ -386,6 +400,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:paddingTop="50dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="5dp"
                         android:paddingBottom="10dp"
                         android:orientation="vertical"
                         android:background="@drawable/border_box">
@@ -396,13 +412,19 @@
                             android:text="Nama Karyawan"
                             android:textColor="@android:color/black" />
 
-                        <Spinner
-                            android:id="@+id/spklNamaKaryawan2"
+                        <TextView
+                            android:id="@+id/spklKaryawan2"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:spinnerMode="dialog"
                             android:layout_marginTop="5dp"
-                            android:layout_marginLeft="10dp" />
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:text="-- Pilih Karyawan --"
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black"
+                            android:drawableRight="@drawable/ic_drop_down"
+                            android:background="@android:color/transparent" />
 
                         <ImageView
                             android:layout_width="match_parent"
@@ -488,6 +510,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:paddingTop="50dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="5dp"
                         android:paddingBottom="10dp"
                         android:orientation="vertical"
                         android:background="@drawable/border_box">
@@ -498,13 +522,19 @@
                             android:text="Nama Karyawan"
                             android:textColor="@android:color/black" />
 
-                        <Spinner
-                            android:id="@+id/spklNamaKaryawan3"
+                        <TextView
+                            android:id="@+id/spklKaryawan3"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:spinnerMode="dialog"
                             android:layout_marginTop="5dp"
-                            android:layout_marginLeft="10dp" />
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:text="-- Pilih Karyawan --"
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black"
+                            android:drawableRight="@drawable/ic_drop_down"
+                            android:background="@android:color/transparent" />
 
                         <ImageView
                             android:layout_width="match_parent"
@@ -590,6 +620,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:paddingTop="50dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="5dp"
                         android:paddingBottom="10dp"
                         android:orientation="vertical"
                         android:background="@drawable/border_box">
@@ -600,13 +632,19 @@
                             android:text="Nama Karyawan"
                             android:textColor="@android:color/black" />
 
-                        <Spinner
-                            android:id="@+id/spklNamaKaryawan4"
+                        <TextView
+                            android:id="@+id/spklKaryawan4"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:spinnerMode="dialog"
                             android:layout_marginTop="5dp"
-                            android:layout_marginLeft="10dp" />
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:text="-- Pilih Karyawan --"
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black"
+                            android:drawableRight="@drawable/ic_drop_down"
+                            android:background="@android:color/transparent" />
 
                         <ImageView
                             android:layout_width="match_parent"
@@ -692,6 +730,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:paddingTop="50dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="5dp"
                         android:paddingBottom="10dp"
                         android:orientation="vertical"
                         android:background="@drawable/border_box">
@@ -702,13 +742,19 @@
                             android:text="Nama Karyawan"
                             android:textColor="@android:color/black" />
 
-                        <Spinner
-                            android:id="@+id/spklNamaKaryawan5"
+                        <TextView
+                            android:id="@+id/spklKaryawan5"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:spinnerMode="dialog"
                             android:layout_marginTop="5dp"
-                            android:layout_marginLeft="10dp" />
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:text="-- Pilih Karyawan --"
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black"
+                            android:drawableRight="@drawable/ic_drop_down"
+                            android:background="@android:color/transparent" />
 
                         <ImageView
                             android:layout_width="match_parent"

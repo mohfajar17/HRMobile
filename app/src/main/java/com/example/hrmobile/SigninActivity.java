@@ -3,7 +3,6 @@ package com.example.hrmobile;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -20,7 +19,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,8 +45,8 @@ public class SigninActivity extends AppCompatActivity {
     private Button buttonSignup;
     private CheckBox checkBox;
 
-    private String[] emplooyeeId;
-    private String[] emplooyeeName;
+    private String[] employeeId, employeeText;
+    private String[] employeeName;
     private ArrayList<String> arrayListKaryawan;
     private int idKaryawan = -1;
 
@@ -121,8 +119,14 @@ public class SigninActivity extends AppCompatActivity {
                 listViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        int count = 0;
+                        while (count<employeeText.length){
+                            if (newAdapter.getItem(i).equals(employeeText[count])){
+                                idKaryawan = count;
+                                break;
+                            } else count++;
+                        }
                         textViewKaryawan.setText(newAdapter.getItem(i));
-                        idKaryawan = i;
                         dialog.dismiss();
                     }
                 });
@@ -145,8 +149,8 @@ public class SigninActivity extends AppCompatActivity {
             Toast.makeText(SigninActivity.this, "Failed, please check your data", Toast.LENGTH_LONG).show();
         } else {
             progressDialog.show();
-            final String empId = emplooyeeId[idKaryawan];
-            final String empName = emplooyeeName[idKaryawan];
+            final String empId = employeeId[idKaryawan];
+            final String empName = employeeName[idKaryawan];
             StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SIGNUP, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -206,11 +210,13 @@ public class SigninActivity extends AppCompatActivity {
 
                                 //data employee
                                 jsonArray = jsonObject.getJSONArray("data employee");
-                                emplooyeeId = new String[jsonArray.length()];
-                                emplooyeeName = new String[jsonArray.length()];
+                                employeeId = new String[jsonArray.length()];
+                                employeeText = new String[jsonArray.length()];
+                                employeeName = new String[jsonArray.length()];
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    emplooyeeId[i] = jsonArray.getJSONObject(i).getString("employee_id");
-                                    emplooyeeName[i] = jsonArray.getJSONObject(i).getString("fullname");
+                                    employeeId[i] = jsonArray.getJSONObject(i).getString("employee_id");
+                                    employeeText[i] = jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name");
+                                    employeeName[i] = jsonArray.getJSONObject(i).getString("fullname");
                                     arrayListKaryawan.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
                                 }
                             }
