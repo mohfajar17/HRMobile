@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ public class RecyclerViewNews extends RecyclerView.Adapter<RecyclerViewNews.View
     @Override
     public void onBindViewHolder(final RecyclerViewNews.ViewHolder holder, final int position) {
         holder.newsTitle.setText(mValues.get(position).getNews_title());
+        holder.webNews.loadData(mValues.get(position).getNews_contents(), "text/html", null);
         Picasso.get().load(Config.DATA_URL_IMAGE+mValues.get(position).getImage_name()).resize(400, 600).into(holder.imageNews);
 
         if (holder.imageNews.getDrawable() == null) {
@@ -64,6 +66,7 @@ public class RecyclerViewNews extends RecyclerView.Adapter<RecyclerViewNews.View
         public final TextView newsTitle;
         public final ImageView imageNews;
         public final LinearLayout layoutNews;
+        public final WebView webNews;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -72,6 +75,7 @@ public class RecyclerViewNews extends RecyclerView.Adapter<RecyclerViewNews.View
             newsTitle = (TextView) itemView.findViewById(R.id.newsTitle);
             imageNews = (ImageView) itemView.findViewById(R.id.imageNews);
             layoutNews = (LinearLayout) itemView.findViewById(R.id.layuotNews);
+            webNews = (WebView) itemView.findViewById(R.id.webNews);
         }
     }
 }

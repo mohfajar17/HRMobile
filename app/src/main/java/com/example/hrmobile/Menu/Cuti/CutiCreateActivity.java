@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -57,6 +58,7 @@ public class CutiCreateActivity extends AppCompatActivity {
     private EditText editCutiStartDate;
     private EditText editCutiEndDate;
     private EditText editNotes;
+    private ImageView buttonBack;
     private Button buttonBuat;
 
     private Dialog dialog;
@@ -79,6 +81,7 @@ public class CutiCreateActivity extends AppCompatActivity {
         editCutiStartDate = (EditText) findViewById(R.id.editCutiStartDate);
         editCutiEndDate = (EditText) findViewById(R.id.editCutiEndDate);
         editNotes = (EditText) findViewById(R.id.editNotes);
+        buttonBack = (ImageView) findViewById(R.id.buttonBack);
         buttonBuat = (Button) findViewById(R.id.buttonBuat);
 
         editCutiKaryawan.setOnClickListener(new View.OnClickListener() {
@@ -167,6 +170,12 @@ public class CutiCreateActivity extends AppCompatActivity {
                 createLeave();
             }
         });
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         getLeaveData();
         loadUserEnable();
@@ -248,7 +257,6 @@ public class CutiCreateActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> param=new HashMap<>();
-                    param.put("leaveNumber", editCutiNo.getText().toString());
                     param.put("employeeId", employeeId);
                     param.put("leaveCategory", categoryId);
                     param.put("startLeave", editCutiStartDate.getText().toString());
@@ -274,7 +282,7 @@ public class CutiCreateActivity extends AppCompatActivity {
                                 JSONArray jsonArray;
 
                                 //data number
-                                editCutiNo.setText(jsonObject.getString("data leave number"));
+                                editCutiNo.setText("ASK-EL-XX.XXXX");
 
                                 //data employee
                                 jsonArray = jsonObject.getJSONArray("data leave employee");

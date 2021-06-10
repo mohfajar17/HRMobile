@@ -2,9 +2,9 @@ package com.example.hrmobile;
 
 public class Config {
 //    public static final String DATA_URL = "http://192.168.43.183/hr_mobile/";   //IP thetering hp
-    public static final String DATA_URL = "http://192.168.88.19/hr_mobile/";   //IP asuka lt 3
+//    public static final String DATA_URL = "http://192.168.88.19/hr_mobile/";   //IP asuka lt 3
 //    public static final String DATA_URL = "http://192.168.0.109/hr_mobile/";   //IP home wifi
-//    public static final String DATA_URL = "https://ais.asukaindonesia.co.id/mobile/";   //IP server
+    public static final String DATA_URL = "https://ais.asukaindonesia.co.id/mobile/";   //IP server
 
     public static final String DATA_URL_AIS = DATA_URL + "apiHrMobile.php?apicall=";
     public static final String DATA_URL_LOGIN = DATA_URL_AIS +"login";

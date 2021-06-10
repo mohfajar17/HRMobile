@@ -52,7 +52,7 @@ import java.util.Map;
 
 public class SpklCreateActivity extends AppCompatActivity {
 
-    private String spklNumber;
+//    private String spklNumber;
     private Dialog dialog;
     private ArrayList<String> arrayListJo, arrayListRequested, arrayListKaryawan1, arrayListKaryawan2, arrayListKaryawan3, arrayListKaryawan4, arrayListKaryawan5;
     private int idJobOrder = -1, idRequested = -1, idKaryawan1 = -1, idKaryawan2 = -1, idKaryawan3 = -1, idKaryawan4 = -1, idKaryawan5 = -1;
@@ -231,7 +231,15 @@ public class SpklCreateActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(SpklCreateActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        editSpklDate.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+                        if (month+1<10){
+                            if (dayOfMonth<10)
+                                editSpklDate.setText(year + "-0" + (month + 1) + "-" + dayOfMonth);
+                            else editSpklDate.setText(year + "-0" + (month + 1) + "-0" + dayOfMonth);
+                        } else {
+                            if (dayOfMonth<10)
+                                editSpklDate.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+                            else editSpklDate.setText(year + "-" + (month + 1) + "-0" + dayOfMonth);
+                        }
                     }
                 }, Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 
@@ -247,6 +255,7 @@ public class SpklCreateActivity extends AppCompatActivity {
                 //initialize dialog variable
                 EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
                 ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
+                editTextSearch.setText("");
                 ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListJo);
                 listViewSearch.setAdapter(newAdapter);
                 editTextSearch.addTextChangedListener(new TextWatcher() {
@@ -290,6 +299,7 @@ public class SpklCreateActivity extends AppCompatActivity {
                 //initialize dialog variable
                 EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
                 ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
+                editTextSearch.setText("");
                 ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListRequested);
                 listViewSearch.setAdapter(newAdapter);
                 editTextSearch.addTextChangedListener(new TextWatcher() {
@@ -333,6 +343,7 @@ public class SpklCreateActivity extends AppCompatActivity {
                 //initialize dialog variable
                 EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
                 ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
+                editTextSearch.setText("");
                 ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListKaryawan1);
                 listViewSearch.setAdapter(newAdapter);
                 editTextSearch.addTextChangedListener(new TextWatcher() {
@@ -375,6 +386,7 @@ public class SpklCreateActivity extends AppCompatActivity {
                 //initialize dialog variable
                 EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
                 ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
+                editTextSearch.setText("");
                 ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListKaryawan2);
                 listViewSearch.setAdapter(newAdapter);
                 editTextSearch.addTextChangedListener(new TextWatcher() {
@@ -417,6 +429,7 @@ public class SpklCreateActivity extends AppCompatActivity {
                 //initialize dialog variable
                 EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
                 ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
+                editTextSearch.setText("");
                 ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListKaryawan3);
                 listViewSearch.setAdapter(newAdapter);
                 editTextSearch.addTextChangedListener(new TextWatcher() {
@@ -459,6 +472,7 @@ public class SpklCreateActivity extends AppCompatActivity {
                 //initialize dialog variable
                 EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
                 ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
+                editTextSearch.setText("");
                 ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListKaryawan4);
                 listViewSearch.setAdapter(newAdapter);
                 editTextSearch.addTextChangedListener(new TextWatcher() {
@@ -501,6 +515,7 @@ public class SpklCreateActivity extends AppCompatActivity {
                 //initialize dialog variable
                 EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
                 ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
+                editTextSearch.setText("");
                 ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListKaryawan5);
                 listViewSearch.setAdapter(newAdapter);
                 editTextSearch.addTextChangedListener(new TextWatcher() {
@@ -551,7 +566,15 @@ public class SpklCreateActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(SpklCreateActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        spklOvertimeDate1.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+                        if (month+1<10){
+                            if (dayOfMonth<10)
+                                spklOvertimeDate1.setText(year + "-0" + (month + 1) + "-" + dayOfMonth);
+                            else spklOvertimeDate1.setText(year + "-0" + (month + 1) + "-0" + dayOfMonth);
+                        } else {
+                            if (dayOfMonth<10)
+                                spklOvertimeDate1.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+                            else spklOvertimeDate1.setText(year + "-" + (month + 1) + "-0" + dayOfMonth);
+                        }
                     }
                 }, Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 
@@ -564,7 +587,15 @@ public class SpklCreateActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(SpklCreateActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        spklOvertimeDate2.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+                        if (month+1<10){
+                            if (dayOfMonth<10)
+                                spklOvertimeDate2.setText(year + "-0" + (month + 1) + "-" + dayOfMonth);
+                            else spklOvertimeDate2.setText(year + "-0" + (month + 1) + "-0" + dayOfMonth);
+                        } else {
+                            if (dayOfMonth<10)
+                                spklOvertimeDate2.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+                            else spklOvertimeDate2.setText(year + "-" + (month + 1) + "-0" + dayOfMonth);
+                        }
                     }
                 }, Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 
@@ -577,7 +608,15 @@ public class SpklCreateActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(SpklCreateActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        spklOvertimeDate3.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+                        if (month+1<10){
+                            if (dayOfMonth<10)
+                                spklOvertimeDate3.setText(year + "-0" + (month + 1) + "-" + dayOfMonth);
+                            else spklOvertimeDate3.setText(year + "-0" + (month + 1) + "-0" + dayOfMonth);
+                        } else {
+                            if (dayOfMonth<10)
+                                spklOvertimeDate3.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+                            else spklOvertimeDate3.setText(year + "-" + (month + 1) + "-0" + dayOfMonth);
+                        }
                     }
                 }, Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 
@@ -590,7 +629,15 @@ public class SpklCreateActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(SpklCreateActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        spklOvertimeDate4.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+                        if (month+1<10){
+                            if (dayOfMonth<10)
+                                spklOvertimeDate4.setText(year + "-0" + (month + 1) + "-" + dayOfMonth);
+                            else spklOvertimeDate4.setText(year + "-0" + (month + 1) + "-0" + dayOfMonth);
+                        } else {
+                            if (dayOfMonth<10)
+                                spklOvertimeDate4.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+                            else spklOvertimeDate4.setText(year + "-" + (month + 1) + "-0" + dayOfMonth);
+                        }
                     }
                 }, Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 
@@ -603,7 +650,15 @@ public class SpklCreateActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(SpklCreateActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        spklOvertimeDate5.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+                        if (month+1<10){
+                            if (dayOfMonth<10)
+                                spklOvertimeDate5.setText(year + "-0" + (month + 1) + "-" + dayOfMonth);
+                            else spklOvertimeDate5.setText(year + "-0" + (month + 1) + "-0" + dayOfMonth);
+                        } else {
+                            if (dayOfMonth<10)
+                                spklOvertimeDate5.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+                            else spklOvertimeDate5.setText(year + "-" + (month + 1) + "-0" + dayOfMonth);
+                        }
                     }
                 }, Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 
@@ -885,8 +940,8 @@ public class SpklCreateActivity extends AppCompatActivity {
                                 JSONArray jsonArray;
 
                                 //data spkl number
-                                spklNumber = jsonObject.getString("data spkl number");
-                                editSpklNumber.setText("SPKL-XXX-" + spklNumber);
+//                                spklNumber = jsonObject.getString("data spkl number");
+                                editSpklNumber.setText("SPKL-XXX-XX.XXXX");
 
                                 //data spkl jo
                                 jsonArray = jsonObject.getJSONArray("data spkl jo");
@@ -978,7 +1033,7 @@ public class SpklCreateActivity extends AppCompatActivity {
             final String employeeId4 = spklRequestedId[idKaryawan4];
             final String employeeId5 = spklRequestedId[idKaryawan5];
 
-            final String spklNumberFinal = "SPKL-" + spklDepartmenCode[editSpklDepartment.getSelectedItemPosition()] + "-" + spklNumber;
+            final String spklNumberFinal = "SPKL-" + spklDepartmenCode[editSpklDepartment.getSelectedItemPosition()] + "-";
 
             StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SPKL_CREATE, new Response.Listener<String>() {
                 @Override
