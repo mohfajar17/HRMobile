@@ -39,6 +39,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -50,13 +52,14 @@ public class CutiCreateActivity extends AppCompatActivity {
     private int idKaryawan = -1;
     private ArrayAdapter<String> adapter;
     private String[] cutiKaryawanId;
+    private String[] cutiKaryawanName;
     private String[] cutiKategoriId;
 
     private EditText editCutiNo;
     private TextView editCutiKaryawan;
     private Spinner editCutiKategori;
-    private EditText editCutiStartDate;
-    private EditText editCutiEndDate;
+    private TextView editCutiStartDate;
+    private TextView editCutiEndDate;
     private EditText editNotes;
     private ImageView buttonBack;
     private Button buttonBuat;
@@ -78,8 +81,8 @@ public class CutiCreateActivity extends AppCompatActivity {
         editCutiNo = (EditText) findViewById(R.id.editCutiNo);
         editCutiKaryawan = (TextView) findViewById(R.id.editCutiKaryawan);
         editCutiKategori = (Spinner) findViewById(R.id.editCutiKategori);
-        editCutiStartDate = (EditText) findViewById(R.id.editCutiStartDate);
-        editCutiEndDate = (EditText) findViewById(R.id.editCutiEndDate);
+        editCutiStartDate = (TextView) findViewById(R.id.editCutiStartDate);
+        editCutiEndDate = (TextView) findViewById(R.id.editCutiEndDate);
         editNotes = (EditText) findViewById(R.id.editNotes);
         buttonBack = (ImageView) findViewById(R.id.buttonBack);
         buttonBuat = (Button) findViewById(R.id.buttonBuat);
@@ -117,8 +120,14 @@ public class CutiCreateActivity extends AppCompatActivity {
                 listViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        int count = 0;
+                        while (count<cutiKaryawanName.length){
+                            if (newAdapter.getItem(i).equals(cutiKaryawanName[count])){
+                                idKaryawan = count;
+                                break;
+                            } else count++;
+                        }
                         editCutiKaryawan.setText(newAdapter.getItem(i));
-                        idKaryawan = i;
                         dialog.dismiss();
                     }
                 });
@@ -167,7 +176,11 @@ public class CutiCreateActivity extends AppCompatActivity {
         buttonBuat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createLeave();
+                try {
+                    createLeave();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
         buttonBack.setOnClickListener(new View.OnClickListener() {
@@ -215,10 +228,11 @@ public class CutiCreateActivity extends AppCompatActivity {
         Volley.newRequestQueue(CutiCreateActivity.this).add(request);
     }
 
-    private void createLeave() {
-        if (editCutiKategori.getSelectedItemPosition() == 0 || editCutiStartDate.getText().toString().matches("") || 
-                editCutiEndDate.getText().toString().matches("") || editCutiNo.getText().toString().equals("ASK-EL-XX.XXXX") || 
-                idKaryawan < 0) {
+    private void createLeave() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        if (editCutiKategori.getSelectedItemPosition() == 0 || editCutiStartDate.getText().toString().matches("start date (yyyy-mm-dd)") ||
+                editCutiEndDate.getText().toString().matches("end date (yyyy-mm-dd)") || idKaryawan < 0 ||
+                sdf.parse(editCutiEndDate.getText().toString()).before(sdf.parse(editCutiStartDate.getText().toString()))) {
             Toast.makeText(CutiCreateActivity.this, "Failed, please check your data", Toast.LENGTH_LONG).show();
         } else {
             progressDialog.show();
@@ -287,8 +301,10 @@ public class CutiCreateActivity extends AppCompatActivity {
                                 //data employee
                                 jsonArray = jsonObject.getJSONArray("data leave employee");
                                 cutiKaryawanId = new String[jsonArray.length()];
+                                cutiKaryawanName = new String[jsonArray.length()];
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     cutiKaryawanId[i] = jsonArray.getJSONObject(i).getString("employee_id");
+                                    cutiKaryawanName[i] = jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name");
                                     arrayListKaryawan.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
                                 }
 

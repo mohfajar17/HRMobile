@@ -5,13 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Profile.DataLengkapActivity">
-
-<!--    <ImageView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:scaleType="centerCrop"-->
-<!--        android:src="@drawable/background" />-->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -81,7 +76,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1.7"
                         android:paddingTop="3dp"
-                        android:text="FULL NAME"
+                        android:text="EMPLOYEE NAME"
                         android:textSize="12sp" />
 
                     <TextView
@@ -469,7 +464,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1.7"
                         android:paddingTop="3dp"
-                        android:text="EMP STATUS"
+                        android:text="EMPLOYEE STATUS"
                         android:textSize="12sp" />
 
                     <TextView
@@ -498,7 +493,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1.7"
                         android:paddingTop="3dp"
-                        android:text="WORK STATUS"
+                        android:text="WORKING STATUS"
                         android:textSize="12sp" />
 
                     <TextView

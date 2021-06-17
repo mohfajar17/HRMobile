@@ -174,13 +174,33 @@
                         android:textColor="@android:color/holo_red_dark" />
                 </LinearLayout>
 
-                <EditText
+<!--                <EditText-->
+<!--                    android:id="@+id/editCutiStartDate"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="10dp"-->
+<!--                    android:hint="start date (yyyy-mm-dd)"-->
+<!--                    android:inputType="text"/>-->
+
+                <TextView
                     android:id="@+id/editCutiStartDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:hint="start date (yyyy-mm-dd)"
-                    android:inputType="text"/>
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="13dp"
+                    android:maxLines="1"
+                    android:gravity="center_vertical"
+                    android:text="start date (yyyy-mm-dd)"
+                    android:textSize="18dp"
+                    android:textColor="@color/black" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:src="@color/colorGray"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginBottom="8dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -200,13 +220,33 @@
                         android:textColor="@android:color/holo_red_dark" />
                 </LinearLayout>
 
-                <EditText
+<!--                <EditText-->
+<!--                    android:id="@+id/editCutiEndDate"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="10dp"-->
+<!--                    android:hint="end date (yyyy-mm-dd)"-->
+<!--                    android:inputType="text"/>-->
+
+                <TextView
                     android:id="@+id/editCutiEndDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:hint="end date (yyyy-mm-dd)"
-                    android:inputType="text"/>
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="13dp"
+                    android:maxLines="1"
+                    android:gravity="center_vertical"
+                    android:text="end date (yyyy-mm-dd)"
+                    android:textSize="18dp"
+                    android:textColor="@color/black" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:src="@color/colorGray"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginBottom="8dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
