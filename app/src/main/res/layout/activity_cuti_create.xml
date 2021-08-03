@@ -191,7 +191,7 @@
                     android:layout_marginLeft="13dp"
                     android:maxLines="1"
                     android:gravity="center_vertical"
-                    android:text="start date (yyyy-mm-dd)"
+                    android:text="start date (dd-mm-yyyy)"
                     android:textSize="18dp"
                     android:textColor="@color/black" />
 
@@ -237,7 +237,7 @@
                     android:layout_marginLeft="13dp"
                     android:maxLines="1"
                     android:gravity="center_vertical"
-                    android:text="end date (yyyy-mm-dd)"
+                    android:text="end date (dd-mm-yyyy)"
                     android:textSize="18dp"
                     android:textColor="@color/black" />
 

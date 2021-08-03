@@ -129,7 +129,7 @@
                     android:layout_marginLeft="18dp"
                     android:gravity="center_vertical"
                     android:text="-- Pilih Job Code --"
-                    android:textSize="16dp"
+                    android:textSize="18dp"
                     android:maxLines="1"
                     android:textColor="@color/black"
                     android:drawableRight="@drawable/ic_drop_down"
@@ -228,13 +228,33 @@
                         android:textColor="@android:color/holo_red_dark" />
                 </LinearLayout>
 
-                <EditText
+<!--                <EditText-->
+<!--                    android:id="@+id/editSpklDate"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="10dp"-->
+<!--                    android:hint="proposed date (yyyy-mm-dd)"-->
+<!--                    android:inputType="text"/>-->
+
+                <TextView
                     android:id="@+id/editSpklDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:hint="proposed date (yyyy-mm-dd)"
-                    android:inputType="text"/>
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="13dp"
+                    android:maxLines="1"
+                    android:gravity="center_vertical"
+                    android:text="proposed date (dd-mm-yyyy)"
+                    android:textSize="18dp"
+                    android:textColor="@color/black" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:src="@color/colorGray"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginBottom="8dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -250,7 +270,7 @@
                     android:layout_marginLeft="18dp"
                     android:gravity="center_vertical"
                     android:text="-- Pilih Karyawan --"
-                    android:textSize="16dp"
+                    android:textSize="18dp"
                     android:maxLines="1"
                     android:textColor="@color/black"
                     android:drawableRight="@drawable/ic_drop_down"
@@ -300,13 +320,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nama Karyawan"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
                         <TextView
                             android:id="@+id/spklKaryawan1"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:layout_marginTop="5dp"
                             android:layout_marginLeft="15dp"
                             android:gravity="center_vertical"
                             android:text="-- Pilih Karyawan --"
@@ -327,48 +347,82 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Overtime Date"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/spklOvertimeDate1"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:hint="overtime date"
-                            android:inputType="text"/>
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:text="overtime date (dd-mm-yyyy)"
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:src="@color/colorGray"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginBottom="8dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Start Time"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/spklStartTime1"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
                             android:text="08:00"
-                            android:inputType="text"/>
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:src="@color/colorGray"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginBottom="8dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Finish Time"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/spklFinishTime1"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
                             android:text="17:00"
-                            android:inputType="text"/>
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:src="@color/colorGray"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginBottom="8dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Keterangan"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
                         <EditText
@@ -376,6 +430,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginTop="-5dp"
                             android:hint="keterangan"
                             android:inputType="text"/>
                     </LinearLayout>
@@ -410,13 +465,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nama Karyawan"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
                         <TextView
                             android:id="@+id/spklKaryawan2"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:layout_marginTop="5dp"
                             android:layout_marginLeft="15dp"
                             android:gravity="center_vertical"
                             android:text="-- Pilih Karyawan --"
@@ -437,48 +492,82 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Overtime Date"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/spklOvertimeDate2"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:hint="overtime date"
-                            android:inputType="text"/>
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:text="overtime date (dd-mm-yyyy)"
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:src="@color/colorGray"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginBottom="8dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Start Time"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/spklStartTime2"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
                             android:text="08:00"
-                            android:inputType="text"/>
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:src="@color/colorGray"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginBottom="8dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Finish Time"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/spklFinishTime2"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
                             android:text="17:00"
-                            android:inputType="text"/>
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:src="@color/colorGray"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginBottom="8dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Keterangan"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
                         <EditText
@@ -486,6 +575,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginTop="-5dp"
                             android:hint="keterangan"
                             android:inputType="text"/>
                     </LinearLayout>
@@ -520,13 +610,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nama Karyawan"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
                         <TextView
                             android:id="@+id/spklKaryawan3"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:layout_marginTop="5dp"
                             android:layout_marginLeft="15dp"
                             android:gravity="center_vertical"
                             android:text="-- Pilih Karyawan --"
@@ -547,48 +637,82 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Overtime Date"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/spklOvertimeDate3"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:hint="overtime date"
-                            android:inputType="text"/>
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:text="overtime date (dd-mm-yyyy)"
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:src="@color/colorGray"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginBottom="8dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Start Time"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/spklStartTime3"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
                             android:text="08:00"
-                            android:inputType="text"/>
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:src="@color/colorGray"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginBottom="8dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Finish Time"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/spklFinishTime3"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
                             android:text="17:00"
-                            android:inputType="text"/>
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:src="@color/colorGray"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginBottom="8dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Keterangan"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
                         <EditText
@@ -596,6 +720,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginTop="-5dp"
                             android:hint="keterangan"
                             android:inputType="text"/>
                     </LinearLayout>
@@ -630,13 +755,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nama Karyawan"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
                         <TextView
                             android:id="@+id/spklKaryawan4"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:layout_marginTop="5dp"
                             android:layout_marginLeft="15dp"
                             android:gravity="center_vertical"
                             android:text="-- Pilih Karyawan --"
@@ -657,48 +782,82 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Overtime Date"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/spklOvertimeDate4"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:hint="overtime date"
-                            android:inputType="text"/>
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:text="overtime date (dd-mm-yyyy)"
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:src="@color/colorGray"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginBottom="8dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Start Time"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/spklStartTime4"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
                             android:text="08:00"
-                            android:inputType="text"/>
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:src="@color/colorGray"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginBottom="8dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Finish Time"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/spklFinishTime4"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
                             android:text="17:00"
-                            android:inputType="text"/>
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:src="@color/colorGray"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginBottom="8dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Keterangan"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
                         <EditText
@@ -706,6 +865,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginTop="-5dp"
                             android:hint="keterangan"
                             android:inputType="text"/>
                     </LinearLayout>
@@ -740,13 +900,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nama Karyawan"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
                         <TextView
                             android:id="@+id/spklKaryawan5"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:layout_marginTop="5dp"
                             android:layout_marginLeft="15dp"
                             android:gravity="center_vertical"
                             android:text="-- Pilih Karyawan --"
@@ -767,48 +927,82 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Overtime Date"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/spklOvertimeDate5"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:hint="overtime date"
-                            android:inputType="text"/>
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:text="overtime date (dd-mm-yyyy)"
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:src="@color/colorGray"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginBottom="8dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Start Time"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/spklStartTime5"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
                             android:text="08:00"
-                            android:inputType="text"/>
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:src="@color/colorGray"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginBottom="8dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Finish Time"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/spklFinishTime5"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"
                             android:text="17:00"
-                            android:inputType="text"/>
+                            android:textSize="16dp"
+                            android:maxLines="1"
+                            android:textColor="@color/black" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:src="@color/colorGray"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginBottom="8dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Keterangan"
+                            android:textSize="12dp"
                             android:textColor="@android:color/black" />
 
                         <EditText
@@ -816,6 +1010,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginTop="-5dp"
                             android:hint="keterangan"
                             android:inputType="text"/>
                     </LinearLayout>

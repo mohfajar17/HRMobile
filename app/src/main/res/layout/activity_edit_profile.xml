@@ -232,8 +232,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:hint="address"
-                    android:inputType="textPersonName" />
+                    android:hint="address"/>
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -254,7 +253,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:hint="city"
-                    android:enabled="false"
                     android:inputType="textPersonName" />
 
                 <ImageView
@@ -276,8 +274,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:hint="state"
-                    android:enabled="false"
-                    android:maxLength="20"
                     android:inputType="textPersonName" />
 
                 <ImageView
@@ -300,7 +296,7 @@
                     android:layout_marginLeft="10dp"
                     android:hint="mobile phone"
                     android:maxLength="15"
-                    android:inputType="number" />
+                    android:inputType="phone" />
 
                 <ImageView
                     android:layout_width="match_parent"

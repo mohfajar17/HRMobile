@@ -17,14 +17,35 @@
         android:background="@drawable/border_card"
         android:orientation="vertical">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageAkun"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="85dp"
-            android:src="@drawable/akun"
             android:layout_margin="5dp"
-            app:civ_border_color="@color/white"
-            app:civ_border_width="2dp" />
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="0dp"
+                android:src="@drawable/ic_image"
+                app:tint="@color/black" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageAkun"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/akun"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="2dp" />
+
+            <ImageView
+                android:id="@+id/imageNotif"
+                android:layout_width="30dp"
+                android:layout_height="0dp"
+                android:scaleType="fitStart"
+                android:src="@drawable/ic_notifications"
+                app:tint="@color/white" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

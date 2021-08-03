@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.hrmobile">
+    package="com.asukacorp.hrmobile">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
@@ -14,35 +15,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HRMobile.NoActionBar"
         tools:replace="android:icon,android:theme">
-        <activity android:name=".Menu.SlipGaji.DownloadSlipActivity"></activity>
-        <activity android:name=".SigninActivity" />
-        <activity android:name=".Menu.SlipGaji.SlipGajiActivity" />
-        <activity android:name=".Profile.FileActivity" />
-        <activity android:name=".Profile.PelatihanActivity" />
-        <activity android:name=".Profile.PengalamanKerjaActivity" />
-        <activity android:name=".Profile.DataKeluargaActivity" />
-        <activity android:name=".Profile.RiwayatPendidikanActivity" />
-        <activity android:name=".Menu.Cuti.CutiCreateActivity" />
-        <activity android:name=".Menu.Absensi.CheckClockActivity" />
-        <activity android:name=".Menu.Spkl.SpklCreateActivity" />
-        <activity android:name=".Menu.Spkl.SpklDetailActivity" />
-        <activity android:name=".Menu.Spkl.SpklActivity" />
-        <activity android:name=".Profile.EditProfileActivity" />
-        <activity android:name=".Home.NewsDetailActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name="com.asukacorp.hrmobile.Menu.SlipGaji.DownloadSlipActivity"></activity>
+        <activity android:name="com.asukacorp.hrmobile.SigninActivity" />
+        <activity android:name="com.asukacorp.hrmobile.Menu.SlipGaji.SlipGajiActivity" />
+        <activity android:name="com.asukacorp.hrmobile.Profile.FileActivity" />
+        <activity android:name="com.asukacorp.hrmobile.Profile.PelatihanActivity" />
+        <activity android:name="com.asukacorp.hrmobile.Profile.PengalamanKerjaActivity" />
+        <activity android:name="com.asukacorp.hrmobile.Profile.DataKeluargaActivity" />
+        <activity android:name="com.asukacorp.hrmobile.Profile.RiwayatPendidikanActivity" />
+        <activity android:name="com.asukacorp.hrmobile.Menu.Cuti.CutiCreateActivity" />
+        <activity android:name="com.asukacorp.hrmobile.Menu.Absensi.CheckClockActivity" />
+        <activity android:name="com.asukacorp.hrmobile.Menu.Spkl.SpklCreateActivity" />
+        <activity android:name="com.asukacorp.hrmobile.Menu.Spkl.SpklDetailActivity" />
+        <activity android:name="com.asukacorp.hrmobile.Menu.Spkl.SpklActivity" />
+        <activity android:name="com.asukacorp.hrmobile.Profile.EditProfileActivity" />
+        <activity android:name="com.asukacorp.hrmobile.Home.NewsDetailActivity" />
+        <activity android:name="com.asukacorp.hrmobile.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Profile.AboutAppsActivity" />
-        <activity android:name=".Hybrid.CutiActivity" />
-        <activity android:name=".Profile.TunjanganPotonganActivity" />
-        <activity android:name=".Profile.RiwayatJabatanActivity" />
-        <activity android:name=".Profile.DataLengkapActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name="com.asukacorp.hrmobile.Profile.AboutAppsActivity" />
+        <activity android:name="com.asukacorp.hrmobile.Hybrid.CutiActivity" />
+        <activity android:name="com.asukacorp.hrmobile.Profile.TunjanganPotonganActivity" />
+        <activity android:name="com.asukacorp.hrmobile.Profile.RiwayatJabatanActivity" />
+        <activity android:name="com.asukacorp.hrmobile.Profile.DataLengkapActivity" />
+        <activity android:name="com.asukacorp.hrmobile.LoginActivity" />
+        <activity android:name="com.asukacorp.hrmobile.MainActivity" />
     </application>
 
 </manifest>
