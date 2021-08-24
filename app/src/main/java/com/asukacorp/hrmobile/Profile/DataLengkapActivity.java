@@ -116,7 +116,7 @@ public class DataLengkapActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        textGolDarah.setText("-");
+        textGolDarah.setText(sharedPrefManager.getKeyBloodGroup());
         textReligion.setText(sharedPrefManager.getKeyReligionName());
         textMaritalStatus.setText(sharedPrefManager.getKeyMaritalStatusName());
         textAddress.setText(sharedPrefManager.getKeyAddress()+", "+sharedPrefManager.getKeyCity()+", "+sharedPrefManager.getKeyState());

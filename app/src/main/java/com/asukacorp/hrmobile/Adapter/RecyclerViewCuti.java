@@ -1,6 +1,7 @@
 package com.asukacorp.hrmobile.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.asukacorp.hrmobile.Data.Cuti;
+import com.asukacorp.hrmobile.Hybrid.CutiDetailActivity;
 import com.asukacorp.hrmobile.R;
 
 import java.util.List;
@@ -48,6 +50,15 @@ public class RecyclerViewCuti extends RecyclerView.Adapter<RecyclerViewCuti.View
             holder.textDisetujui.setText("Belum Disetujui");
             holder.layout.setBackgroundColor(context.getResources().getColor(R.color.white));
         }
+
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, CutiDetailActivity.class);
+                intent.putExtra("detail", mValues.get(position));
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

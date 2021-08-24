@@ -48,18 +48,30 @@ import java.util.Map;
 
 public class CutiCreateActivity extends AppCompatActivity {
 
+    private ArrayAdapter<String> adapter;
+
     private ArrayList<String> arrayListKaryawan;
     private int idKaryawan = -1;
-    private ArrayAdapter<String> adapter;
     private String[] cutiKaryawanId;
     private String[] cutiKaryawanName;
+
+    private ArrayList<String> arrayListPengganti;
+    private int idPengganti = -1;
+    private String[] cutiPenggantiId;
+    private String[] cutiPenggantiName;
+
     private String[] cutiKategoriId;
 
     private EditText editCutiNo;
     private TextView editCutiKaryawan;
     private Spinner editCutiKategori;
+    private TextView editCutiPengganti;
     private TextView editCutiStartDate;
     private TextView editCutiEndDate;
+//    private TextView editCutiExtendedDate;
+    private TextView editCutiWorkStartDate;
+    private EditText editCutiLeaveAddress;
+    private EditText editCutiPhone;
     private EditText editNotes;
     private ImageView buttonBack;
     private Button buttonBuat;
@@ -77,13 +89,19 @@ public class CutiCreateActivity extends AppCompatActivity {
         sharedPrefManager = SharedPrefManager.getInstance(this);
         progressDialog = new CustomProgressDialog(this);
         arrayListKaryawan = new ArrayList<>();
+        arrayListPengganti = new ArrayList<>();
 
         editCutiNo = (EditText) findViewById(R.id.editCutiNo);
         editCutiKaryawan = (TextView) findViewById(R.id.editCutiKaryawan);
         editCutiKategori = (Spinner) findViewById(R.id.editCutiKategori);
+        editCutiPengganti = (TextView) findViewById(R.id.editCutiPengganti);
         editCutiStartDate = (TextView) findViewById(R.id.editCutiStartDate);
         editCutiEndDate = (TextView) findViewById(R.id.editCutiEndDate);
-        editNotes = (EditText) findViewById(R.id.editNotes);
+//        editCutiExtendedDate = (TextView) findViewById(R.id.editCutiExtendedDate);
+        editCutiWorkStartDate = (TextView) findViewById(R.id.editCutiWorkStartDate);
+        editCutiLeaveAddress = (EditText) findViewById(R.id.editCutiLeaveAddress);
+        editCutiPhone = (EditText) findViewById(R.id.editCutiPhone);
+        editNotes = (EditText) findViewById(R.id.editCutiNotes);
         buttonBack = (ImageView) findViewById(R.id.buttonBack);
         buttonBuat = (Button) findViewById(R.id.buttonBuat);
 
@@ -134,6 +152,53 @@ public class CutiCreateActivity extends AppCompatActivity {
             }
         });
 
+        editCutiPengganti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog = new Dialog(CutiCreateActivity.this);
+                dialog.setContentView(R.layout.dialog_searchable_spinner);
+                dialog.getWindow().setLayout(900, 1500);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
+                //initialize dialog variable
+                EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
+                ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
+                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(CutiCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListPengganti);
+                listViewSearch.setAdapter(newAdapter);
+                editTextSearch.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        newAdapter.getFilter().filter(charSequence);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+                listViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        int count = 0;
+                        while (count<cutiPenggantiName.length){
+                            if (newAdapter.getItem(i).equals(cutiPenggantiName[count])){
+                                idPengganti = count;
+                                break;
+                            } else count++;
+                        }
+                        editCutiPengganti.setText(newAdapter.getItem(i));
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+
         editCutiStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,6 +234,46 @@ public class CutiCreateActivity extends AppCompatActivity {
                             if (dayOfMonth<10)
                                 editCutiEndDate.setText("0" + dayOfMonth + "-" + (month + 1) + "-" + year);
                             else editCutiEndDate.setText(dayOfMonth + "-" + (month + 1) + "-" + year);
+                        }
+                    }
+                }, Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
+            }
+        });
+//        editCutiExtendedDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                DatePickerDialog datePickerDialog = new DatePickerDialog(CutiCreateActivity.this, new DatePickerDialog.OnDateSetListener() {
+//                    @Override
+//                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                        if (month+1<10){
+//                            if (dayOfMonth<10)
+//                                editCutiExtendedDate.setText("0" + dayOfMonth + "-0" + (month + 1) + "-" + year);
+//                            else editCutiExtendedDate.setText(dayOfMonth + "-0" + (month + 1) + "-" + year);
+//                        } else {
+//                            if (dayOfMonth<10)
+//                                editCutiExtendedDate.setText("0" + dayOfMonth + "-" + (month + 1) + "-" + year);
+//                            else editCutiExtendedDate.setText(dayOfMonth + "-" + (month + 1) + "-" + year);
+//                        }
+//                    }
+//                }, Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+//                datePickerDialog.show();
+//            }
+//        });
+        editCutiWorkStartDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(CutiCreateActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        if (month+1<10){
+                            if (dayOfMonth<10)
+                                editCutiWorkStartDate.setText("0" + dayOfMonth + "-0" + (month + 1) + "-" + year);
+                            else editCutiWorkStartDate.setText(dayOfMonth + "-0" + (month + 1) + "-" + year);
+                        } else {
+                            if (dayOfMonth<10)
+                                editCutiWorkStartDate.setText("0" + dayOfMonth + "-" + (month + 1) + "-" + year);
+                            else editCutiWorkStartDate.setText(dayOfMonth + "-" + (month + 1) + "-" + year);
                         }
                     }
                 }, Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
@@ -233,13 +338,18 @@ public class CutiCreateActivity extends AppCompatActivity {
     private void createLeave() throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (editCutiKategori.getSelectedItemPosition() == 0 || editCutiStartDate.getText().toString().matches("start date (yyyy-mm-dd)") ||
-                editCutiEndDate.getText().toString().matches("end date (yyyy-mm-dd)") || idKaryawan < 0 ||
-                sdf.parse(editCutiEndDate.getText().toString()).before(sdf.parse(editCutiStartDate.getText().toString()))) {
+                editCutiEndDate.getText().toString().matches("end date (yyyy-mm-dd)") || /*editCutiExtendedDate.getText().toString().matches("end date (yyyy-mm-dd)") ||*/
+                idKaryawan < 0 || sdf.parse(editCutiEndDate.getText().toString()).before(sdf.parse(editCutiStartDate.getText().toString()))) {
             Toast.makeText(CutiCreateActivity.this, "Failed, please check your data", Toast.LENGTH_LONG).show();
         } else {
             progressDialog.show();
             final String employeeId = cutiKaryawanId[idKaryawan];
             final String categoryId = cutiKategoriId[editCutiKategori.getSelectedItemPosition()];
+
+            final String penggantiId;
+            if (idPengganti<0)
+                penggantiId = "0";
+            else penggantiId = cutiPenggantiId[idPengganti];
 
             StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_CUTI_CREATE, new Response.Listener<String>() {
                 @Override
@@ -275,8 +385,12 @@ public class CutiCreateActivity extends AppCompatActivity {
                     Map<String, String> param=new HashMap<>();
                     param.put("employeeId", employeeId);
                     param.put("leaveCategory", categoryId);
+                    param.put("subtituteLeave", penggantiId);
                     param.put("startLeave", editCutiStartDate.getText().toString());
                     param.put("finishLeave", editCutiEndDate.getText().toString());
+                    param.put("workDate", editCutiWorkStartDate.getText().toString());
+                    param.put("addressLeave", editCutiLeaveAddress.getText().toString() + " ");
+                    param.put("phoneLeave", editCutiPhone.getText().toString() + " ");
                     param.put("notes", editNotes.getText().toString() + " ");
                     param.put("userId", sharedPrefManager.getKeyUserId());
                     return param;
@@ -304,10 +418,16 @@ public class CutiCreateActivity extends AppCompatActivity {
                                 jsonArray = jsonObject.getJSONArray("data leave employee");
                                 cutiKaryawanId = new String[jsonArray.length()];
                                 cutiKaryawanName = new String[jsonArray.length()];
+                                cutiPenggantiId = new String[jsonArray.length()];
+                                cutiPenggantiName = new String[jsonArray.length()];
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     cutiKaryawanId[i] = jsonArray.getJSONObject(i).getString("employee_id");
                                     cutiKaryawanName[i] = jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name");
                                     arrayListKaryawan.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
+
+                                    cutiPenggantiId[i] = jsonArray.getJSONObject(i).getString("employee_id");
+                                    cutiPenggantiName[i] = jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name");
+                                    arrayListPengganti.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
                                 }
 
                                 //data category

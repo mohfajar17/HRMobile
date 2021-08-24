@@ -110,7 +110,7 @@
                     android:layout_marginLeft="13dp"
                     android:maxLines="1"
                     android:gravity="center_vertical"
-                    android:text="-- Pilih karyawan --"
+                    android:text="-- pilih karyawan --"
                     android:textSize="18dp"
                     android:textColor="@color/black"
                     android:drawableRight="@drawable/ic_drop_down"
@@ -154,6 +154,34 @@
                     android:layout_height="1dp"
                     android:src="@color/colorGray"
                     android:layout_marginLeft="13dp"
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Substitute Employee"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/editCutiPengganti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="13dp"
+                    android:maxLines="1"
+                    android:gravity="center_vertical"
+                    android:text="-- pilih pengganti --"
+                    android:textSize="18dp"
+                    android:textColor="@color/black"
+                    android:drawableRight="@drawable/ic_drop_down"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:src="@color/colorGray"
+                    android:layout_marginLeft="13dp"
                     android:layout_marginBottom="8dp"/>
 
                 <LinearLayout
@@ -173,14 +201,6 @@
                         android:text=" *"
                         android:textColor="@android:color/holo_red_dark" />
                 </LinearLayout>
-
-<!--                <EditText-->
-<!--                    android:id="@+id/editCutiStartDate"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="10dp"-->
-<!--                    android:hint="start date (yyyy-mm-dd)"-->
-<!--                    android:inputType="text"/>-->
 
                 <TextView
                     android:id="@+id/editCutiStartDate"
@@ -220,14 +240,6 @@
                         android:textColor="@android:color/holo_red_dark" />
                 </LinearLayout>
 
-<!--                <EditText-->
-<!--                    android:id="@+id/editCutiEndDate"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="10dp"-->
-<!--                    android:hint="end date (yyyy-mm-dd)"-->
-<!--                    android:inputType="text"/>-->
-
                 <TextView
                     android:id="@+id/editCutiEndDate"
                     android:layout_width="match_parent"
@@ -248,6 +260,99 @@
                     android:layout_marginLeft="13dp"
                     android:layout_marginBottom="8dp"/>
 
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Extended Date"-->
+<!--                        android:textColor="@android:color/black" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text=" *"-->
+<!--                        android:textColor="@android:color/holo_red_dark" />-->
+<!--                </LinearLayout>-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/editCutiExtendedDate"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:layout_marginBottom="2dp"-->
+<!--                    android:layout_marginLeft="13dp"-->
+<!--                    android:maxLines="1"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:text="date extended (dd-mm-yyyy)"-->
+<!--                    android:textSize="18dp"-->
+<!--                    android:textColor="@color/black" />-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:src="@color/colorGray"-->
+<!--                    android:layout_marginLeft="13dp"-->
+<!--                    android:layout_marginBottom="8dp"/>-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Work Start Date"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/editCutiWorkStartDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="13dp"
+                    android:maxLines="1"
+                    android:gravity="center_vertical"
+                    android:text="work start date (dd-mm-yyyy)"
+                    android:textSize="18dp"
+                    android:textColor="@color/black" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:src="@color/colorGray"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Leave Address"
+                    android:textColor="@android:color/black" />
+
+                <EditText
+                    android:id="@+id/editCutiLeaveAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:hint="leave address"
+                    android:maxLines="1"
+                    android:inputType="text"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phone"
+                    android:textColor="@android:color/black" />
+
+                <EditText
+                    android:id="@+id/editCutiPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:hint="phone"
+                    android:inputType="phone"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -255,7 +360,7 @@
                     android:textColor="@android:color/black" />
 
                 <EditText
-                    android:id="@+id/editNotes"
+                    android:id="@+id/editCutiNotes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"

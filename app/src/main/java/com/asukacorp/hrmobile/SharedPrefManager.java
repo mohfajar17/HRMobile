@@ -29,6 +29,7 @@ public class SharedPrefManager {
     public static final String KEY_BIRTHDAY = "birthday";
     public static final String KEY_PLACE_BIRTHDAY = "place_birthday";
     public static final String KEY_GENDER = "gender";
+    public static final String KEY_BLOOD_GROUP = "blood_group";
     public static final String KEY_ADDRESS = "address";
     public static final String KEY_CITY = "city";
     public static final String KEY_STATE = "state";
@@ -199,6 +200,14 @@ public class SharedPrefManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString(KEY_GENDER, string);
+        editor.apply();
+    }
+
+    public void setBloodGroup(String string){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(KEY_BLOOD_GROUP, string);
         editor.apply();
     }
 
@@ -465,6 +474,11 @@ public class SharedPrefManager {
     public String getKeyGender() {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_GENDER,null);
+    }
+
+    public String getKeyBloodGroup() {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_BLOOD_GROUP,null);
     }
 
     public String getKeyAddress() {

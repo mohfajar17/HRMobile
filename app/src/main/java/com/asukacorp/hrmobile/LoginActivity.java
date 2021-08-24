@@ -142,6 +142,7 @@ public class LoginActivity extends AppCompatActivity {
                             sharedPrefManager.setBirthday(jsonData.getString("birthday"));
                             sharedPrefManager.setPlaceBirthday(jsonData.getString("place_birthday"));
                             sharedPrefManager.setGender(jsonData.getString("gender"));
+                            sharedPrefManager.setBloodGroup(jsonData.getString("blood_group"));
                             sharedPrefManager.setAddress(jsonData.getString("address"));
                             sharedPrefManager.setCity(jsonData.getString("city"));
                             sharedPrefManager.setState(jsonData.getString("state"));
