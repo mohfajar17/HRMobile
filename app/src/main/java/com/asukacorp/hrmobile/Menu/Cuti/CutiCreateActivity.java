@@ -362,6 +362,8 @@ public class CutiCreateActivity extends AppCompatActivity {
                             onBackPressed();
                         } else if (status == 2){
                             Toast.makeText(CutiCreateActivity.this, "Your annual leave has expired", Toast.LENGTH_LONG).show();
+                        } else if (status == 3){
+                            Toast.makeText(CutiCreateActivity.this, "Your date is Incorrect", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(CutiCreateActivity.this, "Filed applied for leave", Toast.LENGTH_LONG).show();
                         }

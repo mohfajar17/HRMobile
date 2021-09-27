@@ -37,7 +37,7 @@ public class RecyclerViewCuti extends RecyclerView.Adapter<RecyclerViewCuti.View
         int nomor = position + 1;
         holder.textNo.setText("" + nomor);
         holder.textLeaveNo.setText(mValues.get(position).getEmployee_leave_number());
-        holder.textTglCuti.setText(mValues.get(position).getDate_leave());
+        holder.textTglCuti.setText(mValues.get(position).getStart_leave());
         holder.textTglPengajuan.setText(mValues.get(position).getProposed_date());
         holder.textTglKadarluarsa.setText(mValues.get(position).getDate_extended());
         holder.textStatus.setText(mValues.get(position).getStatus());
@@ -46,6 +46,9 @@ public class RecyclerViewCuti extends RecyclerView.Adapter<RecyclerViewCuti.View
         if (Integer.valueOf(mValues.get(position).getIs_approved()) == 1){
             holder.textDisetujui.setText("Ya");
             holder.layout.setBackgroundColor(context.getResources().getColor(R.color.cyan));
+        } else if (Integer.valueOf(mValues.get(position).getIs_approved()) == 2){
+            holder.textDisetujui.setText("Tidak Disetujui");
+            holder.layout.setBackgroundColor(context.getResources().getColor(R.color.red));
         } else {
             holder.textDisetujui.setText("Belum Disetujui");
             holder.layout.setBackgroundColor(context.getResources().getColor(R.color.white));

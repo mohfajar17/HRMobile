@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -10,8 +11,8 @@ android {
         applicationId "com.asukacorp.hrmobile"
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 7
-        versionName "1.6"
+        versionCode 15
+        versionName "1.9.4"
         ndk.abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -47,6 +48,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     implementation 'com.github.pramodkr123:ConvertWebViewToPdfDemo:1.0.4'
+    implementation 'com.google.firebase:firebase-auth:19.3.2'
 
     //noinspection GradleCompatible
     implementation 'com.android.support:recyclerview-v7:28.0.0'

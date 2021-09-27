@@ -65,6 +65,7 @@
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_weight="1"
+                android:hint="username"
                 android:background="@android:color/transparent"
                 android:inputType="textPersonName" />
         </LinearLayout>
@@ -94,6 +95,7 @@
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_weight="1"
+                android:hint="password"
                 android:background="@android:color/transparent"
                 android:inputType="textPassword" />
         </LinearLayout>

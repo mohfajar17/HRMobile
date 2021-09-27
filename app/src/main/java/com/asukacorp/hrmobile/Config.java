@@ -2,12 +2,13 @@ package com.asukacorp.hrmobile;
 
 public class Config {
 //    public static final String DATA_URL = "http://192.168.43.183/hr_mobile/";   //IP thetering hp
-//    public static final String DATA_URL = "http://192.168.1.144/hr_mobile/";   //IP asuka lt 3
+//    public static final String DATA_URL = "http://192.168.88.121/hr_mobile/";   //IP asuka IT Room
 //    public static final String DATA_URL = "http://192.168.0.109/hr_mobile/";   //IP home wifi
     public static final String DATA_URL = "https://ais.asukaindonesia.co.id/mobile/";   //IP server
 
     public static final String DATA_URL_AIS = DATA_URL + "apiHrMobile.php?apicall=";
     public static final String DATA_URL_LOGIN = DATA_URL_AIS +"login";
+    public static final String DATA_URL_SEND_OTP = DATA_URL_AIS +"sendOTP";
     public static final String DATA_URL_SIGNUP = DATA_URL_AIS +"signup";
     public static final String DATA_URL_SIGNUP_EMP_LIST = DATA_URL_AIS +"getDataSignup";
 

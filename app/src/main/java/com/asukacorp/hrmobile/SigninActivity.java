@@ -1,5 +1,6 @@
 package com.asukacorp.hrmobile;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
@@ -28,6 +29,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,12 +40,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class SigninActivity extends AppCompatActivity {
     private TextView textViewLogin;
     private TextView textViewKaryawan;
     private EditText editTextUsername;
     private EditText editTextPassword;
+    private EditText editTextPhone;
     private Button buttonSignup;
     private CheckBox checkBox;
 
@@ -66,6 +72,7 @@ public class SigninActivity extends AppCompatActivity {
         textViewLogin = (TextView) findViewById(R.id.textViewLogin);
         editTextUsername = (EditText) findViewById(R.id.editTextUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextPhone = (EditText) findViewById(R.id.editTextPhone);
         buttonSignup = (Button) findViewById(R.id.buttonSignup);
         buttonSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,31 +152,104 @@ public class SigninActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        if (idKaryawan < 0 || editTextUsername.getText().toString().matches("") || editTextPassword.getText().toString().matches("")) {
+        if (idKaryawan < 0 || editTextUsername.getText().toString().matches("") || editTextPassword.getText().toString().matches("") ||
+                editTextPhone.getText().toString().matches("") || editTextPhone.getText().length() < 10) {
             Toast.makeText(SigninActivity.this, "Failed, please check your data", Toast.LENGTH_LONG).show();
         } else {
             progressDialog.show();
+            buttonSignup.setVisibility(View.INVISIBLE);
+
             final String empId = employeeId[idKaryawan];
             final String empName = employeeName[idKaryawan];
-            StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SIGNUP, new Response.Listener<String>() {
+//            StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SIGNUP, new Response.Listener<String>() {
+//                @Override
+//                public void onResponse(String response) {
+//                    try {
+//                        JSONObject jsonObject = new JSONObject(response);
+//                        int status = jsonObject.getInt("status");
+//                        if(status==1){
+//                            editTextUsername.setText("");
+//                            editTextPassword.setText("");
+//                            editTextPhone.setText("");
+//                            textViewKaryawan.setText("Pilih karyawan");
+//                            idKaryawan = -1;
+//                            getDataEmp();
+//                            Toast.makeText(SigninActivity.this, "Registration success, wait until the admin verify your account", Toast.LENGTH_LONG).show();
+//                        } else {
+//                            Toast.makeText(SigninActivity.this, "Registration failed, account with this employee_id already exists", Toast.LENGTH_LONG).show();
+//                        }
+//                        progressDialog.dismiss();
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                        progressDialog.dismiss();
+//                        Toast.makeText(SigninActivity.this, "Failed add data", Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//            }, new Response.ErrorListener() {
+//                @Override
+//                public void onErrorResponse(VolleyError error) {
+//                    error.printStackTrace();
+//                    progressDialog.dismiss();
+//                    Toast.makeText(SigninActivity.this, "network is broken, please check your network", Toast.LENGTH_LONG).show();
+//                }
+//            }){
+//                @Override
+//                protected Map<String, String> getParams() throws AuthFailureError {
+//                    Map<String, String> param=new HashMap<>();
+//                    param.put("empId", empId);
+//                    param.put("empName", empName);
+//                    param.put("userName", editTextUsername.getText().toString());
+//                    param.put("password", editTextPassword.getText().toString());
+//                    return param;
+//                }
+//            };
+//            Volley.newRequestQueue(this).add(request);
+
+            StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SEND_OTP, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
                         int status = jsonObject.getInt("status");
                         if(status==1){
-                            editTextUsername.setText("");
-                            editTextPassword.setText("");
-                            textViewKaryawan.setText("Pilih karyawan");
-                            idKaryawan = -1;
-                            getDataEmp();
-                            Toast.makeText(SigninActivity.this, "Registration success, wait until the admin verify your account", Toast.LENGTH_LONG).show();
+                            PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                                    "+62"+editTextPhone.getText().toString(),
+                                    120,
+                                    TimeUnit.SECONDS,
+                                    SigninActivity.this,
+                                    new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
+                                        @Override
+                                        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+//                                            Toast.makeText(SigninActivity.this, "Completed to send OTP code", Toast.LENGTH_LONG).show();
+                                        }
+                                        @Override
+                                        public void onVerificationFailed(@NonNull FirebaseException e) {
+                                            Toast.makeText(SigninActivity.this, "Failed to send OTP code", Toast.LENGTH_LONG).show();
+                                        }
+                                        @Override
+                                        public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                                            Intent bukaActivity = new Intent(SigninActivity.this, VerificationActivity.class);
+                                            bukaActivity.putExtra("empId", empId);
+                                            bukaActivity.putExtra("empName", empName);
+                                            bukaActivity.putExtra("userName", editTextUsername.getText().toString());
+                                            bukaActivity.putExtra("password", editTextPassword.getText().toString());
+                                            bukaActivity.putExtra("phone", editTextPhone.getText().toString());
+                                            bukaActivity.putExtra("verificationId", verificationId);
+                                            startActivity(bukaActivity);
+                                            finish();
+                                        }
+                                    }
+                            );
                         } else {
-                            Toast.makeText(SigninActivity.this, "Registration failed, account with this employee_id already exists", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SigninActivity.this, "Registration failed, your phone number doesn't match the employee data, confirm your data to HRD", Toast.LENGTH_LONG).show();
                         }
+                        buttonSignup.setVisibility(View.VISIBLE);
+                        progressDialog.dismiss();
                         progressDialog.dismiss();
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        buttonSignup.setVisibility(View.VISIBLE);
+                        progressDialog.dismiss();
                         progressDialog.dismiss();
                         Toast.makeText(SigninActivity.this, "Failed add data", Toast.LENGTH_LONG).show();
                     }
@@ -186,9 +266,7 @@ public class SigninActivity extends AppCompatActivity {
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> param=new HashMap<>();
                     param.put("empId", empId);
-                    param.put("empName", empName);
-                    param.put("userName", editTextUsername.getText().toString());
-                    param.put("password", editTextPassword.getText().toString());
+                    param.put("phone", editTextPhone.getText().toString());
                     return param;
                 }
             };

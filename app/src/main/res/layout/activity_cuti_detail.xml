@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingTop="10dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
@@ -67,7 +67,7 @@
                     android:textColor="@color/black" />
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -86,14 +86,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/black"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -112,14 +112,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/black"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -138,14 +138,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/black"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -164,14 +164,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/black"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
@@ -180,6 +180,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/detailLayoutCuta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
@@ -190,19 +191,19 @@
                     android:background="@drawable/bubble"
                     android:layout_marginTop="5dp"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/black"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:layout_marginTop="5dp"
                     android:padding="10dp"
-                    android:text="Sisa Cuta"
+                    android:text="Sisa Cuti Tahunan"
                     android:textColor="@color/white"/>
             </RelativeLayout>
 
@@ -351,7 +352,7 @@
                             android:layout_width="150dp"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="Kategori Cuti"
+                            android:text="-"
                             android:padding="10dp"
                             android:textColor="@color/black"/>
 
@@ -365,7 +366,7 @@
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Awal Cuti"
+                            android:text="-"
                             android:padding="10dp"
                             android:textColor="@color/black"/>
 
@@ -379,7 +380,7 @@
                             android:layout_width="100dp"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="Akhir Cuti"
+                            android:text="-"
                             android:padding="10dp"
                             android:textColor="@color/black"/>
 
@@ -393,7 +394,7 @@
                             android:layout_width="100dp"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="Tgl Kerja"
+                            android:text="-"
                             android:padding="10dp"
                             android:textColor="@color/black"/>
 
@@ -407,7 +408,7 @@
                             android:layout_width="170dp"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="Pengganti Saat Cuti"
+                            android:text="-"
                             android:padding="10dp"
                             android:textColor="@color/black"/>
 
@@ -421,7 +422,7 @@
                             android:layout_width="100dp"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="Approved"
+                            android:text="-"
                             android:padding="10dp"
                             android:textColor="@color/black"/>
                     </LinearLayout>
@@ -432,6 +433,115 @@
                         android:src="@color/black"/>
                 </LinearLayout>
             </HorizontalScrollView>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_margin="10dp"
+                android:src="@color/cyan"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detailCutiApprovedBy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="150dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Approved By"
+                    android:textColor="@color/white"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detailCutiApprovedDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="150dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Approved Date"
+                    android:textColor="@color/white"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detailCutiProcessedBy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="150dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Processed By"
+                    android:textColor="@color/white"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/detailCutiProcessedDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bubble"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="150dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="-"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bubble_sub"
+                    android:padding="10dp"
+                    android:text="Processed Date"
+                    android:textColor="@color/white"/>
+            </RelativeLayout>
 
             <ImageView
                 android:layout_width="match_parent"
@@ -476,23 +586,23 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/detailCutiApprovedBy"
+                    android:id="@+id/detailCutiCreateBy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/black"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
-                    android:text="Approved By"
+                    android:text="Create By"
                     android:textColor="@color/white"/>
             </RelativeLayout>
 
@@ -502,23 +612,23 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/detailCutiApprovedDate"
+                    android:id="@+id/detailCutiCreateDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/black"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
-                    android:text="Approved Date"
+                    android:text="Create Date"
                     android:textColor="@color/white"/>
             </RelativeLayout>
 
@@ -528,23 +638,23 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/detailCutiProcessedBy"
+                    android:id="@+id/detailCutiModifiedBy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/black"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
-                    android:text="Processed By"
+                    android:text="Modified By"
                     android:textColor="@color/white"/>
             </RelativeLayout>
 
@@ -554,23 +664,23 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/detailCutiProcessedDate"
+                    android:id="@+id/detailCutiModifiedDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bubble"
                     android:paddingTop="10dp"
-                    android:paddingLeft="140dp"
+                    android:paddingLeft="150dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:text="-"
                     android:textColor="@color/black"/>
 
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/bubble_sub"
                     android:padding="10dp"
-                    android:text="Processed Date"
+                    android:text="Modified Date"
                     android:textColor="@color/white"/>
             </RelativeLayout>
         </LinearLayout>

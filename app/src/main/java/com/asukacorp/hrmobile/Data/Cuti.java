@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 public class Cuti implements Parcelable {
 
+    private String employee_leave_id;
     private String employee_leave_number;
     private String start_leave;
     private String date_leave;
@@ -31,8 +32,13 @@ public class Cuti implements Parcelable {
     private String approver_date;
     private String processed_by;
     private String processed_date;
+    private String created_by;
+    private String created_date;
+    private String modified_by;
+    private String modified_date;
 
     protected Cuti(Parcel in) {
+        employee_leave_id = in.readString();
         employee_leave_number = in.readString();
         start_leave = in.readString();
         date_leave = in.readString();
@@ -56,10 +62,15 @@ public class Cuti implements Parcelable {
         approver_date = in.readString();
         processed_by = in.readString();
         processed_date = in.readString();
+        created_by = in.readString();
+        created_date = in.readString();
+        modified_by = in.readString();
+        modified_date = in.readString();
     }
 
     public Cuti(JSONObject jsonObject){
         try {
+            this.employee_leave_id = jsonObject.getString("employee_leave_id");
             this.employee_leave_number = jsonObject.getString("employee_leave_number");
             this.start_leave = jsonObject.getString("start_leave");
             this.date_leave = jsonObject.getString("date_leave");
@@ -83,6 +94,10 @@ public class Cuti implements Parcelable {
             this.approver_date = jsonObject.getString("approver_date");
             this.processed_by = jsonObject.getString("processed_by");
             this.processed_date = jsonObject.getString("processed_date");
+            this.created_by = jsonObject.getString("created_by");
+            this.created_date = jsonObject.getString("created_date");
+            this.modified_by = jsonObject.getString("modified_by");
+            this.modified_date = jsonObject.getString("modified_date");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -107,6 +122,7 @@ public class Cuti implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(employee_leave_id);
         dest.writeString(employee_leave_number);
         dest.writeString(start_leave);
         dest.writeString(date_leave);
@@ -130,6 +146,14 @@ public class Cuti implements Parcelable {
         dest.writeString(approver_date);
         dest.writeString(processed_by);
         dest.writeString(processed_date);
+        dest.writeString(created_by);
+        dest.writeString(created_date);
+        dest.writeString(modified_by);
+        dest.writeString(modified_date);
+    }
+
+    public String getEmployee_leave_id() {
+        return employee_leave_id;
     }
 
     public String getEmployee_leave_number() {
@@ -222,5 +246,21 @@ public class Cuti implements Parcelable {
 
     public String getProcessed_date() {
         return processed_date;
+    }
+
+    public String getCreated_by() {
+        return created_by;
+    }
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public String getModified_by() {
+        return modified_by;
+    }
+
+    public String getModified_date() {
+        return modified_date;
     }
 }

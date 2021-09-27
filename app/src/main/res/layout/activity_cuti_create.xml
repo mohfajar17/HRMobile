@@ -48,12 +48,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:orientation="vertical" >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -83,6 +83,12 @@
                     android:enabled="false"
                     android:inputType="text"/>
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/cyan"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -108,6 +114,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginLeft="13dp"
+                    android:layout_marginRight="10dp"
                     android:maxLines="1"
                     android:gravity="center_vertical"
                     android:text="-- pilih karyawan --"
@@ -122,6 +129,12 @@
                     android:src="@color/colorGray"
                     android:layout_marginLeft="13dp"
                     android:layout_marginBottom="8dp"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/cyan"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -154,7 +167,13 @@
                     android:layout_height="1dp"
                     android:src="@color/colorGray"
                     android:layout_marginLeft="13dp"
-                    android:layout_marginBottom="5dp"/>
+                    android:layout_marginBottom="8dp"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/cyan"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -169,6 +188,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="2dp"
                     android:layout_marginLeft="13dp"
+                    android:layout_marginRight="10dp"
                     android:maxLines="1"
                     android:gravity="center_vertical"
                     android:text="-- pilih pengganti --"
@@ -183,6 +203,12 @@
                     android:src="@color/colorGray"
                     android:layout_marginLeft="13dp"
                     android:layout_marginBottom="8dp"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/cyan"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -222,6 +248,12 @@
                     android:layout_marginLeft="13dp"
                     android:layout_marginBottom="8dp"/>
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/cyan"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -259,6 +291,12 @@
                     android:src="@color/colorGray"
                     android:layout_marginLeft="13dp"
                     android:layout_marginBottom="8dp"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/cyan"/>
 
 <!--                <LinearLayout-->
 <!--                    android:layout_width="match_parent"-->
@@ -324,6 +362,12 @@
                     android:layout_marginLeft="13dp"
                     android:layout_marginBottom="8dp"/>
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/cyan"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -339,6 +383,12 @@
                     android:maxLines="1"
                     android:inputType="text"/>
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/cyan"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -352,6 +402,12 @@
                     android:layout_marginLeft="10dp"
                     android:hint="phone"
                     android:inputType="phone"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/cyan"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -368,13 +424,16 @@
                     android:inputType="text"/>
             </LinearLayout>
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/cyan"/>
+
             <Button
                 android:id="@+id/buttonBuat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
                 android:text="Create"
                 app:backgroundTint="@color/colorAsukaGreen" />
         </LinearLayout>

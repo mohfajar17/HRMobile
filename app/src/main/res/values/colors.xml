@@ -5,6 +5,7 @@
     <color name="primary_light">#51adcf</color>
     <color name="cyan">#a5ecd7</color>
     <color name="cream">#e8ffc1</color>
+    <color name="red">#ff8080</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
