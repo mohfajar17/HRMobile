@@ -8,6 +8,7 @@ public class Config {
 
     public static final String DATA_URL_AIS = DATA_URL + "apiHrMobile.php?apicall=";
     public static final String DATA_URL_LOGIN = DATA_URL_AIS +"login";
+    public static final String DATA_URL_ACCESS_LOGIN = DATA_URL_AIS +"accessLogin";
     public static final String DATA_URL_SEND_OTP = DATA_URL_AIS +"sendOTP";
     public static final String DATA_URL_SIGNUP = DATA_URL_AIS +"signup";
     public static final String DATA_URL_SIGNUP_EMP_LIST = DATA_URL_AIS +"getDataSignup";
@@ -34,7 +35,6 @@ public class Config {
     public static final String DATA_URL_CUTI_CREATE = DATA_URL_AIS +"createCuti";
     public static final String DATA_URL_SLIP_GAJI = DATA_URL_AIS +"getSlipGaji";
     public static final String DATA_URL_SLIP_GAJI_WEB = DATA_URL + "gaji.php?employee_id=";
-    public static final String DATA_URL_SLIP_GAJI_WEB_COBA = "https://ais.asukaindonesia.co.id/index.php?r=hr/employee/print2&id=";
 
     //menu profile
     public static final String DATA_URL_DATA_KELUARGA_LIST = DATA_URL_AIS +"getFamily";

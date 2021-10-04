@@ -5,11 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,31 +35,53 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class VerificationActivity extends AppCompatActivity {
 
     private Button buttonVerify;
+    private TextView textViewTimer;
     private TextView textViewResendOtp;
     private EditText editTextCode1, editTextCode2, editTextCode3, editTextCode4, editTextCode5, editTextCode6;
-    private String verificationId, empId, empName, userName, password, phone, code;
+    private String verificationId, empId, empName, userName, password, phone, otpCode;
+    private int code;
 
+    private CountDownTimer countDownTimer;
+    private static final long START_TIME_IN_MILLIS = 600000;
+    private long timeLeftInMillis = START_TIME_IN_MILLIS;
+    private boolean timerRunning;
+
+    private LinearLayout layoutTextLogin;
+    private ViewGroup.LayoutParams params;
     private CustomProgressDialog progressDialog;
+    private SharedPrefManager sharedPrefManager;
+    private boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verification);
 
-        verificationId = getIntent().getStringExtra("verificationId");
-        empId = getIntent().getStringExtra("empId");
-        empName = getIntent().getStringExtra("empName");
+        progressDialog = new CustomProgressDialog(this);
+        sharedPrefManager = SharedPrefManager.getInstance(this);
+
+        code = getIntent().getIntExtra("code", 1);
         userName = getIntent().getStringExtra("userName");
         password = getIntent().getStringExtra("password");
         phone = getIntent().getStringExtra("phone");
+        verificationId = getIntent().getStringExtra("verificationId");
 
-        progressDialog = new CustomProgressDialog(this);
+        if (code==1){
+            empId = getIntent().getStringExtra("empId");
+            empName = getIntent().getStringExtra("empName");
+        } else {
+            layoutTextLogin = (LinearLayout) findViewById(R.id.layoutTextLogin);
+            params = layoutTextLogin.getLayoutParams();
+            params.height = 0;
+            layoutTextLogin.setLayoutParams(params);
+        }
 
         editTextCode1 = (EditText) findViewById(R.id.editTextCode1);
         editTextCode2 = (EditText) findViewById(R.id.editTextCode2);
@@ -70,13 +96,13 @@ public class VerificationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 PhoneAuthProvider.getInstance().verifyPhoneNumber(
                         "+62"+phone,
-                        120,
+                        60,
                         TimeUnit.SECONDS,
                         VerificationActivity.this,
                         new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
                             @Override
                             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-//                                Toast.makeText(VerificationActivity.this, "Completed to send OTP code", Toast.LENGTH_LONG).show();
+                                Toast.makeText(VerificationActivity.this, "Completed to send OTP code", Toast.LENGTH_LONG).show();
                             }
                             @Override
                             public void onVerificationFailed(@NonNull FirebaseException e) {
@@ -101,7 +127,7 @@ public class VerificationActivity extends AppCompatActivity {
                         editTextCode5.getText().toString().isEmpty() || editTextCode6.getText().toString().isEmpty()){
                     Toast.makeText(VerificationActivity.this, "Please enter valid code", Toast.LENGTH_LONG).show();
                 } else {
-                    code = editTextCode1.getText().toString() +
+                    otpCode = editTextCode1.getText().toString() +
                             editTextCode2.getText().toString() +
                             editTextCode3.getText().toString() +
                             editTextCode4.getText().toString() +
@@ -111,7 +137,7 @@ public class VerificationActivity extends AppCompatActivity {
                     if (verificationId != null){
                         progressDialog.show();
                         buttonVerify.setVisibility(View.INVISIBLE);
-                        PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(verificationId, code);
+                        PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(verificationId, otpCode);
 
                         FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
@@ -119,7 +145,9 @@ public class VerificationActivity extends AppCompatActivity {
                                 progressDialog.dismiss();
                                 buttonVerify.setVisibility(View.VISIBLE);
                                 if (task.isSuccessful()){
-                                    createData();
+                                    if (code==1)
+                                        createData();
+                                    else loginAccount();
                                 } else Toast.makeText(VerificationActivity.this, "Failed to verify otp code, please try again", Toast.LENGTH_LONG).show();
                             }
                         });
@@ -129,6 +157,25 @@ public class VerificationActivity extends AppCompatActivity {
         });
 
         setOtpInput();
+        startTimer();
+    }
+
+    private void startTimer() {
+        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilEnd) {
+                timeLeftInMillis = millisUntilEnd;
+                int second = (int) (timeLeftInMillis/1000)%60;
+                String timeLeftFormatted = String.format(Locale.getDefault(),"00:%02d", second);
+                textViewTimer.setText(timeLeftFormatted);
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
+        timerRunning = true;
     }
 
     private void setOtpInput(){
@@ -241,6 +288,88 @@ public class VerificationActivity extends AppCompatActivity {
         });
     }
 
+    private void loginAccount() {
+        progressDialog.show();
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_LOGIN, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    if(status==1){
+                        JSONObject jsonData = jsonObject.getJSONObject("data");
+
+                        sharedPrefManager.setUserId(jsonData.getString("user_id"));
+                        sharedPrefManager.setEmployeeId(jsonData.getString("employee_id"));
+                        sharedPrefManager.setUserName(jsonData.getString("user_name"));
+                        sharedPrefManager.setFullname(jsonData.getString("fullname"));
+                        sharedPrefManager.setNickname(jsonData.getString("nickname"));
+                        sharedPrefManager.setEmployeeNumber(jsonData.getString("employee_number"));
+                        sharedPrefManager.setEmployeeGradeId(jsonData.getString("employee_grade_id"));
+                        sharedPrefManager.setEmployeeGradeName(jsonData.getString("employee_grade_name"));
+                        sharedPrefManager.setJobGradeId(jsonData.getString("job_grade_id"));
+                        sharedPrefManager.setJobGradeName(jsonData.getString("job_grade_name"));
+                        sharedPrefManager.setEmployeeStatusId(jsonData.getString("employee_status_id"));
+                        sharedPrefManager.setEmployeeStatus(jsonData.getString("employee_status"));
+                        sharedPrefManager.setWorkingStatus(jsonData.getString("working_status"));
+                        sharedPrefManager.setDepartmentId(jsonData.getString("department_id"));
+                        sharedPrefManager.setDepartmentName(jsonData.getString("department_name"));
+                        sharedPrefManager.setNik(jsonData.getString("sin_num"));
+                        sharedPrefManager.setNpwp(jsonData.getString("npwp"));
+                        sharedPrefManager.setBpjs(jsonData.getString("bpjs_health_number"));
+                        sharedPrefManager.setBirthday(jsonData.getString("birthday"));
+                        sharedPrefManager.setPlaceBirthday(jsonData.getString("place_birthday"));
+                        sharedPrefManager.setGender(jsonData.getString("gender"));
+                        sharedPrefManager.setBloodGroup(jsonData.getString("blood_group"));
+                        sharedPrefManager.setAddress(jsonData.getString("address"));
+                        sharedPrefManager.setCity(jsonData.getString("city"));
+                        sharedPrefManager.setState(jsonData.getString("state"));
+                        sharedPrefManager.setCountry(jsonData.getString("country"));
+                        sharedPrefManager.setCompanyWorkbaseId(jsonData.getString("company_workbase_id"));
+                        sharedPrefManager.setCompanyWorkbaseName(jsonData.getString("company_workbase_name"));
+                        sharedPrefManager.setReligionName(jsonData.getString("religion_name"));
+                        sharedPrefManager.setMaritalStatusId(jsonData.getString("marital_status_id"));
+                        sharedPrefManager.setMaritalStatusName(jsonData.getString("marital_status_name"));
+                        sharedPrefManager.setMobilePhone(jsonData.getString("mobile_phone"));
+                        sharedPrefManager.setEmail(jsonData.getString("email1"));
+                        sharedPrefManager.setEmployeeFileName(jsonData.getString("employee_file_name"));
+                        sharedPrefManager.setIdentityFileName(jsonData.getString("identity_file_name"));
+                        sharedPrefManager.setJoinDate(jsonData.getString("join_date"));
+                        sharedPrefManager.setComeOutDate(jsonData.getString("come_out_date"));
+                        sharedPrefManager.setIslogin();
+
+                        Intent bukaMainActivity = new Intent(VerificationActivity.this, MainActivity.class);
+                        startActivity(bukaMainActivity);
+                        finish();
+                    } else {
+                        Toast.makeText(VerificationActivity.this, "Username and password incorrect", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(VerificationActivity.this, "Failed load data", Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(VerificationActivity.this, "network is broken, please check your network", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user_name", userName);
+                param.put("password", password);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(this).add(request);
+    }
+
     private void createData() {
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SIGNUP, new Response.Listener<String>() {
             @Override
@@ -282,5 +411,32 @@ public class VerificationActivity extends AppCompatActivity {
             }
         };
         Volley.newRequestQueue(this).add(request);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            if (code == 1) {
+                Intent bukaActivity = new Intent(VerificationActivity.this, SigninActivity.class);
+                startActivity(bukaActivity);
+                finish();
+            } else {
+                Intent bukaActivity = new Intent(VerificationActivity.this, LoginActivity.class);
+                startActivity(bukaActivity);
+                finish();
+            }
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Press again to back", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
     }
 }

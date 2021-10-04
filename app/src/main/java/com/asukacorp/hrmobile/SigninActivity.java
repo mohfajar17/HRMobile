@@ -161,49 +161,6 @@ public class SigninActivity extends AppCompatActivity {
 
             final String empId = employeeId[idKaryawan];
             final String empName = employeeName[idKaryawan];
-//            StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SIGNUP, new Response.Listener<String>() {
-//                @Override
-//                public void onResponse(String response) {
-//                    try {
-//                        JSONObject jsonObject = new JSONObject(response);
-//                        int status = jsonObject.getInt("status");
-//                        if(status==1){
-//                            editTextUsername.setText("");
-//                            editTextPassword.setText("");
-//                            editTextPhone.setText("");
-//                            textViewKaryawan.setText("Pilih karyawan");
-//                            idKaryawan = -1;
-//                            getDataEmp();
-//                            Toast.makeText(SigninActivity.this, "Registration success, wait until the admin verify your account", Toast.LENGTH_LONG).show();
-//                        } else {
-//                            Toast.makeText(SigninActivity.this, "Registration failed, account with this employee_id already exists", Toast.LENGTH_LONG).show();
-//                        }
-//                        progressDialog.dismiss();
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                        progressDialog.dismiss();
-//                        Toast.makeText(SigninActivity.this, "Failed add data", Toast.LENGTH_LONG).show();
-//                    }
-//                }
-//            }, new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//                    error.printStackTrace();
-//                    progressDialog.dismiss();
-//                    Toast.makeText(SigninActivity.this, "network is broken, please check your network", Toast.LENGTH_LONG).show();
-//                }
-//            }){
-//                @Override
-//                protected Map<String, String> getParams() throws AuthFailureError {
-//                    Map<String, String> param=new HashMap<>();
-//                    param.put("empId", empId);
-//                    param.put("empName", empName);
-//                    param.put("userName", editTextUsername.getText().toString());
-//                    param.put("password", editTextPassword.getText().toString());
-//                    return param;
-//                }
-//            };
-//            Volley.newRequestQueue(this).add(request);
 
             StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SEND_OTP, new Response.Listener<String>() {
                 @Override
@@ -235,6 +192,7 @@ public class SigninActivity extends AppCompatActivity {
                                             bukaActivity.putExtra("password", editTextPassword.getText().toString());
                                             bukaActivity.putExtra("phone", editTextPhone.getText().toString());
                                             bukaActivity.putExtra("verificationId", verificationId);
+                                            bukaActivity.putExtra("code", 1);
                                             startActivity(bukaActivity);
                                             finish();
                                         }
@@ -245,11 +203,9 @@ public class SigninActivity extends AppCompatActivity {
                         }
                         buttonSignup.setVisibility(View.VISIBLE);
                         progressDialog.dismiss();
-                        progressDialog.dismiss();
                     } catch (JSONException e) {
                         e.printStackTrace();
                         buttonSignup.setVisibility(View.VISIBLE);
-                        progressDialog.dismiss();
                         progressDialog.dismiss();
                         Toast.makeText(SigninActivity.this, "Failed add data", Toast.LENGTH_LONG).show();
                     }
