@@ -51,6 +51,7 @@ public class VerificationActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private static final long START_TIME_IN_MILLIS = 600000;
     private long timeLeftInMillis = START_TIME_IN_MILLIS;
+    private int second;
     private boolean timerRunning;
 
     private LinearLayout layoutTextLogin;
@@ -83,6 +84,7 @@ public class VerificationActivity extends AppCompatActivity {
             layoutTextLogin.setLayoutParams(params);
         }
 
+        textViewTimer = (TextView) findViewById(R.id.textViewTimer);
         editTextCode1 = (EditText) findViewById(R.id.editTextCode1);
         editTextCode2 = (EditText) findViewById(R.id.editTextCode2);
         editTextCode3 = (EditText) findViewById(R.id.editTextCode3);
@@ -106,7 +108,7 @@ public class VerificationActivity extends AppCompatActivity {
                             }
                             @Override
                             public void onVerificationFailed(@NonNull FirebaseException e) {
-                                Toast.makeText(VerificationActivity.this, "Failed to send OTP code", Toast.LENGTH_LONG).show();
+                                Toast.makeText(VerificationActivity.this, "Failed to send OTP, you can only send five times today", Toast.LENGTH_LONG).show();
                             }
                             @Override
                             public void onCodeSent(@NonNull String newVerificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
@@ -115,6 +117,7 @@ public class VerificationActivity extends AppCompatActivity {
                             }
                         }
                 );
+                startTimer();
             }
         });
 
@@ -161,18 +164,33 @@ public class VerificationActivity extends AppCompatActivity {
     }
 
     private void startTimer() {
+        params = textViewResendOtp.getLayoutParams();
+        params.width = 0;
+        params.height = 0;
+        textViewResendOtp.setLayoutParams(params);
+
+        timeLeftInMillis = START_TIME_IN_MILLIS;
+
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilEnd) {
                 timeLeftInMillis = millisUntilEnd;
-                int second = (int) (timeLeftInMillis/1000)%60;
-                String timeLeftFormatted = String.format(Locale.getDefault(),"00:%02d", second);
+
+                second = (int) (timeLeftInMillis/1000)%60;
+                String timeLeftFormatted = String.format(Locale.getDefault(),"(00:%02d)", second);
                 textViewTimer.setText(timeLeftFormatted);
+                if (second<1){
+                    cancel();
+
+                    params = textViewResendOtp.getLayoutParams();
+                    params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    textViewResendOtp.setLayoutParams(params);
+                }
             }
 
             @Override
             public void onFinish() {
-
             }
         }.start();
         timerRunning = true;
@@ -279,6 +297,10 @@ public class VerificationActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.toString().trim().isEmpty())
                     editTextCode5.requestFocus();
+                else if (!editTextCode1.getText().toString().trim().isEmpty() || !editTextCode2.getText().toString().trim().isEmpty() ||
+                        !editTextCode3.getText().toString().trim().isEmpty() || !editTextCode4.getText().toString().trim().isEmpty() ||
+                        !editTextCode5.getText().toString().trim().isEmpty() || !editTextCode6.getText().toString().trim().isEmpty())
+                    buttonVerify.performClick();
             }
 
             @Override

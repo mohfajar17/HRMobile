@@ -115,7 +115,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        if (sharedPrefManager.getKeyEmployeeFileName().equals("")){
+        if (sharedPrefManager.getKeyEmployeeFileName().equals("null")){
             imageAkun.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.akun));
         } else Picasso.get().load(Config.DATA_URL_EMP_PHOTO +sharedPrefManager.getKeyEmployeeFileName()).into(imageAkun);
 

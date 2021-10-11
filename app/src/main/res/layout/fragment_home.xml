@@ -63,7 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Sisa cuti tahunan"
-                    android:textSize="14dp"
+                    android:textSize="12dp"
                     android:gravity="center"
                     android:textColor="@color/white" />
 
@@ -72,7 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="- Hari"
-                    android:textSize="18dp"
+                    android:textSize="16dp"
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textColor="@color/cyan" />
@@ -93,7 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="investation box"
-                    android:textSize="14dp"
+                    android:textSize="12dp"
                     android:gravity="center"
                     android:textColor="@color/white" />
 
@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Rp. -"
-                    android:textSize="18dp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     android:textColor="@color/cyan" />
             </LinearLayout>
@@ -123,7 +123,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Periode Kerja"
-                    android:textSize="14dp"
+                    android:textSize="12dp"
                     android:gravity="center"
                     android:textColor="@color/white" />
 
@@ -133,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="-"
-                    android:textSize="18dp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     android:textColor="@color/cyan" />
             </LinearLayout>

@@ -40,41 +40,6 @@
         tools:layout_editor_absoluteX="15dp">
 
         <LinearLayout
-            android:id="@+id/layoutEmployee"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/border_edittext_off"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="match_parent"
-                android:padding="5dp"
-                android:src="@drawable/ic_outline_business"
-                app:tint="@color/primary" />
-
-            <ImageView
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
-                android:src="@color/colorLightGray" />
-
-            <TextView
-                android:id="@+id/textViewKaryawan"
-                android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:layout_weight="1"
-                android:maxLines="1"
-                android:gravity="center_vertical"
-                android:text="Pilih karyawan"
-                android:textSize="18dp"
-                android:textColor="@color/black"
-                android:drawableRight="@drawable/ic_drop_down"
-                android:background="@android:color/transparent" />
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/layoutPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -115,6 +80,41 @@
                 android:hint="nomor hp"
                 android:background="@android:color/transparent"
                 android:inputType="phone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutEmployee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/border_edittext_off"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:src="@drawable/ic_outline_business"
+                app:tint="@color/primary" />
+
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:src="@color/colorLightGray" />
+
+            <TextView
+                android:id="@+id/textViewKaryawan"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:gravity="center_vertical"
+                android:text="Pilih karyawan"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:drawableRight="@drawable/ic_drop_down"
+                android:background="@android:color/transparent" />
         </LinearLayout>
 
         <LinearLayout

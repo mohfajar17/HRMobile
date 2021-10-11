@@ -14,11 +14,13 @@ import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +62,10 @@ public class SigninActivity extends AppCompatActivity {
 
     private CustomProgressDialog progressDialog;
     private boolean doubleBackToExitPressedOnce = false;
+
+    private LinearLayout layoutPhone;
+    private ViewGroup.LayoutParams params;
+    private int access = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,86 +154,171 @@ public class SigninActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         getDataEmp();
+        getAccess();
+    }
+
+    private void getAccess() {
+        progressDialog.show();
+        StringRequest request = new StringRequest(Request.Method.GET, Config.DATA_URL_ACCESS_LOGIN, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    access = jsonObject.getInt("status");
+                    if (access==1){
+                        layoutPhone = (LinearLayout) findViewById(R.id.layoutPhone);
+                        params = layoutPhone.getLayoutParams();
+                        params.height = 0;
+                        layoutPhone.setLayoutParams(params);
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                progressDialog.dismiss();
+            }
+        });
+        Volley.newRequestQueue(this).add(request);
     }
 
     private void loadData() {
-        if (idKaryawan < 0 || editTextUsername.getText().toString().matches("") || editTextPassword.getText().toString().matches("") ||
-                editTextPhone.getText().toString().matches("") || editTextPhone.getText().length() < 10) {
+        if (idKaryawan < 0 || editTextUsername.getText().toString().matches("") || editTextPassword.getText().toString().matches("") /*||
+                editTextPhone.getText().toString().matches("") || editTextPhone.getText().length() < 10*/) {
             Toast.makeText(SigninActivity.this, "Failed, please check your data", Toast.LENGTH_LONG).show();
         } else {
-            progressDialog.show();
-            buttonSignup.setVisibility(View.INVISIBLE);
-
-            final String empId = employeeId[idKaryawan];
-            final String empName = employeeName[idKaryawan];
-
-            StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SEND_OTP, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        int status = jsonObject.getInt("status");
-                        if(status==1){
-                            PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                                    "+62"+editTextPhone.getText().toString(),
-                                    120,
-                                    TimeUnit.SECONDS,
-                                    SigninActivity.this,
-                                    new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
-                                        @Override
-                                        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-//                                            Toast.makeText(SigninActivity.this, "Completed to send OTP code", Toast.LENGTH_LONG).show();
-                                        }
-                                        @Override
-                                        public void onVerificationFailed(@NonNull FirebaseException e) {
-                                            Toast.makeText(SigninActivity.this, "Failed to send OTP code", Toast.LENGTH_LONG).show();
-                                        }
-                                        @Override
-                                        public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                                            Intent bukaActivity = new Intent(SigninActivity.this, VerificationActivity.class);
-                                            bukaActivity.putExtra("empId", empId);
-                                            bukaActivity.putExtra("empName", empName);
-                                            bukaActivity.putExtra("userName", editTextUsername.getText().toString());
-                                            bukaActivity.putExtra("password", editTextPassword.getText().toString());
-                                            bukaActivity.putExtra("phone", editTextPhone.getText().toString());
-                                            bukaActivity.putExtra("verificationId", verificationId);
-                                            bukaActivity.putExtra("code", 1);
-                                            startActivity(bukaActivity);
-                                            finish();
-                                        }
-                                    }
-                            );
-                        } else {
-                            Toast.makeText(SigninActivity.this, "Registration failed, your phone number doesn't match the employee data, confirm your data to HRD", Toast.LENGTH_LONG).show();
-                        }
-                        buttonSignup.setVisibility(View.VISIBLE);
-                        progressDialog.dismiss();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        buttonSignup.setVisibility(View.VISIBLE);
-                        progressDialog.dismiss();
-                        Toast.makeText(SigninActivity.this, "Failed add data", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    error.printStackTrace();
-                    progressDialog.dismiss();
-                    Toast.makeText(SigninActivity.this, "network is broken, please check your network", Toast.LENGTH_LONG).show();
-                }
-            }){
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> param=new HashMap<>();
-                    param.put("empId", empId);
-                    param.put("phone", editTextPhone.getText().toString());
-                    return param;
-                }
-            };
-            Volley.newRequestQueue(this).add(request);
+            if (access == 1)
+                signNoOTP();
+            else signOTP();
         }
+    }
+
+    private void signNoOTP(){
+        progressDialog.show();
+        final String empId = employeeId[idKaryawan];
+        final String empName = employeeName[idKaryawan];
+
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SIGNUP, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    if(status==1){
+                        Intent bukaActivity = new Intent(SigninActivity.this, LoginActivity.class);
+                        startActivity(bukaActivity);
+                        finish();
+                        Toast.makeText(SigninActivity.this, "Registration success, wait until the admin verify your account", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(SigninActivity.this, "Registration failed, account with this employee_id already exists", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                    Toast.makeText(SigninActivity.this, "Failed add data", Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                progressDialog.dismiss();
+                Toast.makeText(SigninActivity.this, "network is broken, please check your network", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("empId", empId);
+                param.put("empName", empName);
+                param.put("userName", editTextUsername.getText().toString());
+                param.put("password", editTextPassword.getText().toString());
+                return param;
+            }
+        };
+        Volley.newRequestQueue(this).add(request);
+    }
+
+    private void signOTP(){
+        progressDialog.show();
+        buttonSignup.setVisibility(View.INVISIBLE);
+
+        final String empId = employeeId[idKaryawan];
+        final String empName = employeeName[idKaryawan];
+
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SEND_OTP, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    if(status==1){
+                        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                                "+62"+editTextPhone.getText().toString(),
+                                60,
+                                TimeUnit.SECONDS,
+                                SigninActivity.this,
+                                new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
+                                    @Override
+                                    public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+//                                            Toast.makeText(SigninActivity.this, "Completed to send OTP code", Toast.LENGTH_LONG).show();
+                                    }
+                                    @Override
+                                    public void onVerificationFailed(@NonNull FirebaseException e) {
+                                        Toast.makeText(SigninActivity.this, "Failed to send OTP, you can only send five times today", Toast.LENGTH_LONG).show();
+                                    }
+                                    @Override
+                                    public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                                        Intent bukaActivity = new Intent(SigninActivity.this, VerificationActivity.class);
+                                        bukaActivity.putExtra("empId", empId);
+                                        bukaActivity.putExtra("empName", empName);
+                                        bukaActivity.putExtra("userName", editTextUsername.getText().toString());
+                                        bukaActivity.putExtra("password", editTextPassword.getText().toString());
+                                        bukaActivity.putExtra("phone", editTextPhone.getText().toString());
+                                        bukaActivity.putExtra("verificationId", verificationId);
+                                        bukaActivity.putExtra("code", 1);
+                                        startActivity(bukaActivity);
+                                        finish();
+                                    }
+                                }
+                        );
+                    } else {
+                        Toast.makeText(SigninActivity.this, "Registration failed, your phone number doesn't match the employee data, confirm your data to HRD", Toast.LENGTH_LONG).show();
+                    }
+                    buttonSignup.setVisibility(View.VISIBLE);
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    buttonSignup.setVisibility(View.VISIBLE);
+                    progressDialog.dismiss();
+                    Toast.makeText(SigninActivity.this, "Failed add data", Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                progressDialog.dismiss();
+                Toast.makeText(SigninActivity.this, "network is broken, please check your network", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("empId", empId);
+                param.put("phone", editTextPhone.getText().toString());
+                return param;
+            }
+        };
+        Volley.newRequestQueue(this).add(request);
     }
 
     private void getDataEmp() {
@@ -249,7 +340,7 @@ public class SigninActivity extends AppCompatActivity {
                                 employeeName = new String[jsonArray.length()];
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     employeeId[i] = jsonArray.getJSONObject(i).getString("employee_id");
-                                    employeeText[i] = jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name");
+                                    employeeText[i] = jsonArray.getJSONObject(i).getString("employee_number") + " | " + jsonArray.getJSONObject(i).getString("fullname") + " | " + jsonArray.getJSONObject(i).getString("job_grade_name");
                                     employeeName[i] = jsonArray.getJSONObject(i).getString("fullname");
                                     arrayListKaryawan.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
                                 }

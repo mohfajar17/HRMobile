@@ -58,14 +58,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        progressDialog = new CustomProgressDialog(this);
         sharedPrefManager = SharedPrefManager.getInstance(this);
+
         if(sharedPrefManager.getIsLogin()){
             Intent bukaMainActivity = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(bukaMainActivity);
             finish();
-        }
-
-        progressDialog = new CustomProgressDialog(this);
+        } else getaccess();
 
         layoutPhone = (LinearLayout) findViewById(R.id.layoutPhone);
         layoutUsername = (LinearLayout) findViewById(R.id.layoutUsername);
@@ -127,8 +127,6 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        getaccess();
     }
 
     private void getaccess() {
@@ -154,7 +152,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(LoginActivity.this, "network is broken, please check your network", Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         });
@@ -250,7 +247,7 @@ public class LoginActivity extends AppCompatActivity {
                 buttonLogin.setVisibility(View.INVISIBLE);
                 PhoneAuthProvider.getInstance().verifyPhoneNumber(
                         "+62"+editTextPhone.getText().toString(),
-                        120,
+                        60,
                         TimeUnit.SECONDS,
                         LoginActivity.this,
                         new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
@@ -263,7 +260,7 @@ public class LoginActivity extends AppCompatActivity {
                             public void onVerificationFailed(@NonNull FirebaseException e) {
                                 progressDialog.dismiss();
                                 buttonLogin.setVisibility(View.VISIBLE);
-                                Toast.makeText(LoginActivity.this, "Failed to send OTP code", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "Failed to send OTP, you can only send five times today", Toast.LENGTH_LONG).show();
                             }
                             @Override
                             public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
