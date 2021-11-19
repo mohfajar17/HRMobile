@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "1022143662710-i8rcd2dmqj3lo77ct1ass6dlsoc1t2o8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.asukacorp.hrmobile",
+            "certificate_hash": "c205e433eea79de1ea406f458f0b9ec6801f9b81"
+          }
+        },
+        {
+          "client_id": "1022143662710-o9eah8j56fpf4ue9tu0ruk8hj24qlqql.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.asukacorp.hrmobile",
+            "certificate_hash": "fc6ad9cfeae6bce8c7e14c625585a03c587813f2"
+          }
+        },
+        {
           "client_id": "1022143662710-op0sc33q3u3cvfj51b35245n730uaact.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

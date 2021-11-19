@@ -26,7 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.asukacorp.hrmobile.Adapter.RecyclerViewAgenda;
 import com.asukacorp.hrmobile.Config;
 import com.asukacorp.hrmobile.Data.Holiday;
-import com.asukacorp.hrmobile.LoginActivity;
+import com.asukacorp.hrmobile.Login.LoginActivity;
 import com.asukacorp.hrmobile.R;
 import com.asukacorp.hrmobile.SharedPrefManager;
 

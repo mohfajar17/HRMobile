@@ -1,4 +1,4 @@
-package com.asukacorp.hrmobile;
+package com.asukacorp.hrmobile.Login;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +23,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.asukacorp.hrmobile.Config;
+import com.asukacorp.hrmobile.CustomProgressDialog;
+import com.asukacorp.hrmobile.MainActivity;
+import com.asukacorp.hrmobile.R;
+import com.asukacorp.hrmobile.SharedPrefManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -45,14 +50,13 @@ public class VerificationActivity extends AppCompatActivity {
     private TextView textViewTimer;
     private TextView textViewResendOtp;
     private EditText editTextCode1, editTextCode2, editTextCode3, editTextCode4, editTextCode5, editTextCode6;
-    private String verificationId, empId, empName, userName, password, phone, otpCode;
+    private String verificationId, empId, empName, userName, password, phone, otpCode, newPassword, newUsername, userId;
     private int code;
 
     private CountDownTimer countDownTimer;
     private static final long START_TIME_IN_MILLIS = 600000;
     private long timeLeftInMillis = START_TIME_IN_MILLIS;
     private int second;
-    private boolean timerRunning;
 
     private LinearLayout layoutTextLogin;
     private ViewGroup.LayoutParams params;
@@ -69,15 +73,24 @@ public class VerificationActivity extends AppCompatActivity {
         sharedPrefManager = SharedPrefManager.getInstance(this);
 
         code = getIntent().getIntExtra("code", 1);
-        userName = getIntent().getStringExtra("userName");
-        password = getIntent().getStringExtra("password");
         phone = getIntent().getStringExtra("phone");
         verificationId = getIntent().getStringExtra("verificationId");
 
-        if (code==1){
+        if (code==1){ //signup
             empId = getIntent().getStringExtra("empId");
             empName = getIntent().getStringExtra("empName");
-        } else {
+            userName = getIntent().getStringExtra("userName");
+            password = getIntent().getStringExtra("password");
+        } if (code==2){ //change password
+            newPassword = getIntent().getStringExtra("newPassword");
+            userId = getIntent().getStringExtra("userId");
+        } else if (code==3){ //change username
+            newUsername = getIntent().getStringExtra("newUsername");
+            userId = getIntent().getStringExtra("userId");
+        } else { //login
+            userName = getIntent().getStringExtra("userName");
+            password = getIntent().getStringExtra("password");
+
             layoutTextLogin = (LinearLayout) findViewById(R.id.layoutTextLogin);
             params = layoutTextLogin.getLayoutParams();
             params.height = 0;
@@ -96,27 +109,38 @@ public class VerificationActivity extends AppCompatActivity {
         textViewResendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                        "+62"+phone,
-                        60,
-                        TimeUnit.SECONDS,
-                        VerificationActivity.this,
-                        new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
-                            @Override
-                            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                                Toast.makeText(VerificationActivity.this, "Completed to send OTP code", Toast.LENGTH_LONG).show();
+                progressDialog.show();
+                if (sharedPrefManager.getKeyOtpCount()>4){
+                    progressDialog.dismiss();
+                    Toast.makeText(VerificationActivity.this, "You can only send the otp code five times today, try again tomorrow", Toast.LENGTH_LONG).show();
+                } else {
+                    PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                            "+62"+phone,
+                            55,
+                            TimeUnit.SECONDS,
+                            VerificationActivity.this,
+                            new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
+                                @Override
+                                public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                                    progressDialog.dismiss();
+                                    verificationId = phoneAuthCredential.getSmsCode();
+                                    Toast.makeText(VerificationActivity.this, "Success send OTP code", Toast.LENGTH_LONG).show();
+                                }
+                                @Override
+                                public void onVerificationFailed(@NonNull FirebaseException e) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(VerificationActivity.this, "Failed to send OTP, you can only send five times today", Toast.LENGTH_LONG).show();
+                                }
+                                @Override
+                                public void onCodeSent(@NonNull String newVerificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                                    progressDialog.dismiss();
+                                    sharedPrefManager.setOtpCount(sharedPrefManager.getKeyOtpCount()+1);
+                                    verificationId = newVerificationId;
+                                    Toast.makeText(VerificationActivity.this, "Success send OTP code", Toast.LENGTH_LONG).show();
+                                }
                             }
-                            @Override
-                            public void onVerificationFailed(@NonNull FirebaseException e) {
-                                Toast.makeText(VerificationActivity.this, "Failed to send OTP, you can only send five times today", Toast.LENGTH_LONG).show();
-                            }
-                            @Override
-                            public void onCodeSent(@NonNull String newVerificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                                verificationId = newVerificationId;
-                                Toast.makeText(VerificationActivity.this, "Success send OTP code", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                );
+                    );
+                }
                 startTimer();
             }
         });
@@ -147,9 +171,13 @@ public class VerificationActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressDialog.dismiss();
                                 buttonVerify.setVisibility(View.VISIBLE);
-                                if (task.isSuccessful()){
+                                if (task.isSuccessful() || otpCode.matches(verificationId)){
                                     if (code==1)
-                                        createData();
+                                        createDataSignup();
+                                    else if (code==2)
+                                        updatePassword();
+                                    else if (code==3)
+                                        updateUsername();
                                     else loginAccount();
                                 } else Toast.makeText(VerificationActivity.this, "Failed to verify otp code, please try again", Toast.LENGTH_LONG).show();
                             }
@@ -193,7 +221,6 @@ public class VerificationActivity extends AppCompatActivity {
             public void onFinish() {
             }
         }.start();
-        timerRunning = true;
     }
 
     private void setOtpInput(){
@@ -392,7 +419,7 @@ public class VerificationActivity extends AppCompatActivity {
         Volley.newRequestQueue(this).add(request);
     }
 
-    private void createData() {
+    private void createDataSignup() {
         StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_SIGNUP, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -429,6 +456,91 @@ public class VerificationActivity extends AppCompatActivity {
                 param.put("empName", empName);
                 param.put("userName", userName);
                 param.put("password", password);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(this).add(request);
+    }
+
+    private void updatePassword() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_UPDATE_FORGOT_PASSWORD, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    if(status==1){
+                        Intent bukaActivity = new Intent(VerificationActivity.this, LoginActivity.class);
+                        startActivity(bukaActivity);
+                        finish();
+                        Toast.makeText(VerificationActivity.this, "Success change password, try to login", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(VerificationActivity.this, "Failed change password", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                    Toast.makeText(VerificationActivity.this, "Error change password", Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                progressDialog.dismiss();
+                Toast.makeText(VerificationActivity.this, "network is broken, please check your network", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user_id", userId);
+                param.put("new_password", newPassword);
+                return param;
+            }
+        };
+        Volley.newRequestQueue(this).add(request);
+    }
+
+    private void updateUsername() {
+        StringRequest request = new StringRequest(Request.Method.POST, Config.DATA_URL_UPDATE_FORGOT_USERNAME, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int status = jsonObject.getInt("status");
+                    if(status==1){
+                        Intent bukaActivity = new Intent(VerificationActivity.this, LoginActivity.class);
+                        startActivity(bukaActivity);
+                        finish();
+                        Toast.makeText(VerificationActivity.this, "Success change username, try to login", Toast.LENGTH_LONG).show();
+                    } else {
+                        Intent bukaActivity = new Intent(VerificationActivity.this, LoginActivity.class);
+                        startActivity(bukaActivity);
+                        finish();
+                        Toast.makeText(VerificationActivity.this, "Failed, username has been used", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                    Toast.makeText(VerificationActivity.this, "Error change username", Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                progressDialog.dismiss();
+                Toast.makeText(VerificationActivity.this, "network is broken, please check your network", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param=new HashMap<>();
+                param.put("user_id", userId);
+                param.put("new_username", newUsername);
                 return param;
             }
         };

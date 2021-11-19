@@ -31,7 +31,7 @@ import com.android.volley.toolbox.Volley;
 import com.asukacorp.hrmobile.Config;
 import com.asukacorp.hrmobile.CustomProgressDialog;
 import com.asukacorp.hrmobile.Hybrid.CutiActivity;
-import com.asukacorp.hrmobile.LoginActivity;
+import com.asukacorp.hrmobile.Login.LoginActivity;
 import com.asukacorp.hrmobile.R;
 import com.asukacorp.hrmobile.SharedPrefManager;
 
@@ -357,16 +357,14 @@ public class CutiCreateActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
                         int status = jsonObject.getInt("status");
-                        if(status==1){
+                        if(status==1) {
                             Toast.makeText(CutiCreateActivity.this, "Success applied for leave", Toast.LENGTH_LONG).show();
                             onBackPressed();
-                        } else if (status == 2){
+                        } else if (status == 2)
                             Toast.makeText(CutiCreateActivity.this, "Your annual leave has expired", Toast.LENGTH_LONG).show();
-                        } else if (status == 3){
+                        else if (status == 3)
                             Toast.makeText(CutiCreateActivity.this, "Your date is Incorrect", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(CutiCreateActivity.this, "Filed applied for leave", Toast.LENGTH_LONG).show();
-                        }
+                        else Toast.makeText(CutiCreateActivity.this, "Filed applied for leave, you don't have access", Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -424,12 +422,12 @@ public class CutiCreateActivity extends AppCompatActivity {
                                 cutiPenggantiName = new String[jsonArray.length()];
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     cutiKaryawanId[i] = jsonArray.getJSONObject(i).getString("employee_id");
-                                    cutiKaryawanName[i] = jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name");
-                                    arrayListKaryawan.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
+                                    cutiKaryawanName[i] = jsonArray.getJSONObject(i).getString("employee_number") + " | " + jsonArray.getJSONObject(i).getString("fullname") + " | " + jsonArray.getJSONObject(i).getString("job_grade_name");
+                                    arrayListKaryawan.add(jsonArray.getJSONObject(i).getString("employee_number") + " | " + jsonArray.getJSONObject(i).getString("fullname") + " | " + jsonArray.getJSONObject(i).getString("job_grade_name"));
 
                                     cutiPenggantiId[i] = jsonArray.getJSONObject(i).getString("employee_id");
-                                    cutiPenggantiName[i] = jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name");
-                                    arrayListPengganti.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
+                                    cutiPenggantiName[i] = jsonArray.getJSONObject(i).getString("employee_number") + " | " + jsonArray.getJSONObject(i).getString("fullname") + " | " + jsonArray.getJSONObject(i).getString("job_grade_name");
+                                    arrayListPengganti.add(jsonArray.getJSONObject(i).getString("employee_number") + " | " + jsonArray.getJSONObject(i).getString("fullname") + " | " + jsonArray.getJSONObject(i).getString("job_grade_name"));
                                 }
 
                                 //data category

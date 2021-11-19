@@ -18,7 +18,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.asukacorp.hrmobile.Config;
 import com.asukacorp.hrmobile.Hybrid.CutiActivity;
-import com.asukacorp.hrmobile.LoginActivity;
+import com.asukacorp.hrmobile.Login.LoginActivity;
 import com.asukacorp.hrmobile.Menu.Absensi.CheckClockActivity;
 import com.asukacorp.hrmobile.Menu.SlipGaji.SlipGajiActivity;
 import com.asukacorp.hrmobile.Menu.Spkl.SpklActivity;

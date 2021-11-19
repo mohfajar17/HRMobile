@@ -21,7 +21,7 @@ import com.asukacorp.hrmobile.Adapter.RecyclerViewPendidikan;
 import com.asukacorp.hrmobile.Config;
 import com.asukacorp.hrmobile.CustomProgressDialog;
 import com.asukacorp.hrmobile.Data.Pendidikan;
-import com.asukacorp.hrmobile.LoginActivity;
+import com.asukacorp.hrmobile.Login.LoginActivity;
 import com.asukacorp.hrmobile.R;
 import com.asukacorp.hrmobile.SharedPrefManager;
 

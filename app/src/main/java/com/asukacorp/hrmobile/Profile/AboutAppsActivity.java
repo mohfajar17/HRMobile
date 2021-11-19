@@ -14,7 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.asukacorp.hrmobile.Config;
-import com.asukacorp.hrmobile.LoginActivity;
+import com.asukacorp.hrmobile.Login.LoginActivity;
 import com.asukacorp.hrmobile.R;
 import com.asukacorp.hrmobile.SharedPrefManager;
 

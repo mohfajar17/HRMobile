@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutBirthday"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageEmployee"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/akun"
+        android:paddingBottom="5dp"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="2dp" />
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Employee Name"
+        android:maxLines="1"
+        android:textSize="12dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/cyan" />
+
+    <TextView
+        android:id="@+id/textViewAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- Tahun"
+        android:textSize="12dp"
+        android:gravity="center"
+        android:textColor="@color/cyan" />
+</LinearLayout>

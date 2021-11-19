@@ -56,7 +56,6 @@ public class DownloadSlipActivity extends AppCompatActivity {
                 progressDialog = new CustomProgressDialog(DownloadSlipActivity.this);
                 progressDialog.show();
                 PdfView.createWebPrintJob(DownloadSlipActivity.this, webView, directory, fileName, new PdfView.Callback() {
-
                     @Override
                     public void success(String path) {
                         progressDialog.dismiss();

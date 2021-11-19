@@ -22,7 +22,7 @@ import com.asukacorp.hrmobile.Adapter.RecyclerViewCuti;
 import com.asukacorp.hrmobile.Config;
 import com.asukacorp.hrmobile.CustomProgressDialog;
 import com.asukacorp.hrmobile.Data.Cuti;
-import com.asukacorp.hrmobile.LoginActivity;
+import com.asukacorp.hrmobile.Login.LoginActivity;
 import com.asukacorp.hrmobile.Menu.Cuti.CutiCreateActivity;
 import com.asukacorp.hrmobile.R;
 import com.asukacorp.hrmobile.SharedPrefManager;

@@ -41,7 +41,7 @@ public class RecyclerViewSpkl extends RecyclerView.Adapter<RecyclerViewSpkl.View
         holder.pskTextJobCode.setText(""+mValues.get(position).getJob_order_id());
         holder.pskTextFile.setText(""+mValues.get(position).getOvertime_file_name());
         holder.pskTextDepartment.setText(""+mValues.get(position).getDepartment_id());
-        holder.pskTextApproval1.setText(""+mValues.get(position).getApproval2_by());
+        holder.pskTextApproval1.setText(""+mValues.get(position).getApproval1_by());
         holder.pskTextApproval2.setText(""+mValues.get(position).getApproval2_by());
         holder.pskTextVerifiedBy.setText(""+mValues.get(position).getVerified_by());
 

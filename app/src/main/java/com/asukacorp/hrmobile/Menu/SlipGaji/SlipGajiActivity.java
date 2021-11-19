@@ -22,7 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.asukacorp.hrmobile.Config;
 import com.asukacorp.hrmobile.CustomProgressDialog;
-import com.asukacorp.hrmobile.LoginActivity;
+import com.asukacorp.hrmobile.Login.LoginActivity;
 import com.asukacorp.hrmobile.R;
 import com.asukacorp.hrmobile.SharedPrefManager;
 
@@ -43,6 +43,7 @@ public class SlipGajiActivity extends AppCompatActivity {
     private Spinner spinnerTahun;
     private LinearLayout btnSearch;
     private LinearLayout layoutAll;
+    private ImageView buttonBack;
 
     private TextView textGajiPokok;
     private TextView textMeal;
@@ -178,11 +179,19 @@ public class SlipGajiActivity extends AppCompatActivity {
             }
         });
 
+        buttonBack = (ImageView) findViewById(R.id.buttonBack);
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         spinnerTgl = (Spinner) findViewById(R.id.spinnerTgl);
         spinnerBulan = (Spinner) findViewById(R.id.spinnerBulan);
         spinnerTahun = (Spinner) findViewById(R.id.spinnerTahun);
 
-        String[] tgl = {"-- Pilih Tanggal --", "1 - 15", "16 - 31", "1 - 31"};
+        String[] tgl = {"-- Pilih Tanggal --", "01 - 15", "16 - 31", "01 - 31"};
         String[] bulan = {"-- Pilih Bulan --", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         String[] tahun = {"-- Pilih Tahun --", "", ""};
         tahun[1] = "" + Calendar.getInstance().get(Calendar.YEAR);

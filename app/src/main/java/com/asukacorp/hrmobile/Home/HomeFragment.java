@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,11 +23,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.asukacorp.hrmobile.Adapter.RecyclerViewBirthday;
 import com.asukacorp.hrmobile.Adapter.RecyclerViewNews;
 import com.asukacorp.hrmobile.Config;
 import com.asukacorp.hrmobile.CustomProgressDialog;
+import com.asukacorp.hrmobile.Data.Birthday;
 import com.asukacorp.hrmobile.Data.News;
-import com.asukacorp.hrmobile.LoginActivity;
+import com.asukacorp.hrmobile.Login.LoginActivity;
 import com.asukacorp.hrmobile.R;
 import com.asukacorp.hrmobile.SharedPrefManager;
 import com.squareup.picasso.Picasso;
@@ -48,10 +51,15 @@ public class HomeFragment extends Fragment {
 
     private Context context;
     private RecyclerView recyclerView;
-    private RecyclerViewNews adapter;
+    private RecyclerView recyclerViewB;
+    private RecyclerViewNews recyclerViewNews;
+    private RecyclerViewBirthday recyclerViewBirthday;
     private RecyclerView.LayoutManager recylerViewLayoutManager;
     private List<News> news;
+    private List<Birthday> birthdays;
+
     private CustomProgressDialog progressDialog;
+    private ViewGroup.LayoutParams params;
 
     private NumberFormat formatter;
     private SharedPrefManager sharedPrefManager;
@@ -59,8 +67,10 @@ public class HomeFragment extends Fragment {
     private TextView textViewCuti;
     private TextView textViewMoneyBox;
     private TextView textViewPeriodeKerja;
+    private TextView textViewEmpBirthday;
     private CircleImageView imageAkun;
     private ImageView imageNotif;
+    private LinearLayout layoutBirthday;
 
     public HomeFragment() {
     }
@@ -91,16 +101,23 @@ public class HomeFragment extends Fragment {
 
         context = getActivity().getApplicationContext();
         news = new ArrayList<>();
+        birthdays = new ArrayList<>();
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recylerViewLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
 
+        recyclerViewB = (RecyclerView) view.findViewById(R.id.recyclerViewBirthday);
+        recylerViewLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewB.setLayoutManager(recylerViewLayoutManager);
+
         textViewCuti = (TextView) view.findViewById(R.id.textViewCuti);
         textViewMoneyBox = (TextView) view.findViewById(R.id.textViewMoneyBox);
         textViewPeriodeKerja = (TextView) view.findViewById(R.id.textViewPeriodeKerja);
+        textViewEmpBirthday = (TextView) view.findViewById(R.id.textViewEmpBirthday);
         imageAkun = (CircleImageView) view.findViewById(R.id.imageAkun);
         imageNotif = (ImageView) view.findViewById(R.id.imageNotif);
+        layoutBirthday = (LinearLayout) view.findViewById(R.id.layoutBirthday);
 
 //        if (Integer.valueOf(sharedPrefManager.getKeyDepartmentId()) == 15){
 //            ViewGroup.LayoutParams params = imageNotif.getLayoutParams();
@@ -177,8 +194,22 @@ public class HomeFragment extends Fragment {
                         for(int i=0;i<jsonArray.length();i++){
                             news.add(new News(jsonArray.getJSONObject(i)));
                         }
-                        adapter = new RecyclerViewNews(news, context);
-                        recyclerView.setAdapter(adapter);
+                        recyclerViewNews = new RecyclerViewNews(news, context);
+                        recyclerView.setAdapter(recyclerViewNews);
+
+                        //set data birthday
+                        jsonArray = jsonObject.getJSONArray("data birthday");
+                        if (jsonArray.length()>0){
+                            params = layoutBirthday.getLayoutParams();
+                            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                            layoutBirthday.setLayoutParams(params);
+
+                            for(int i=0;i<jsonArray.length();i++){
+                                birthdays.add(new Birthday(jsonArray.getJSONObject(i)));
+                            }
+                            recyclerViewBirthday = new RecyclerViewBirthday(birthdays, context);
+                            recyclerViewB.setAdapter(recyclerViewBirthday);
+                        }
                     } else {
                         Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();
                     }

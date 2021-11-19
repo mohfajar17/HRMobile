@@ -47,6 +47,8 @@ public class Config {
     public static final String DATA_URL_CUTI_LIST = DATA_URL_AIS +"getDataCuti";
 
     //add or update data
+    public static final String DATA_URL_UPDATE_FORGOT_USERNAME = DATA_URL_AIS +"editForgotUsername";
+    public static final String DATA_URL_UPDATE_FORGOT_PASSWORD = DATA_URL_AIS +"editForgotPassword";
     public static final String DATA_URL_UPDATE_PASSWORD = DATA_URL_AIS +"editPassword";
     public static final String DATA_URL_UPDATE_PERSONAL = DATA_URL_AIS +"editPersonalData";
 }

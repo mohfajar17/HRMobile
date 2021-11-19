@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
     android:padding="15dp"
-    tools:context=".SigninActivity">
+    tools:context=".Login.SigninActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -146,7 +146,8 @@
                 android:maxLength="20"
                 android:hint="username"
                 android:background="@android:color/transparent"
-                android:inputType="textPersonName" />
+                android:inputType="textFilter"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"/>
         </LinearLayout>
 
         <LinearLayout

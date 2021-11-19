@@ -46,6 +46,11 @@ public class SharedPrefManager {
     public static final String KEY_JOIN_DATE = "join_date";
     public static final String KEY_COME_OUT_DATE = "come_out_date";
 
+    public static final String KEY_DUE_DATE = "due_date";
+    public static final String KEY_OTP_COUNT = "otp_counter";
+    public static final String KEY_REMENBER_USERNAME = "remember_username";
+    public static final String KEY_REMENBER_PASSWORD = "remember_password";
+
     public SharedPrefManager(Context context){
         this.mContext = context;
     }
@@ -71,7 +76,44 @@ public class SharedPrefManager {
     public void setIsLogout(){
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
+        editor.putBoolean(KEY_ISLOGGEDIN, false);
+        editor.remove("user_id");
+        editor.remove("employee_id");
+        editor.remove("user_name");
+        editor.remove("fullname");
+        editor.remove("nickname");
+        editor.remove("employee_number");
+        editor.remove("employee_grade_id");
+        editor.remove("employee_grade_name");
+        editor.remove("job_grade_id");
+        editor.remove("job_grade_name");
+        editor.remove("employee_status_id");
+        editor.remove("employee_status");
+        editor.remove("working_status");
+        editor.remove("department_id");
+        editor.remove("department_name");
+        editor.remove("sin_num");
+        editor.remove("npwp");
+        editor.remove("bpjs_health_number");
+        editor.remove("birthday");
+        editor.remove("place_birthday");
+        editor.remove("gender");
+        editor.remove("blood_group");
+        editor.remove("address");
+        editor.remove("city");
+        editor.remove("state");
+        editor.remove("country");
+        editor.remove("company_workbase_id");
+        editor.remove("company_workbase_name");
+        editor.remove("religion_name");
+        editor.remove("marital_status_id");
+        editor.remove("marital_status_name");
+        editor.remove("mobile_phone");
+        editor.remove("email1");
+        editor.remove("employee_file_name");
+        editor.remove("identity_file_name");
+        editor.remove("join_date");
+        editor.remove("come_out_date");
         editor.apply();
     }
 
@@ -371,6 +413,38 @@ public class SharedPrefManager {
         editor.apply();
     }
 
+    public void setDueDate(String string){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(KEY_DUE_DATE, string);
+        editor.apply();
+    }
+
+    public void setOtpCount(int integer){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putInt(KEY_OTP_COUNT, integer);
+        editor.apply();
+    }
+
+    public void setRemenberUsername(String string){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(KEY_REMENBER_USERNAME, string);
+        editor.apply();
+    }
+
+    public void setRemenberPassword(String string){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(KEY_REMENBER_PASSWORD, string);
+        editor.apply();
+    }
+
     public String getKeyUserId() {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_USER_ID,null);
@@ -554,5 +628,25 @@ public class SharedPrefManager {
     public String getKeyComeOutDate() {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_COME_OUT_DATE,null);
+    }
+
+    public String getKeyDueDate() {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_DUE_DATE,null);
+    }
+
+    public int getKeyOtpCount() {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getInt(KEY_OTP_COUNT,0);
+    }
+
+    public String getKeyRememberUsername() {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_REMENBER_USERNAME,null);
+    }
+
+    public String getKeyRemenberPassword() {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_REMENBER_PASSWORD,null);
     }
 }

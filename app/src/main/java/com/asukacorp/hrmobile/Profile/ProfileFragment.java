@@ -26,7 +26,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.asukacorp.hrmobile.Config;
 import com.asukacorp.hrmobile.Hybrid.CutiActivity;
-import com.asukacorp.hrmobile.LoginActivity;
+import com.asukacorp.hrmobile.Login.LoginActivity;
 import com.asukacorp.hrmobile.R;
 import com.asukacorp.hrmobile.SharedPrefManager;
 import com.squareup.picasso.Picasso;
@@ -235,8 +235,6 @@ public class ProfileFragment extends Fragment {
         };
         Volley.newRequestQueue(getActivity()).add(request);
     }
-
-
 
     public void ShowPopup() {
         ImageView image;

@@ -29,7 +29,7 @@ import com.asukacorp.hrmobile.Adapter.RecyclerViewCheckClock;
 import com.asukacorp.hrmobile.Config;
 import com.asukacorp.hrmobile.CustomProgressDialog;
 import com.asukacorp.hrmobile.Data.CheckClock;
-import com.asukacorp.hrmobile.LoginActivity;
+import com.asukacorp.hrmobile.Login.LoginActivity;
 import com.asukacorp.hrmobile.R;
 import com.asukacorp.hrmobile.SharedPrefManager;
 

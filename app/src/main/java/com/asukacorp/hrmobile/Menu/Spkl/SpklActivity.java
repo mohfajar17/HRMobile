@@ -21,7 +21,7 @@ import com.asukacorp.hrmobile.Adapter.RecyclerViewSpkl;
 import com.asukacorp.hrmobile.Config;
 import com.asukacorp.hrmobile.CustomProgressDialog;
 import com.asukacorp.hrmobile.Data.Spkl;
-import com.asukacorp.hrmobile.LoginActivity;
+import com.asukacorp.hrmobile.Login.LoginActivity;
 import com.asukacorp.hrmobile.R;
 import com.asukacorp.hrmobile.SharedPrefManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

@@ -34,7 +34,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.asukacorp.hrmobile.Config;
 import com.asukacorp.hrmobile.CustomProgressDialog;
-import com.asukacorp.hrmobile.LoginActivity;
+import com.asukacorp.hrmobile.Login.LoginActivity;
 import com.asukacorp.hrmobile.R;
 import com.asukacorp.hrmobile.SharedPrefManager;
 
@@ -54,7 +54,7 @@ public class SpklCreateActivity extends AppCompatActivity {
 
 //    private String spklNumber;
     private Dialog dialog;
-    private ArrayList<String> arrayListJo, arrayListRequested, arrayListKaryawan1, arrayListKaryawan2, arrayListKaryawan3, arrayListKaryawan4, arrayListKaryawan5;
+    private ArrayList<String> arrayListJo, arrayListRequested;
     private int idJobOrder = -1, idRequested = -1, idKaryawan1 = -1, idKaryawan2 = -1, idKaryawan3 = -1, idKaryawan4 = -1, idKaryawan5 = -1;
     private ArrayAdapter<String> adapter;
     private String[] spklJobCodeId, spklJobCodeText;
@@ -102,11 +102,6 @@ public class SpklCreateActivity extends AppCompatActivity {
         progressDialog = new CustomProgressDialog(this);
         arrayListJo = new ArrayList<>();
         arrayListRequested = new ArrayList<>();
-        arrayListKaryawan1 = new ArrayList<>();
-        arrayListKaryawan2 = new ArrayList<>();
-        arrayListKaryawan3 = new ArrayList<>();
-        arrayListKaryawan4 = new ArrayList<>();
-        arrayListKaryawan5 = new ArrayList<>();
 
         editSpklNumber = (EditText) findViewById(R.id.editSpklNumber);
         editSpklDesc = (EditText) findViewById(R.id.editSpklDesc);
@@ -344,7 +339,7 @@ public class SpklCreateActivity extends AppCompatActivity {
                 EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
                 ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
                 editTextSearch.setText("");
-                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListKaryawan1);
+                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListRequested);
                 listViewSearch.setAdapter(newAdapter);
                 editTextSearch.addTextChangedListener(new TextWatcher() {
                     @Override
@@ -387,7 +382,7 @@ public class SpklCreateActivity extends AppCompatActivity {
                 EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
                 ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
                 editTextSearch.setText("");
-                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListKaryawan2);
+                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListRequested);
                 listViewSearch.setAdapter(newAdapter);
                 editTextSearch.addTextChangedListener(new TextWatcher() {
                     @Override
@@ -430,7 +425,7 @@ public class SpklCreateActivity extends AppCompatActivity {
                 EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
                 ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
                 editTextSearch.setText("");
-                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListKaryawan3);
+                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListRequested);
                 listViewSearch.setAdapter(newAdapter);
                 editTextSearch.addTextChangedListener(new TextWatcher() {
                     @Override
@@ -473,7 +468,7 @@ public class SpklCreateActivity extends AppCompatActivity {
                 EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
                 ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
                 editTextSearch.setText("");
-                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListKaryawan4);
+                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListRequested);
                 listViewSearch.setAdapter(newAdapter);
                 editTextSearch.addTextChangedListener(new TextWatcher() {
                     @Override
@@ -516,7 +511,7 @@ public class SpklCreateActivity extends AppCompatActivity {
                 EditText editTextSearch = dialog.findViewById(R.id.editTextSearch);
                 ListView listViewSearch = dialog.findViewById(R.id.listViewSearch);
                 editTextSearch.setText("");
-                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListKaryawan5);
+                ArrayAdapter<String> newAdapter = new ArrayAdapter<>(SpklCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayListRequested);
                 listViewSearch.setAdapter(newAdapter);
                 editTextSearch.addTextChangedListener(new TextWatcher() {
                     @Override
@@ -985,13 +980,8 @@ public class SpklCreateActivity extends AppCompatActivity {
                                 spklEmpName = new String[jsonArray.length()];
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     spklRequestedId[i] = jsonArray.getJSONObject(i).getString("employee_id");
-                                    spklEmpName[i] = jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name");
-                                    arrayListRequested.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
-                                    arrayListKaryawan1.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
-                                    arrayListKaryawan2.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
-                                    arrayListKaryawan3.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
-                                    arrayListKaryawan4.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
-                                    arrayListKaryawan5.add(jsonArray.getJSONObject(i).getString("fullname") + " - " + jsonArray.getJSONObject(i).getString("job_grade_name"));
+                                    spklEmpName[i] = jsonArray.getJSONObject(i).getString("employee_number") + " | " + jsonArray.getJSONObject(i).getString("fullname") + " | " + jsonArray.getJSONObject(i).getString("job_grade_name");
+                                    arrayListRequested.add(jsonArray.getJSONObject(i).getString("employee_number") + " | " + jsonArray.getJSONObject(i).getString("fullname") + " | " + jsonArray.getJSONObject(i).getString("job_grade_name"));
                                 }
                             } else Toast.makeText(SpklCreateActivity.this, "Failed load data", Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
@@ -1013,11 +1003,11 @@ public class SpklCreateActivity extends AppCompatActivity {
 
     private void createSpkl() {
         if (idJobOrder < 0 || editSpklLokasi.getSelectedItemPosition() == 0 ||
-                editSpklDepartment.getSelectedItemPosition() == 0 || editSpklDesc.getText().toString().matches("") ||
-                editSpklDate.getText().toString().matches("") || /*spklNamaKaryawan1.getSelectedItemPosition() == 0 ||*/
-                spklOvertimeDate1.getText().toString().matches("") || spklStartTime1.getText().toString().matches("") ||
-                spklFinishTime1.getText().toString().matches("") || idKaryawan1 < 0) {
-            Toast.makeText(SpklCreateActivity.this, "Failed, please check your data", Toast.LENGTH_LONG).show();
+                editSpklDepartment.getSelectedItemPosition() == 0 || editSpklDesc.getText().toString().trim().isEmpty() ||
+                editSpklDate.getText().toString().trim().isEmpty() || /*spklNamaKaryawan1.getSelectedItemPosition() == 0 ||*/
+                spklOvertimeDate1.getText().toString().trim().isEmpty() || spklStartTime1.getText().toString().trim().isEmpty() ||
+                spklFinishTime1.getText().toString().trim().isEmpty() || idKaryawan1 < 0) {
+            Toast.makeText(SpklCreateActivity.this, "Failed, please check your data\n" + idJobOrder + idRequested + idKaryawan1 + idKaryawan2, Toast.LENGTH_LONG).show();
         } else {
             progressDialog.show();
             final String spklJobCode = spklJobCodeId[idJobOrder];

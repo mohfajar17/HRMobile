@@ -33,15 +33,15 @@
         android:id="@+id/textDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        android:gravity="center"
         android:text="Do you want to logout?"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:textColor="@color/black"/>
 
     <LinearLayout
         android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="45dp"
         android:orientation="horizontal">
 
         <TextView
@@ -55,7 +55,7 @@
             android:text="YES"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="18dp" />
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/btnNo"
@@ -68,6 +68,6 @@
             android:text="NO"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="18dp" />
+            android:textSize="16dp" />
     </LinearLayout>
 </LinearLayout>

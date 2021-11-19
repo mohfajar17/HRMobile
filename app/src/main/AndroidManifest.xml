@@ -17,10 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HRMobile.NoActionBar"
         tools:replace="android:icon,android:theme">
-        <activity android:name=".VerificationActivity"></activity>
+        <activity android:name=".Login.ForgotActivity"></activity>
+        <activity android:name=".Login.VerificationActivity" />
         <activity android:name=".Hybrid.CutiDetailActivity" />
         <activity android:name=".Menu.SlipGaji.DownloadSlipActivity" />
-        <activity android:name=".SigninActivity" />
+        <activity android:name=".Login.SigninActivity" />
         <activity android:name=".Menu.SlipGaji.SlipGajiActivity" />
         <activity android:name=".Profile.FileActivity" />
         <activity android:name=".Profile.PelatihanActivity" />
@@ -34,7 +35,7 @@
         <activity android:name=".Menu.Spkl.SpklActivity" />
         <activity android:name=".Profile.EditProfileActivity" />
         <activity android:name=".Home.NewsDetailActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".Login.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,7 +47,7 @@
         <activity android:name=".Profile.TunjanganPotonganActivity" />
         <activity android:name=".Profile.RiwayatJabatanActivity" />
         <activity android:name=".Profile.DataLengkapActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".Login.LoginActivity" />
         <activity android:name=".MainActivity" />
     </application>
 

@@ -19,6 +19,7 @@ public class News implements Parcelable {
         this.image_name = image_name;
         this.image_name = news_contents;
     }
+
     protected News(Parcel in) {
         news_id = in.readInt();
         news_title = in.readString();
