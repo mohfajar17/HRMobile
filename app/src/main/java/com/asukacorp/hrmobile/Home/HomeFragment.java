@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,6 +72,7 @@ public class HomeFragment extends Fragment {
     private CircleImageView imageAkun;
     private ImageView imageNotif;
     private LinearLayout layoutBirthday;
+    private RelativeLayout layoutBirthdayList;
 
     public HomeFragment() {
     }
@@ -118,6 +120,7 @@ public class HomeFragment extends Fragment {
         imageAkun = (CircleImageView) view.findViewById(R.id.imageAkun);
         imageNotif = (ImageView) view.findViewById(R.id.imageNotif);
         layoutBirthday = (LinearLayout) view.findViewById(R.id.layoutBirthday);
+        layoutBirthdayList = (RelativeLayout) view.findViewById(R.id.layoutBirthdayList);
 
 //        if (Integer.valueOf(sharedPrefManager.getKeyDepartmentId()) == 15){
 //            ViewGroup.LayoutParams params = imageNotif.getLayoutParams();
@@ -209,6 +212,22 @@ public class HomeFragment extends Fragment {
                             }
                             recyclerViewBirthday = new RecyclerViewBirthday(birthdays, context);
                             recyclerViewB.setAdapter(recyclerViewBirthday);
+
+                            textViewEmpBirthday.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    params = layoutBirthdayList.getLayoutParams();
+                                    if (params.height == 0) {
+                                        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                                        recyclerViewB.setAdapter(recyclerViewBirthday);
+                                        textViewEmpBirthday.setText("Happy Birthday");
+                                    } else {
+                                        params.height = 0;
+                                        textViewEmpBirthday.setText("Employee Birthday");
+                                    }
+                                    layoutBirthdayList.setLayoutParams(params);
+                                }
+                            });
                         }
                     } else {
                         Toast.makeText(getActivity(), "Filed load data", Toast.LENGTH_LONG).show();

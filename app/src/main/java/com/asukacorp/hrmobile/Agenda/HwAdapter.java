@@ -93,7 +93,6 @@ public class HwAdapter extends BaseAdapter {
         dayView = (TextView) v.findViewById(R.id.date);
         String[] separatedTime = day_string.get(position).split("-");
 
-
         gridvalue = separatedTime[2].replaceFirst("^0*", "");
         if ((Integer.parseInt(gridvalue) > 1) && (position < firstDay)) {
             dayView.setTextColor(Color.parseColor("#A9A9A9"));
