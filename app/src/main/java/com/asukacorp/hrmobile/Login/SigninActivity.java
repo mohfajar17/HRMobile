@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -202,7 +203,7 @@ public class SigninActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        if (idKaryawan < 0 || editTextUsername.getText().toString().matches("") || editTextPassword.getText().toString().matches("") /*||
+        if (idKaryawan < 0 || TextUtils.isEmpty(editTextUsername.getText().toString()) || TextUtils.isEmpty(editTextPassword.getText().toString()) /*||
                 editTextPhone.getText().toString().matches("") || editTextPhone.getText().length() < 10*/) {
             Toast.makeText(SigninActivity.this, "Failed, please check your data", Toast.LENGTH_LONG).show();
         } else {
@@ -225,7 +226,7 @@ public class SigninActivity extends AppCompatActivity {
                     int status = jsonObject.getInt("status");
                     int data = jsonObject.getInt("data");
                     if(status>0){
-                        if (data>1){
+                        if (data==1){
                             Intent bukaActivity = new Intent(SigninActivity.this, LoginActivity.class);
                             startActivity(bukaActivity);
                             finish();

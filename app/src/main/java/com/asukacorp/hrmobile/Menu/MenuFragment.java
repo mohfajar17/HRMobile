@@ -20,6 +20,7 @@ import com.asukacorp.hrmobile.Config;
 import com.asukacorp.hrmobile.Hybrid.CutiActivity;
 import com.asukacorp.hrmobile.Login.LoginActivity;
 import com.asukacorp.hrmobile.Menu.Absensi.CheckClockActivity;
+import com.asukacorp.hrmobile.Menu.Chat.ChatActivity;
 import com.asukacorp.hrmobile.Menu.SlipGaji.SlipGajiActivity;
 import com.asukacorp.hrmobile.Menu.Spkl.SpklActivity;
 import com.asukacorp.hrmobile.R;
@@ -37,6 +38,7 @@ public class MenuFragment extends Fragment {
     private LinearLayout menuSpkl;
     private LinearLayout menuAbsensi;
     private LinearLayout menuSlipGaji;
+    private LinearLayout menuChat;
 
     private SharedPrefManager sharedPrefManager;
 
@@ -68,6 +70,7 @@ public class MenuFragment extends Fragment {
         menuSpkl = (LinearLayout) view.findViewById(R.id.menuSpkl);
         menuAbsensi = (LinearLayout) view.findViewById(R.id.menuAbsensi);
         menuSlipGaji = (LinearLayout) view.findViewById(R.id.menuSlipGaji);
+        menuChat = (LinearLayout) view.findViewById(R.id.menuChat);
 
         menuCuti.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +98,13 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent bukaActivity = new Intent(getActivity(), SlipGajiActivity.class);
+                startActivityForResult(bukaActivity,1);
+            }
+        });
+        menuChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent bukaActivity = new Intent(getActivity(), ChatActivity.class);
                 startActivityForResult(bukaActivity,1);
             }
         });

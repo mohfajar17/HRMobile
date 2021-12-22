@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HRMobile.NoActionBar"
         tools:replace="android:icon,android:theme">
-        <activity android:name=".Login.ForgotActivity"></activity>
+        <activity android:name=".Menu.Chat.ChatActivity"></activity>
+        <activity android:name=".Login.ForgotActivity" />
         <activity android:name=".Login.VerificationActivity" />
         <activity android:name=".Hybrid.CutiDetailActivity" />
         <activity android:name=".Menu.SlipGaji.DownloadSlipActivity" />
