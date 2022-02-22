@@ -56,6 +56,14 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white" />
             </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textStyle="italic"
+                android:text="Sumber : PT.Asuka Engineering Indonesia, Gresik."/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

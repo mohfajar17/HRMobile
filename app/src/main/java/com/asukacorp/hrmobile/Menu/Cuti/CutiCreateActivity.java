@@ -362,9 +362,10 @@ public class CutiCreateActivity extends AppCompatActivity {
                             onBackPressed();
                         } else if (status == 2)
                             Toast.makeText(CutiCreateActivity.this, "Your annual leave has expired", Toast.LENGTH_LONG).show();
-                        else if (status == 3)
-                            Toast.makeText(CutiCreateActivity.this, "Your date is Incorrect", Toast.LENGTH_LONG).show();
-                        else Toast.makeText(CutiCreateActivity.this, "Filed applied for leave, you don't have access", Toast.LENGTH_LONG).show();
+                        else if (status == 3){
+                            Toast.makeText(CutiCreateActivity.this, "Success applied for leave. Maximum of two days for annual leave", Toast.LENGTH_LONG).show();
+                            onBackPressed();
+                        } else Toast.makeText(CutiCreateActivity.this, "Filed applied for leave, you don't have access", Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
                     } catch (JSONException e) {
                         e.printStackTrace();
